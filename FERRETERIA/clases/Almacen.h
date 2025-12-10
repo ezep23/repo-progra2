@@ -1,0 +1,6 @@
+#ifndef ALMACEN_H_INCLUDED
+#define ALMACEN_H_INCLUDED
+
+
+
+#endif // ALMACEN_H_INCLUDED

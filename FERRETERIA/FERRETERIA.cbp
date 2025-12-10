@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FERRETERIA" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/FERRETERIA" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/FERRETERIA" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="archivos/Clientes.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="archivos/Compras.h" />
+		<Unit filename="archivos/DetalleCompras.h" />
+		<Unit filename="archivos/DetalleVentas.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="archivos/DetallesCompras.cpp" />
+		<Unit filename="archivos/DetallesVentas.cpp" />
+		<Unit filename="archivos/Productos.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="archivos/Proveedores.h" />
+		<Unit filename="archivos/Ventas.cpp" />
+		<Unit filename="archivos/Ventas.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Almacen.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Categoria.h" />
+		<Unit filename="clases/Cliente.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/DetalleTransaccion.cpp" />
+		<Unit filename="clases/DetalleTransaccion.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Fecha.h" />
+		<Unit filename="clases/Hora.h" />
+		<Unit filename="clases/Persona.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Producto.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Proveedor.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Transaccion.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="clases/Transaccion.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="menus/funciones-menus/funcionesMenuVentas.cpp" />
+		<Unit filename="menus/funciones-menus/funcionesMenuVentas.h" />
+		<Unit filename="menus/ventas.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
