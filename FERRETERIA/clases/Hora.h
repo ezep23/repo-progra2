@@ -1,30 +1,26 @@
 #ifndef HORA_H_INCLUDED
 #define HORA_H_INCLUDED
 
-Habría que encontrar una forma de setear la hora actual.
-
 class Hora {
   private:
     int _hora;
     int _minutos;
-    int _segundos;
   public:
 
     Hora();
-    Hora();
+    Hora(int h, int m);
 
     void setHora(int);
     void setMinutos(int);
-    void setSegundos(int);
 
     int getHora( );
     int getMinutos();
-    int getSegundos();
 
-    void setHoraActual();
-    void Mostrar();
+    bool validarHora(int h, int m);
 
-}
+    void cargar();
+    void mostrar();
+};
 
 
 #endif // HORA_H_INCLUDED

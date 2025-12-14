@@ -1,5 +1,6 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
+#include <cstring>
 
 #include "../clases/Transaccion.h"
 
@@ -16,9 +17,11 @@ class ArchivoVentas{
     int contarVentas();
     int generarNuevoID();
 
-    int guardarVenta(Transaccion venta);
+    bool guardarVenta(Transaccion venta);
     int editarVenta(Transaccion venta, int pos);
-    Transaccion buscarVenta(int pos);
+
+    Transaccion obtenerVenta(int pos);
+    int obtenerUbicacionVenta(int id);
 
     bool listarVentas();
     bool listarVentasInactivas();

@@ -1,3 +1,4 @@
+
 #include "Ventas.h"
 #include "../clases/Transaccion.h"
 
@@ -5,129 +6,159 @@
 using namespace std;
 
 int ArchivoVentas::contarVentas(){
-    FILE *pVentas;
-    pVentas=fopen(_nombre,"rb");
+    FILE *p = fopen("Ventas.dat", "rb");
 
-    if(pVentas==nullptr){
-       system("cls");
-       cout<<"ERROR DE ARCHIVO"<<endl;
-       system("pause");
-        return -1;
+    if (p == NULL) {
+        return 0;
     }
-    fseek(pVentas, 0, 2);
-    int tam=ftell(pVentas);
-    fclose(pVentas);
 
-    int numVentas;
-    numVentas=tam/_tamVenta;
-    return numVentas;
-};
+    fseek(p, 0, SEEK_END);
+    int bytes = ftell(p);
+    fclose(p);
+
+    return bytes / sizeof(Transaccion);
+}
 
 int ArchivoVentas::generarNuevoID(){
+
+   int numVentas = contarVentas();
+
+   if (numVentas == 0) {
+        return 1;
+   }
+
+   Transaccion venta = obtenerVenta(numVentas - 1);
+   return venta.getIdTransaccion() + 1;
 }
 
 bool ArchivoVentas::guardarVenta(Transaccion venta){
 
- FILE *pVentas;
- pVentas=fopen(_nombre,"ab");
+    FILE *p=fopen(_nombre, "ab");
 
- if(pVentas==nullptr){
-    return -1;
- }
+    if(p==nullptr){
+        return -1;
+    }
 
- bool guardado=fwrite(&venta, _tamVenta, 1, pVentas);
+    bool guardado=fwrite(&venta, _tamVenta, 1, p);
+    fclose(p);
 
- fclose(pVentas);
- return bool;
+    return guardado;
+}
 
-};
 int ArchivoVentas::editarVenta(Transaccion venta, int pos){
 
-};
-Transaccion ArchivoVentas::buscarVenta(int pos){
+}
+
+Transaccion ArchivoVentas::obtenerVenta(int pos){
 
     Transaccion venta;
-    FILE *pVentas;
-    pVentas=fopen(_nombre,"rb");
+    FILE *p = fopen(_nombre, "rb");
 
     venta.setMontoTotal(-1);
 
-    if(pPropietario==nullptr){
+    if(p==nullptr){
         return venta;
     }
 
-    fseek(pVentas, pos * _tamVenta, 0);
-    fread(&venta, _tamVenta, 1 ,pVentas);
+    fseek(p, pos * _tamVenta, 0);
+    fread(&venta, _tamVenta, 1 ,p);
 
-    fclose(pVenta);
+    fclose(p);
     return venta;
 }
+
+ int ArchivoVentas::obtenerUbicacionVenta(int id){
+
+    Transaccion venta;
+    FILE *p=fopen("Ventas.dat","rb");
+
+    int pos=0;
+
+    if(p == NULL){
+        return -1;
+    }
+
+    while(fread(&venta, sizeof venta, 1, p) ==1 ){
+                if(venta.getIdTransaccion() == id){
+                    fclose(p);
+                    return pos;
+                }
+                pos++;
+    }
+    fclose(p);
+    return -2;
+}
+
+
 bool ArchivoVentas::listarVentas(){
 
     Transaccion venta;
-    FILE *pVentas;
-    pVentas=fopen(_nombre,"rb");
+    FILE *p=fopen(_nombre,"rb");
 
-    if(pVentas==nullptr){
+    if(p==nullptr){
         cout<<"ERROR DE ARCHIVO"<<endl;
         return false;
     }
 
 
-    while(fread(&venta, _tamVenta, 1, pVentas)==1){
+    while(fread(&venta, _tamVenta, 1, p)==1){
         if(venta.getEstado()){
-            venta.Mostrar();
+            venta.mostrar();
         }
     }
 
-    fclose(pVentas);
+    fclose(p);
     return true;
 
-};
+}
+
 bool ArchivoVentas::listarVentasInactivas(){
 
     Transaccion venta;
-    FILE *pVentas;
-    pVentas = fopen(_nombre,"rb");
+    FILE *p = fopen(_nombre,"rb");
 
-    if(pVentas==nullptr){
+    if(p==nullptr){
         cout<<"ERROR DE ARCHIVO"<<endl;
         return false;
     }
 
-    while(fread(&venta, _tamVenta , 1, pVentas)==1){
-        if(!venta.getEstado()){ // si es false, pasa a true y se muestra
-            venta.Mostrar();
+    while(fread(&venta, _tamVenta , 1, p)==1){
+        if(!venta.getEstado()){
+            venta.mostrar();
         }
     }
 
-    fclose(pVentas);
+    fclose(p);
     return true;
 
-};
+}
+
 bool ArchivoVentas::bajaVenta(int id){
 
     Transaccion venta;
     ArchivoVentas archivo;
-    int pos=archivo.buscarVenta(id);
+
+    int pos=archivo.obtenerUbicacionVenta(id);
 
     if(pos==-1) return false;
 
-    venta=archivo.buscarVenta(pos);///en reg tengo el registro a borrar
+    venta=archivo.obtenerVenta(pos); ///en reg tengo el registro a borrar
     venta.setEstado(false);
     return archivo.editarVenta(venta, pos);
 
-};
+}
+
 bool ArchivoVentas::altaVenta(int id){
 
     Transaccion venta;
     ArchivoVentas archivo;
-    int pos=archivo.buscarVenta(id);
+
+    int pos=archivo.obtenerUbicacionVenta(id);
 
     if(pos==-1) return false;
 
-    venta=archivo.buscarVenta(pos);///en reg tengo el registro a borrar
+    venta=archivo.obtenerVenta(pos); ///en reg tengo el registro a dar de alta
     venta.setEstado(true);
     return archivo.editarVenta(venta, pos);
 
-};
+}

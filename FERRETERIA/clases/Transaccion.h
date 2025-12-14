@@ -1,6 +1,9 @@
 #ifndef TRANSACCION_H_INCLUDED
 #define TRANSACCION_H_INCLUDED
 
+#include "Fecha.h"
+#include "Hora.h"
+
 class Transaccion{
  private:
     int _id;
@@ -12,7 +15,7 @@ class Transaccion{
     bool _estado=true;
  public:
 
-    Transaccion()
+    Transaccion();
     Transaccion(int _id, int _idPersona, float _montoTotal, Hora _hora, Fecha _fecha, const char* _tipoFactura);
 
     /// VER ESTO

@@ -23,7 +23,6 @@ class Fecha{
     bool esBisiesto(int anio);
     bool validarFecha(int dia, int mes, int anio);
 
-
 };
 
 

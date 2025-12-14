@@ -1,19 +1,24 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
 
-class Cliente : protected Persona{
+#include "Persona.h"
+
+class Cliente : public Persona{
  private:
-    int _idCliente;
-    char _cuit_dni[15];
+    int _id;
+    int _dni;
+    bool _estado;
  public:
 
     /// AGREGAR CONSTRUCTORES
 
     void setId(int);
-    void setCuitDni(const char*);
+    void setDni(int);
+    void setEstado(bool);
 
     int getId();
-    char getCuitDni();
+    int getDni();
+    bool getEstado();
 
     void cargar();
     void mostrar();

@@ -1,25 +1,31 @@
 #ifndef PROVEEDOR_H_INCLUDED
 #define PROVEEDOR_H_INCLUDED
 
+#include "Persona.h"
+
 class Proveedor : protected Persona{
  private:
-    int _idProveedor;
-    int _idDeEmpresa;
+    int _id;
+    int _idEmpresa;
+    char _nombreEmpresa[50];
     char _razonSocial[50];
-
+    bool _estado;
  public:
 
     void setId(int);
-    void setIdDeEmpresa(int);
+    void setIdEmpresa(int);
+    void setNombreEmpresa(const char *);
     void setRazonSocial(const char*);
+    void setEstado(bool);
 
     int getId();
-    int getIdDeEmpresa();
-    char getRazonSocial();
+    int getIdEmpresa();
+    const char * getNombreEmpresa();
+    const char* getRazonSocial();
+    bool getEstado();
 
     void cargar();
     void mostrar();
-
 };
 
 #endif // PROVEEDOR_H_INCLUDED

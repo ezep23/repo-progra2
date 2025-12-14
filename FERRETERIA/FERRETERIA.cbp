@@ -32,9 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="archivos/Clientes.cpp" />
 		<Unit filename="archivos/Clientes.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="archivos/Compras.cpp" />
 		<Unit filename="archivos/Compras.h" />
 		<Unit filename="archivos/DetalleCompras.h" />
 		<Unit filename="archivos/DetalleVentas.h">
@@ -42,18 +44,23 @@
 		</Unit>
 		<Unit filename="archivos/DetallesCompras.cpp" />
 		<Unit filename="archivos/DetallesVentas.cpp" />
+		<Unit filename="archivos/Productos.cpp" />
 		<Unit filename="archivos/Productos.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="archivos/Proveedores.cpp" />
 		<Unit filename="archivos/Proveedores.h" />
 		<Unit filename="archivos/Ventas.cpp" />
 		<Unit filename="archivos/Ventas.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Almacen.cpp" />
 		<Unit filename="clases/Almacen.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Categoria.cpp" />
 		<Unit filename="clases/Categoria.h" />
+		<Unit filename="clases/Cliente.cpp" />
 		<Unit filename="clases/Cliente.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -61,20 +68,23 @@
 		<Unit filename="clases/DetalleTransaccion.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Fecha.cpp" />
 		<Unit filename="clases/Fecha.h" />
+		<Unit filename="clases/Hora.cpp" />
 		<Unit filename="clases/Hora.h" />
+		<Unit filename="clases/Persona.cpp" />
 		<Unit filename="clases/Persona.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Producto.cpp" />
 		<Unit filename="clases/Producto.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Proveedor.cpp" />
 		<Unit filename="clases/Proveedor.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="clases/Transaccion.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="clases/Transaccion.cpp" />
 		<Unit filename="clases/Transaccion.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

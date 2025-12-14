@@ -3,32 +3,35 @@
 
 #include "./funciones-menus/funcionesMenuVentas.h"
 
-int ventas(){
+void ventas(){
 
     int opc;
     while (true){
         system("cls");
-        cout << "=========================================";
-        cout << "SUBMENU CLIENTES" << endl;
-        cout << "-------------------------------------"<<endl;
-        cout << "1 - GENERAR VENTA" << endl;
-        cout << "2 - LISTAR VENTAS" << endl;
-        cout << "3 - ELIMINAR VENTA" << endl;
-        cout << "4 - LISTAR CLIENTE" << endl;
-        cout << "5 - ELIMINAR CLIENTE" << endl;
-        cout << "0 - VOLVER AL MENU PRINCIPAL" << endl;
-        cout << "-------------------------------------"<<endl;
-        cout << "INGRESE LA OPCION: ";
+
+        cout << " ----------------------------" << endl;
+        cout << endl;
+        cout << "       SUBMENU VENTAS" << endl;
+        cout << endl;
+        cout << " ----------------------------" << endl;
+        cout << endl;
+        cout << "   1. Nueva venta" << endl;
+        cout << "   2. Listar ventas" << endl;
+        cout << "   3. Eliminar venta" << endl;
+        cout << "   4. Listar cliente" << endl;
+        cout << "   5. Eliminar cliente" << endl;
+        cout << "   0. Volver al menu principal " << endl;
+        cout << endl;
+        cout << " ----------------------------" << endl;
+        cout << " # Seleccione opcion: ";
         cin >> opc;
         system("cls");
 
         if (opc == 0) break;
 
         switch (opc){
-            case 0:
-                break;
             case 1:
-                crearVenta();
+                nuevaVenta();
                 system("pause");
                 break;
             case 2:
@@ -53,7 +56,6 @@ int ventas(){
                 break;
             }
         }
-
 }
 
 

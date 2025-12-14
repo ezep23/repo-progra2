@@ -1,6 +1,8 @@
 #ifndef DETALLECOMPRAS_H_INCLUDED
 #define DETALLECOMPRAS_H_INCLUDED
 
+#include <cstring>
+
 #include "../clases/DetalleTransaccion.h"
 
 class ArchivoDetallesCompra{
@@ -18,14 +20,17 @@ class ArchivoDetallesCompra{
 
     int guardarDetalleCompra(DetalleTransaccion detalle);
     int editarDetalleCompra(DetalleTransaccion detalle, int pos);
-    DetalleTransaccion buscarDetallesCompra(int pos);
+
+    DetalleTransaccion obtenerDetalleCompra(int pos);
+    int obtenerUbicacionDetalleCompra(int id);
 
     bool listarDetallesDeCompra(int idTransaccion);
-    bool listarDetallesCompra();
-    bool listarDetallesCompraInactivas();
+    bool listarDetallesTransaccion();
+    bool listarDetallesTransaccionInactivas();
 
     bool bajaDetalleCompra(int id);
     bool altaDetalleCompra(int id);
+
 
 };
 
