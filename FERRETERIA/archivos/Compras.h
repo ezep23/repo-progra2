@@ -18,7 +18,7 @@ class ArchivoCompras{
     int generarNuevoID();
 
     bool guardarCompra(Transaccion Compra);
-    int editarCompra(Transaccion Compra, int pos);
+    bool editarCompra(Transaccion Compra, int pos);
 
     Transaccion obtenerCompra(int pos);
     int obtenerUbicacionCompra(int id);

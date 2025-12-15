@@ -44,8 +44,16 @@ bool ArchivoCompras::guardarCompra(Transaccion compra){
     return guardado;
 }
 
-int ArchivoCompras::editarCompra(Transaccion compra, int pos){
+bool ArchivoCompras::editarCompra(Transaccion compra, int pos){
+    FILE *p=fopen(_nombre, "rb+");
+    if(p==NULL){
+        return false;
+    }
 
+    fseek(p, pos*sizeof compra,0);
+    bool escribio=fwrite(&compra, sizeof compra, 1, p);
+    fclose(p);
+    return escribio;
 }
 
 Transaccion ArchivoCompras::obtenerCompra(int pos){
@@ -87,7 +95,6 @@ Transaccion ArchivoCompras::obtenerCompra(int pos){
     fclose(p);
     return -2;
 }
-
 
 bool ArchivoCompras::listarCompras(){
 

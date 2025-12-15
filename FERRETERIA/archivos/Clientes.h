@@ -14,14 +14,7 @@ class ArchivoClientes{
             _tamCliente = sizeof(Cliente);
         }
 
-       /* bool archivoExiste() {
-            FILE *p = fopen(_nombre, "rb");
-            if (p == NULL) {
-                return false;
-            }
-            fclose(p);
-            return true;
-        } */ /// IMPORTANTE ESTO VALIDAR EN TODOS LOS ARCHIVOS SI EXISTE
+        bool validarIdExiste(int id);
 
         int generarNuevoID();
         int contarClientes();

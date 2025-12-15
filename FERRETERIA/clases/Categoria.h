@@ -3,14 +3,18 @@
 
 class Categoria {
  private:
-     int  _idCategoria;
-     char[50] _nombre;
+     int  _id;
+     char _nombre[25];
+     bool _estado;
  public:
 
-    void  setNombre(const char*);
+    void setId(int);
+    void setNombre(const char*);
+    void setEstado(bool);
 
-    int getIDCategoria();
+    int getId();
     const char* getNombre();
+    bool getEstado();
 
     void cargar(int);
     void mostrar();

@@ -12,6 +12,9 @@ class Proveedor : protected Persona{
     bool _estado;
  public:
 
+    Proveedor();
+    Proveedor(const char * nom, const char *  ape, const char *  tel, const char *  em, int id, int idE, const char* nE, const char* rS, bool est);
+
     void setId(int);
     void setIdEmpresa(int);
     void setNombreEmpresa(const char *);

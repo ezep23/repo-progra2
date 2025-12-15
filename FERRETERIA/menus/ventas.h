@@ -16,8 +16,8 @@ void ventas(){
         cout << " ----------------------------" << endl;
         cout << endl;
         cout << "   1. Nueva venta" << endl;
-        cout << "   2. Listar ventas" << endl;
-        cout << "   3. Eliminar venta" << endl;
+        cout << "   2. Editar venta" << endl;
+        cout << "   3. Listar ventas" << endl;
         cout << "   4. Listar cliente" << endl;
         cout << "   5. Eliminar cliente" << endl;
         cout << "   0. Volver al menu principal " << endl;
@@ -35,18 +35,22 @@ void ventas(){
                 system("pause");
                 break;
             case 2:
-                listarVentas();
+                modificarVenta();
                 system("pause");
                 break;
             case 3:
-                eliminarVenta();
+                listarVentas();
                 system("pause");
                 break;
             case 4:
-                listarCliente();
+                eliminarVenta();
                 system("pause");
                 break;
             case 5:
+                //listarCliente();
+                system("pause");
+                break;
+            case 6:
                 eliminarCliente();
                 system("pause");
                 break;

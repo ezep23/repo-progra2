@@ -17,7 +17,6 @@ Hora::Hora(int h, int m){
 void Hora::setHora(int h){
     _hora = h;
 }
-
 void Hora::setMinutos(int m){
     _minutos = m;
 }
@@ -25,7 +24,6 @@ void Hora::setMinutos(int m){
 int Hora::getHora(){
     return _hora;
 }
-
 int Hora::getMinutos(){
     return _minutos;
 }

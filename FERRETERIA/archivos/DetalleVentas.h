@@ -19,12 +19,13 @@ class ArchivoDetallesVenta{
     int generarNuevoID();
 
     int guardarDetalleVenta(DetalleTransaccion detalle);
-    int editarDetalleVenta(DetalleTransaccion detalle, int pos);
+    bool editarDetalleVenta(DetalleTransaccion detalle, int pos);
 
     DetalleTransaccion obtenerDetalleVenta(int pos);
     int obtenerUbicacionDetalleVenta(int id);
+    float obtenerMontoTotal(int idTransaccion);
 
-    bool listarDetallesDeVenta(int idTransaccion);
+    void listarDetallesDeVenta(int idTransaccion);
     bool listarDetallesTransaccion();
     bool listarDetallesTransaccionInactivas();
 

@@ -43,7 +43,17 @@ int ArchivoDetallesCompra::guardarDetalleCompra(DetalleTransaccion detalle){
     return guardado;
 }
 
-int ArchivoDetallesCompra::editarDetalleCompra(DetalleTransaccion detalle, int pos){
+bool ArchivoDetallesCompra::editarDetalleCompra(DetalleTransaccion detalle, int pos){
+    FILE *p=fopen(_nombre, "rb+");
+    if(p==NULL){
+        return false;
+    }
+
+    fseek(p, pos*sizeof detalle,0);
+    bool escribio=fwrite(&detalle, sizeof detalle, 1, p);
+    fclose(p);
+    return escribio;
+
 }
 
 int ArchivoDetallesCompra::obtenerUbicacionDetalleCompra(int id){
@@ -67,6 +77,30 @@ int ArchivoDetallesCompra::obtenerUbicacionDetalleCompra(int id){
     return -1;
 }
 
+float ArchivoDetallesCompra::obtenerMontoTotal(int idTransaccion){
+
+    DetalleTransaccion obj;
+    FILE *p=fopen(_nombre,"rb");
+
+    if(p==nullptr){
+        cout<<"ERROR DE ARCHIVO"<<endl;
+        return 0;
+    }
+
+    float total = 0;
+
+    while(fread(&obj, _tamDetalleCompra, 1, p)==1){
+        if(obj.getIdTransaccion() == idTransaccion ){
+            total += (obj.getCantidad() * obj.getPrecioUnitario());
+        }
+    }
+
+    fclose(p);
+    return total;
+
+}
+
+
 DetalleTransaccion ArchivoDetallesCompra::obtenerDetalleCompra(int pos){
 
     DetalleTransaccion obj;
@@ -86,26 +120,28 @@ DetalleTransaccion ArchivoDetallesCompra::obtenerDetalleCompra(int pos){
 
 }
 
-bool ArchivoDetallesCompra::listarDetallesDeCompra(int idTransaccion){
+void ArchivoDetallesCompra::listarDetallesDeCompra(int idTransaccion){
 
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
 
     if(p==nullptr){
         cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
+        return;
     }
 
 
     while(fread(&obj, _tamDetalleCompra, 1, p)==1){
         if(obj.getIdTransaccion() == idTransaccion ){
+            cout << " ----------------------------- " << endl;
             obj.mostrar();
-            cout << " - Estado: " << obj.getEstado() << endl;
+            cout << " Estado: " << obj.getEstado() << endl;
+            cout << " ----------------------------- " << endl;
         }
     }
 
     fclose(p);
-    return true;
+    return;
 }
 
 bool ArchivoDetallesCompra::listarDetallesTransaccion(){

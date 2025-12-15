@@ -6,6 +6,26 @@
 
 using namespace std;
 
+bool ArchivoProveedores::validarIdExiste(int id){
+    Proveedor obj;
+    FILE *p = fopen(_nombre,"rb");
+
+    if(p==nullptr){
+        cout<<"ERROR DE ARCHIVO"<<endl;
+        return false;
+    }
+
+
+    while(fread(&obj, _tamProveedor, 1, p) == 1){
+        if(obj.getId() == id){
+            return true;
+        }
+    }
+
+    fclose(p);
+    return false;
+}
+
 int ArchivoProveedores::guardarProveedor(Proveedor obj){
 
     FILE *pProveedores;
@@ -111,17 +131,17 @@ Proveedor ArchivoProveedores::obtenerProveedor(int pos){
 
 }
 
-int ArchivoProveedores::modificarProveedor(Proveedor obj, int pos){
+bool ArchivoProveedores::modificarProveedor(Proveedor obj, int pos){
 
     FILE *pProveedores;
     pProveedores=fopen(_nombre,"rb+");
 
     if(pProveedores==nullptr){
-        return -1;
+        return false;
     }
 
     fseek(pProveedores, pos*_tamProveedor, 0);
-    int modificado=fwrite(&obj, _tamProveedor, 1, pProveedores);
+    bool modificado=fwrite(&obj, _tamProveedor, 1, pProveedores);
 
     fclose(pProveedores);
     return modificado;

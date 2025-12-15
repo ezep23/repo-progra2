@@ -34,8 +34,8 @@ class Producto{
     void setStock(int);
     void setEstado(bool);
 
-    cargar(int idProveedor);
-    mostrar();
+    void cargar(int idProveedor);
+    void mostrar();
 };
 
 #endif // PRODUCTO_H_INCLUDED

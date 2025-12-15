@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="archivos/Categorias.cpp" />
+		<Unit filename="archivos/Categorias.h" />
 		<Unit filename="archivos/Clientes.cpp" />
 		<Unit filename="archivos/Clientes.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -89,8 +91,14 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="menus/compras.h" />
+		<Unit filename="menus/funciones-menus/funcionesMenuCompras.cpp" />
+		<Unit filename="menus/funciones-menus/funcionesMenuCompras.h" />
+		<Unit filename="menus/funciones-menus/funcionesMenuInventario.cpp" />
+		<Unit filename="menus/funciones-menus/funcionesMenuInventario.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.h" />
+		<Unit filename="menus/inventario.h" />
 		<Unit filename="menus/ventas.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

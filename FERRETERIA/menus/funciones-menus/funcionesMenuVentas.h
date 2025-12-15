@@ -2,6 +2,7 @@
 #define FUNCIONESMENUVENTAS_H_INCLUDED
 
 void nuevaVenta();
+void modificarVenta();
 void listarVentas();
 void eliminarVenta();
 void listarCliente();

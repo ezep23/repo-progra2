@@ -14,6 +14,17 @@ bool Almacen::descontarStock(int id, int cantidad){
     obj = archivo.obtenerProducto(pos);
 
     obj.setStock( obj.getStock() - cantidad );
+
+    bool modificado = archivo.editarProducto(obj, pos);
+
+    if(!modificado){
+        cout << " #ERROR - NO SE PUDO DESCONTAR EL STOCK";
+        return false;
+    }
+
+    cout << "STOCK ACTUALIZADO" << endl;
+    system("pause");
+    return true;
 }
 
 bool Almacen::reponerStock(int id, int cantidad){
@@ -24,12 +35,50 @@ bool Almacen::reponerStock(int id, int cantidad){
     obj = archivo.obtenerProducto(pos);
 
     obj.setStock( obj.getStock() + cantidad );
+
+    bool modificado = archivo.editarProducto(obj, pos);
+
+    if(!modificado){
+        cout << " #ERROR - NO SE PUDO REPONER EL STOCK";
+        return false;
+    }
+
+    cout << "STOCK ACTUALIZADO" << endl;
+    system("pause");
+    return true;
 }
 
-void Almacen::consultarStock(){
+void Almacen::listarProducto(int id){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProducto(id);
+}
 
+void Almacen::listarProductosCategoria(int idCat){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosCategoria(idCat);
+}
+
+void Almacen::listarProductosInactivos(){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosInactivos();
+}
+
+void Almacen::listarProductosInactivosCategoria(int idCat){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosInactivosCategoria(idCat);
+}
+
+void Almacen::consultarStock(int id){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProducto(id);
 }
 
 void Almacen::consultarProductosBajoStock(){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosBajoStock();
+}
 
+void Almacen::consultarProductosBajoStock(int idCat){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosBajoStock(idCat);
 }

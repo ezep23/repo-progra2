@@ -10,7 +10,8 @@ class Cliente : public Persona{
     bool _estado;
  public:
 
-    /// AGREGAR CONSTRUCTORES
+    Cliente();
+    Cliente(const char * nom, const char *  ape, const char *  tel, const char *  em, int id, int dni, bool est);
 
     void setId(int);
     void setDni(int);

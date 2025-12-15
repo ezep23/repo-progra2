@@ -43,7 +43,16 @@ int ArchivoDetallesVenta::guardarDetalleVenta(DetalleTransaccion detalle){
     return guardado;
 }
 
-int ArchivoDetallesVenta::editarDetalleVenta(DetalleTransaccion detalle, int pos){
+bool ArchivoDetallesVenta::editarDetalleVenta(DetalleTransaccion detalle, int pos){
+    FILE *p=fopen(_nombre, "rb+");
+    if(p==NULL){
+        return false;
+    }
+
+    fseek(p, pos*sizeof detalle,0);
+    bool escribio=fwrite(&detalle, sizeof detalle, 1, p);
+    fclose(p);
+    return escribio;
 }
 
 int ArchivoDetallesVenta::obtenerUbicacionDetalleVenta(int id){
@@ -67,6 +76,29 @@ int ArchivoDetallesVenta::obtenerUbicacionDetalleVenta(int id){
     return -1;
 }
 
+float ArchivoDetallesVenta::obtenerMontoTotal(int idTransaccion){
+
+    DetalleTransaccion obj;
+    FILE *p=fopen(_nombre,"rb");
+
+    if(p==nullptr){
+        cout<<"ERROR DE ARCHIVO"<<endl;
+        return 0;
+    }
+
+    float total = 0;
+
+    while(fread(&obj, _tamDetalleVenta, 1, p)==1){
+        if(obj.getIdTransaccion() == idTransaccion ){
+            total += (obj.getCantidad() * obj.getPrecioUnitario());
+        }
+    }
+
+    fclose(p);
+    return total;
+
+}
+
 DetalleTransaccion ArchivoDetallesVenta::obtenerDetalleVenta(int pos){
 
     DetalleTransaccion obj;
@@ -86,26 +118,28 @@ DetalleTransaccion ArchivoDetallesVenta::obtenerDetalleVenta(int pos){
 
 }
 
-bool ArchivoDetallesVenta::listarDetallesDeVenta(int idTransaccion){
+void ArchivoDetallesVenta::listarDetallesDeVenta(int idTransaccion){
 
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
 
     if(p==nullptr){
         cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
+        return;
     }
 
 
     while(fread(&obj, _tamDetalleVenta, 1, p)==1){
         if(obj.getIdTransaccion() == idTransaccion ){
+            cout << " ----------------------------- " << endl;
             obj.mostrar();
-            cout << " - Estado: " << obj.getEstado() << endl;
+            cout << " Estado: " << obj.getEstado() << endl;
+            cout << " ----------------------------- " << endl;
         }
     }
 
     fclose(p);
-    return true;
+    return;
 }
 
 bool ArchivoDetallesVenta::listarDetallesTransaccion(){

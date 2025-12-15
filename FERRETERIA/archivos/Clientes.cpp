@@ -6,6 +6,27 @@
 
 using namespace std;
 
+bool ArchivoClientes::validarIdExiste(int id){
+    Cliente obj;
+    FILE *p = fopen(_nombre,"rb");
+
+    if(p==nullptr){
+        cout<<"ERROR DE ARCHIVO"<<endl;
+        return false;
+    }
+
+
+    while(fread(&obj, _tamCliente, 1, p) == 1){
+        if(obj.getId() == id){
+            return true;
+        }
+    }
+
+    fclose(p);
+    return false;
+
+}
+
 int ArchivoClientes::generarNuevoID(){
 
     ArchivoClientes archivo("Clientes.dat");
@@ -14,7 +35,7 @@ int ArchivoClientes::generarNuevoID(){
     int numClientes = archivo.contarClientes();
 
     if (numClientes == 0){
-        return 0;
+        return 1;
     }
 
     obj = archivo.obtenerCliente(numClientes-1);

@@ -86,14 +86,15 @@ bool Transaccion::getEstado(){
     return _estado;
 }
 
-void Transaccion::cargar(){
-
-}
-
 void Transaccion::mostrar(){
-
-}
-
-void Transaccion::mostrarDetalles(){
-
+    system("cls");
+    cout << " -----------------------------" << endl;
+    cout << " ID TRANSACCION: " << _id << endl;
+    cout << " ID CLIENTE: " << _idPersona << endl;
+    cout << " FECHA EMISION: " << _fecha.getDia() << "/" << _fecha.getMes() << "/" << _fecha.getAnio() << endl;
+    cout << " HORA EMISION: " << _hora.getHora() << ":" << _hora.getMinutos() << endl;
+    cout << " MONTO TOTAL: " << _montoTotal << endl;
+    cout << " TIPO FACTURA: " << _tipoFactura << endl;
+    cout << " -----------------------------" << endl;
+    system("pause");
 }

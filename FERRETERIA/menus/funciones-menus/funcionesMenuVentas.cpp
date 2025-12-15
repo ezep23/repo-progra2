@@ -3,6 +3,8 @@ using namespace std;
 
 #include "../../clases/Transaccion.h"
 #include "../../clases/Almacen.h"
+#include "../../clases/Fecha.h"
+#include "../../clases/Hora.h"
 #include "../../archivos/Ventas.h"
 #include "../../archivos/DetalleVentas.h"
 #include "../../archivos/Clientes.h"
@@ -13,8 +15,10 @@ void nuevaVenta(){
     ArchivoClientes clientes("Clientes.dat");
     Transaccion nuevaVenta;
     DetalleTransaccion detalleVenta;
+    Hora hora;
+    Fecha fecha;
 
-    cout << "----- NUEVA VENTA -----" << endl;
+    cout << "------- NUEVA VENTA -------" << endl;
     nuevaVenta.setIdTransaccion( ventas.generarNuevoID() );
 
     char opcCliente;
@@ -45,18 +49,34 @@ void nuevaVenta(){
         cout << " Opcion:";
         cin >> opcId;
 
-        if(opcId == 0){
+        if(opcId <= 0){
 
-            clientes.listarClientes();
+            cout << "No puede ingresar ese ID.";
+            system("pause");
 
-            cout << " Ingrese el ID del cliente: ";
-            cin >> opcId;
+            while(opcId <= 0){
+                system("cls");
+                clientes.listarClientes();
+
+                cout << " Ingrese el ID del cliente: ";
+                cin >> opcId;
+            }
+
+            while(!clientes.validarIdExiste(opcId) && opcId > 0){
+                    system("cls");
+                    cout << " Ese id no existe, ingrese uno existente: ";
+                    cin >> opcId;
+            }
+
+            nuevaVenta.setIdPersona( opcId );
 
         } else {
 
-            /// VALIDACIÓN PREVIA
-            /// - NO SEA ID < 0
-            /// - NO SE REPITA
+            while(!clientes.validarIdExiste(opcId) && opcId > 0){
+                    system("cls");
+                    cout << " Ese id no existe, ingrese uno existente: ";
+                    cin >> opcId;
+            }
 
             nuevaVenta.setIdPersona( opcId );
         }
@@ -65,6 +85,7 @@ void nuevaVenta(){
     system("cls");
     cout << " ------------------------------------" << endl;
     cout << "         Detalles de la venta        " << endl;
+    cout << " ------------------------------------" << endl;
     system("pause");
 
     int opcDetalle=1;
@@ -93,16 +114,102 @@ void nuevaVenta(){
 
     }
 
+    /// SE CARGA FECHA Y HORA DE EMISIÓN
+    fecha.cargar();
+    hora.cargar();
+
+    /// SE TERMINA DE COMPLETAR LOS DATOS DE LA VENTA
+    nuevaVenta.setMontoTotal( detallesVenta.obtenerMontoTotal( nuevaVenta.getIdTransaccion() ) );
+    nuevaVenta.setFechaEmision(fecha);
+    nuevaVenta.setHoraEmision(hora);
+
+    if(ventas.guardarVenta(nuevaVenta)){
+        cout << "ERROR NO SE PUDO GUARDAR LA VENTA" << endl;
+    }
+
+    /// CUANDO SE TERMINA DE TIPEAR SE MUESTRA
+    nuevaVenta.mostrar();
+    detallesVenta.listarDetallesDeVenta( nuevaVenta.getIdTransaccion() );
+
+}
+
+void modificarVenta(){
+    system("cls");
+    ArchivoVentas ventas("Ventas.dat");
+    int opc;
+    cout << "------ EDITAR VENTA -------" << endl;
+    cout << " Ingrese el ID de la venta: ";
+    cin >> opc;
+
+
+
 }
 
 void listarVentas(){
-cout << "Listando ventas..." << endl;
+    system("cls");
+    ArchivoVentas ventas("Ventas.dat");
+    int opc;
+
+    cout << " ---------------------------" << endl;
+    cout << "           SUBMENU          " << endl;
+    cout << " ---------------------------" << endl;
+    cout << " 1. Listar ventas" << endl;
+    cout << " 2. Listar venta por id" << endl;
+    cout << " Opcion: ";
+    cin >> opc;
+
+    if(opc == 1){
+        ventas.listarVentas();
+        return;
+    }
+
+    if(opc == 2){
+        int id;
+        system("cls");
+        cout << " Ingrese el ID de la venta: ";
+        cin >> id;
+
+        int pos = ventas.obtenerUbicacionVenta(id);
+        Transaccion busqueda = ventas.obtenerVenta(pos);
+        busqueda.mostrar();
+        return;
+    }
+
+    cout << "OPCIÓN INVALIDA";
+    system("pause");
+    return;
 }
+
 void eliminarVenta(){
 cout << "Listando ventas..." << endl;
 }
-void listarCliente(){
-cout << "Listando ventas..." << endl;
+
+void listarClientes(){
+    system("cls");
+    ArchivoClientes clientes("Clientes.dat");
+    int opc;
+
+    cout << " ---------------------------" << endl;
+    cout << "           SUBMENU          " << endl;
+    cout << " ---------------------------" << endl;
+    cout << " 1. Listar clientes" << endl;
+    cout << " 2. Listar cliente por id" << endl;
+    cout << " Opcion: ";
+    cin >> opc;
+
+    if(opc == 1){
+        clientes.listarClientes();
+        return;
+    }
+
+    if(opc == 2){
+
+
+    }
+
+    cout << "OPCIÓN INVALIDA";
+    system("pause");
+    return;
 }
 void eliminarCliente(){
 cout << "Listando ventas..." << endl;

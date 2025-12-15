@@ -17,8 +17,8 @@ class Fecha{
     int getMes();
     int getAnio();
 
-    void Cargar();
-    void Mostrar();
+    void cargar();
+    void mostrar();
 
     bool esBisiesto(int anio);
     bool validarFecha(int dia, int mes, int anio);

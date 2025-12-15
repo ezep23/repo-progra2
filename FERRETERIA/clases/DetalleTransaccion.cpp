@@ -10,23 +10,18 @@ using namespace std;
 void DetalleTransaccion::setId(int id){
     _id = id;
 }
-
 void DetalleTransaccion::setIdTransaccion(int id){
     _idTransaccion = id;
 }
-
 void DetalleTransaccion::setIdProducto(int id){
     _idProducto = id;
 }
-
 void DetalleTransaccion::setCantidad(int cant){
     _cantidad = cant;
 }
-
 void DetalleTransaccion::setPrecioUnitario(float prec){
     _precioUnitario = prec;
 }
-
 void DetalleTransaccion::setEstado(bool est){
     _estado = est;
 }
@@ -34,23 +29,18 @@ void DetalleTransaccion::setEstado(bool est){
 int DetalleTransaccion::getId(){
     return _id;
 }
-
 int DetalleTransaccion::getIdTransaccion(){
     return _idTransaccion;
 }
-
 int DetalleTransaccion::getIdProducto(){
     return _idProducto;
 }
-
 int DetalleTransaccion::getCantidad(){
     return _cantidad;
 }
-
 float DetalleTransaccion::getPrecioUnitario(){
     return _precioUnitario;
 }
-
 bool DetalleTransaccion::getEstado(){
     return _estado;
 }
@@ -103,11 +93,8 @@ void DetalleTransaccion::cargar(int idTransaccion){
 
 void DetalleTransaccion::mostrar(){
     cout << endl;
-    cout << "-------------------" << endl;
     cout << "ID Detalle: " << _id << endl;
     cout << "ID Articulo: " << _idProducto << endl;
     cout << "Precio unitario: " << _precioUnitario << endl;
     cout << "Cantidad: " << _cantidad << endl;
-    cout << "-------------------" << endl;
-    cout << endl;
 }

@@ -14,8 +14,9 @@ class ArchivoProveedores{
             _tamProveedor=sizeof(Proveedor);
         }
 
-        int contarProveedores();
+        bool validarIdExiste(int id);
 
+        int contarProveedores();
         int guardarProveedor(Proveedor obj);
 
         bool listarProveedores();
@@ -24,8 +25,7 @@ class ArchivoProveedores{
         int obtenerUbicacionProveedor(int _id);
         Proveedor obtenerProveedor(int pos);
 
-        int modificarProveedor(Proveedor obj, int pos);
-
+        bool modificarProveedor(Proveedor obj, int pos);
         bool bajaProveedor(int _id);
         bool altaProveedor(int _id);
 };

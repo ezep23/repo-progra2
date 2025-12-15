@@ -2,11 +2,14 @@
 using namespace std;
 
 #include "./menus/ventas.h"
+#include "./menus/compras.h"
+#include "./menus/inventario.h"
 
 int main(){
     int opc;
 
     while(true){
+        opc = 0;
         system("cls");
         cout << " ----------------------------" << endl;
         cout << endl;
@@ -31,7 +34,10 @@ int main(){
             ventas();
             break;
         case 2:
-            //compras();
+            compras();
+            break;
+        case 3:
+            inventario();
             break;
         case 0:
             return 0;

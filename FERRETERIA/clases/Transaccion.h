@@ -35,9 +35,7 @@ class Transaccion{
     void getTipoFactura();
     bool getEstado();
 
-    void cargar();
     void mostrar();
-    void mostrarDetalles();
 };
 
 

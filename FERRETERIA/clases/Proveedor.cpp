@@ -5,21 +5,43 @@ using namespace std;
 #include "Persona.h"
 #include "Proveedor.h"
 
+Proveedor::Proveedor(){
+    strcpy(_nombre, "");
+    strcpy(_apellido, "");
+    strcpy(_telefono, "");
+    strcpy(_email, "");
+    _id=0;
+    _idEmpresa=0;
+    strcpy(_nombreEmpresa,"");
+    strcpy(_razonSocial, "");
+    _estado=true;
+}
+
+Proveedor::Proveedor(const char * nom, const char *  ape, const char *  tel, const char *  em, int id, int idE, const char* nE, const char* rS, bool est){
+    strcpy(_nombre, nom);
+    strcpy(_apellido, ape);
+    strcpy(_telefono, tel);
+    strcpy(_email, em);
+    _id=id;
+    _idEmpresa=idE;
+    strcpy(_nombreEmpresa,nE);
+    strcpy(_razonSocial, rS);
+    _estado=est;
+}
+
+
 void Proveedor::setId(int id){
     _id = id;
 }
 void Proveedor::setIdEmpresa(int idEmpresa){
     _idEmpresa = idEmpresa;
 }
-
 void Proveedor::setNombreEmpresa(const char * nE){
     strcpy(_nombreEmpresa, nE);
 }
-
 void Proveedor::setRazonSocial(const char* razon){
     strcpy(_razonSocial, razon);
 }
-
 void Proveedor::setEstado(bool est){
     _estado = est;
 }
@@ -30,7 +52,6 @@ int Proveedor::getId(){
 int Proveedor::getIdEmpresa(){
     return _idEmpresa;
 }
-
 const char* Proveedor::getNombreEmpresa(){
     return _nombreEmpresa;
 }
@@ -72,6 +93,7 @@ void Proveedor::cargar(){
     cout << "-----------------------------" << endl;
     cout << "# Plantilla de proveedor completa!" << endl;
 }
+
 void Proveedor::mostrar(){
     cout << "-----------------------------" << endl;
     cout << "ID: " << _id << endl;

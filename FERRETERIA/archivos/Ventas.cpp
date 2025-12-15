@@ -46,8 +46,17 @@ bool ArchivoVentas::guardarVenta(Transaccion venta){
 }
 
 int ArchivoVentas::editarVenta(Transaccion venta, int pos){
+    FILE *p=fopen(_nombre, "rb+");
+    if(p==NULL){
+        return false;
+    }
 
+    fseek(p, pos*sizeof venta,0);
+    bool escribio=fwrite(&venta, sizeof venta, 1, p);
+    fclose(p);
+    return escribio;
 }
+
 
 Transaccion ArchivoVentas::obtenerVenta(int pos){
 
@@ -88,7 +97,6 @@ Transaccion ArchivoVentas::obtenerVenta(int pos){
     fclose(p);
     return -2;
 }
-
 
 bool ArchivoVentas::listarVentas(){
 

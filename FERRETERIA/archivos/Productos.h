@@ -21,13 +21,21 @@ class ArchivoProductos{
     bool validarDisponibilidad(int id);
 
     bool guardarProducto(Producto obj);
-    int editarProducto(Producto obj, int pos);
+    bool editarProducto(Producto obj, int pos);
 
+    Producto obtenerProducto(const char* nombre);
     Producto obtenerProducto(int pos);
     int obtenerUbicacionProducto(int id);
 
-    bool listarProductos();
-    bool listarProductosInactivos();
+    void listarProducto(int id);
+    void listarProductoStock(int id);
+    void listarProductosBajoStock();
+    void listarProductosBajoStock(int idCat);
+
+    void listarProductos();
+    void listarProductosCategoria(int idCat);
+    void listarProductosInactivos();
+    void listarProductosInactivosCategoria(int idCat);
 
     bool bajaProducto(int id);
     bool altaProducto(int id);

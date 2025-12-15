@@ -18,11 +18,9 @@ Fecha::Fecha(int d, int m, int a){
 void Fecha::setDia(int d){
     _dia = d;
 }
-
 void Fecha::setMes(int m){
     _mes = m;
 }
-
 void Fecha::setAnio(int a){
     _anio = a;
 }
@@ -30,16 +28,14 @@ void Fecha::setAnio(int a){
 int Fecha::getDia(){
     return _dia;
 }
-
 int Fecha::getMes(){
     return _mes;
 }
-
 int Fecha::getAnio(){
     return _anio;
 }
 
-void Fecha::Cargar(){
+void Fecha::cargar(){
 int dia, mes, anio;
 
     while (true) {
@@ -61,7 +57,7 @@ int dia, mes, anio;
     }
 }
 
-void Fecha::Mostrar(){
+void Fecha::mostrar(){
     cout << "FECHA: " << _dia << "/" << _mes << "/" << _anio;
 }
 
@@ -82,9 +78,9 @@ bool Fecha::validarFecha(int d, int m, int a){
 
     int diasEnMes[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    // febrero
+    /// si mes es febrero y se valida que año esBisiesto() -> true
     if (m == 2 && esBisiesto(a)) {
-        diasEnMes[1] = 29;
+        diasEnMes[1] = 29; /// se agrega un dia al mes[1] el cual es el segundo mes, o sea febrero
     }
 
     return d >= 1 && d <= diasEnMes[m - 1];

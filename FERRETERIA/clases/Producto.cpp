@@ -91,7 +91,7 @@ void Producto::setEstado(bool e){
     _estado = e;
 }
 
-Producto::cargar(int proveedor){
+void Producto::cargar(int proveedor){
     ArchivoProductos archivo("Productos.dat");
     Producto obj;
 
@@ -126,7 +126,7 @@ Producto::cargar(int proveedor){
 
 }
 
-Producto::mostrar(){
+void Producto::mostrar(){
 cout<<"-------------------------------" << endl;
 cout<<"ID: "<< _id << endl;
 cout<<"ID PROVEEDOR: " << _idProveedor << endl;
