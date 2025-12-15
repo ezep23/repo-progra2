@@ -46,6 +46,8 @@
 		</Unit>
 		<Unit filename="archivos/DetallesCompras.cpp" />
 		<Unit filename="archivos/DetallesVentas.cpp" />
+		<Unit filename="archivos/Empresas.cpp" />
+		<Unit filename="archivos/Empresas.h" />
 		<Unit filename="archivos/Productos.cpp" />
 		<Unit filename="archivos/Productos.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -70,6 +72,8 @@
 		<Unit filename="clases/DetalleTransaccion.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="clases/Empresa.cpp" />
+		<Unit filename="clases/Empresa.h" />
 		<Unit filename="clases/Fecha.cpp" />
 		<Unit filename="clases/Fecha.h" />
 		<Unit filename="clases/Hora.cpp" />

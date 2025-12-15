@@ -167,9 +167,8 @@ int ArchivoClientes::contarClientes(){
     int tamTotal=ftell(p);
 
     fclose(p);
-    int numClientes;
 
-    numClientes=tamTotal/_tamCliente;
+    int numClientes=tamTotal/_tamCliente;
     return numClientes;
 }
 

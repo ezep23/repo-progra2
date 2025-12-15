@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1765796240 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
+1765805773 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
 	<iostream>
 	"../../clases/Transaccion.h"
 	"../../clases/Almacen.h"
@@ -63,7 +63,7 @@
 	"../clases/Almacen.h"
 	"Productos.h"
 
-1765805760 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.cpp
+1765811417 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.cpp
 	"Clientes.h"
 	"../clases/Cliente.h"
 	<iostream>
@@ -195,4 +195,20 @@
 	"../../archivos/Productos.h"
 	"../../archivos/Categorias.h"
 	"../../clases/Producto.h"
+
+1765810419 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\empresa.cpp
+	<iostream>
+	"Empresa.h"
+	"string.h"
+
+1765811417 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\empresa.h
+
+1765812527 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.cpp
+	<iostream>
+	"Empresas.h"
+	"string.h"
+
+1765812527 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.h
+	"string.h"
+	"../clases/Empresa.h"
 
