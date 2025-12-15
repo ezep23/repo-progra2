@@ -5,12 +5,47 @@
 #include <iostream>
 using namespace std;
 
-int ArchivoVentas::contarVentas(){
-    FILE *p = fopen("Ventas.dat", "rb");
 
-    if (p == NULL) {
-        return 0;
+void ArchivoVentas::validarArchivoExiste()
+{
+    FILE *p = fopen(_nombre, "rb");
+
+    if (p == NULL){
+
+        system("cls");
+        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
+             system("pause");
+
+        return ;
     }
+    fclose(p);
+
+}
+
+bool ArchivoVentas::validarIdExiste(int id){
+
+    validarArchivoExiste();
+
+    Transaccion obj;
+    FILE *p = fopen(_nombre,"rb");
+
+    while(fread(&obj, _tamVenta, 1, p) == 1){
+
+        if(obj.getIdTransaccion() == id){
+            return true;
+        }
+    }
+
+    fclose(p);
+    return false;
+
+}
+
+
+
+int ArchivoVentas::contarVentas(){
+    validarArchivoExiste();
+    FILE *p = fopen("Ventas.dat", "rb");
 
     fseek(p, 0, SEEK_END);
     int bytes = ftell(p);
@@ -19,25 +54,24 @@ int ArchivoVentas::contarVentas(){
     return bytes / sizeof(Transaccion);
 }
 
-int ArchivoVentas::generarNuevoID(){
+int ArchivoVentas::generarNuevoID()
+{
 
-   int numVentas = contarVentas();
+    int numVentas = contarVentas();
 
-   if (numVentas == 0) {
+    if (numVentas == 0)
+    {
         return 1;
-   }
+    }
 
-   Transaccion venta = obtenerVenta(numVentas - 1);
-   return venta.getIdTransaccion() + 1;
+    Transaccion venta = obtenerVenta(numVentas - 1);
+    return venta.getIdTransaccion() + 1;
 }
 
 bool ArchivoVentas::guardarVenta(Transaccion venta){
 
+    validarArchivoExiste();
     FILE *p=fopen(_nombre, "ab");
-
-    if(p==nullptr){
-        return -1;
-    }
 
     bool guardado=fwrite(&venta, _tamVenta, 1, p);
     fclose(p);
@@ -46,53 +80,56 @@ bool ArchivoVentas::guardarVenta(Transaccion venta){
 }
 
 int ArchivoVentas::editarVenta(Transaccion venta, int pos){
+
+    validarArchivoExiste();
     FILE *p=fopen(_nombre, "rb+");
-    if(p==NULL){
-        return false;
-    }
 
     fseek(p, pos*sizeof venta,0);
     bool escribio=fwrite(&venta, sizeof venta, 1, p);
     fclose(p);
     return escribio;
+
 }
 
 
-Transaccion ArchivoVentas::obtenerVenta(int pos){
+Transaccion ArchivoVentas::obtenerVenta(int pos)
+{
 
     Transaccion venta;
     FILE *p = fopen(_nombre, "rb");
 
     venta.setMontoTotal(-1);
 
-    if(p==nullptr){
+    if(p==nullptr)
+    {
         return venta;
     }
 
     fseek(p, pos * _tamVenta, 0);
-    fread(&venta, _tamVenta, 1 ,p);
+    fread(&venta, _tamVenta, 1,p);
 
     fclose(p);
     return venta;
 }
 
- int ArchivoVentas::obtenerUbicacionVenta(int id){
+int ArchivoVentas::obtenerUbicacionVenta(int id)
+{
+
+    validarArchivoExiste();
 
     Transaccion venta;
     FILE *p=fopen("Ventas.dat","rb");
 
     int pos=0;
 
-    if(p == NULL){
-        return -1;
-    }
-
-    while(fread(&venta, sizeof venta, 1, p) ==1 ){
-                if(venta.getIdTransaccion() == id){
-                    fclose(p);
-                    return pos;
-                }
-                pos++;
+    while(fread(&venta, sizeof venta, 1, p) ==1 )
+    {
+        if(venta.getIdTransaccion() == id)
+        {
+            fclose(p);
+            return pos;
+        }
+        pos++;
     }
     fclose(p);
     return -2;
@@ -100,17 +137,15 @@ Transaccion ArchivoVentas::obtenerVenta(int pos){
 
 bool ArchivoVentas::listarVentas(){
 
+    validarArchivoExiste();
+
     Transaccion venta;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&venta, _tamVenta, 1, p)==1){
-        if(venta.getEstado()){
+    while(fread(&venta, _tamVenta, 1, p)==1)
+    {
+        if(venta.getEstado())
+        {
             venta.mostrar();
         }
     }
@@ -122,16 +157,15 @@ bool ArchivoVentas::listarVentas(){
 
 bool ArchivoVentas::listarVentasInactivas(){
 
+    validarArchivoExiste();
+
     Transaccion venta;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-    while(fread(&venta, _tamVenta , 1, p)==1){
-        if(!venta.getEstado()){
+    while(fread(&venta, _tamVenta, 1, p)==1)
+    {
+        if(!venta.getEstado())
+        {
             venta.mostrar();
         }
     }
@@ -156,6 +190,25 @@ bool ArchivoVentas::bajaVenta(int id){
 
 }
 
+bool ArchivoVentas::bajaVentasCliente(int id){
+
+    validarArchivoExiste();
+
+    Transaccion venta;
+    FILE *p=fopen(_nombre,"rb");
+
+    while(fread(&venta, _tamVenta, 1, p)==1){
+
+        if(venta.getEstado() && venta.getIdPersona() == id){
+            venta.setEstado(false);
+        }
+    }
+
+    fclose(p);
+    return true;
+
+}
+
 bool ArchivoVentas::altaVenta(int id){
 
     Transaccion venta;
@@ -169,4 +222,30 @@ bool ArchivoVentas::altaVenta(int id){
     venta.setEstado(true);
     return archivo.editarVenta(venta, pos);
 
+}
+
+bool ArchivoVentas::altaVentasCliente(int id){
+
+    validarArchivoExiste();
+
+    Transaccion venta;
+    FILE *p=fopen(_nombre,"rb");
+
+    while(fread(&venta, _tamVenta, 1, p)==1){
+
+        if(!venta.getEstado() && venta.getIdPersona() == id){
+            venta.setEstado(true);
+        }
+    }
+
+    fclose(p);
+    return true;
+
+}
+
+bool ArchivoVentas::borrar() {
+    FILE* p = fopen(_nombre, "wb");
+    if (p == NULL) return false;
+    fclose(p);
+    return true;
 }

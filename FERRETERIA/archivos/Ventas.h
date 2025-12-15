@@ -14,6 +14,9 @@ class ArchivoVentas{
         _tamVenta=sizeof(Transaccion);
     }
 
+    bool validarIdExiste(int id);
+    void validarArchivoExiste();
+
     int contarVentas();
     int generarNuevoID();
 
@@ -27,8 +30,11 @@ class ArchivoVentas{
     bool listarVentasInactivas();
 
     bool bajaVenta(int id);
+    bool bajaVentasCliente(int idCliente);
     bool altaVenta(int id);
+    bool altaVentasCliente(int idCliente);
 
+    bool borrar();
 };
 
 

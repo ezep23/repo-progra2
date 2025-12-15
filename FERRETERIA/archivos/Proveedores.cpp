@@ -6,18 +6,36 @@
 
 using namespace std;
 
+void ArchivoProveedores::validarArchivoExiste()
+{
+    FILE *p = fopen(_nombre, "rb");
+
+    if (p == NULL)
+    {
+
+        system("cls");
+        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
+        system("pause");
+
+        return ;
+    }
+    fclose(p);
+
+}
+
+
+
 bool ArchivoProveedores::validarIdExiste(int id){
+
+    validarArchivoExiste();
+
     Proveedor obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamProveedor, 1, p) == 1){
-        if(obj.getId() == id){
+    while(fread(&obj, _tamProveedor, 1, p) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return true;
         }
     }
@@ -28,12 +46,10 @@ bool ArchivoProveedores::validarIdExiste(int id){
 
 int ArchivoProveedores::guardarProveedor(Proveedor obj){
 
+    validarArchivoExiste();
+
     FILE *pProveedores;
     pProveedores = fopen(_nombre,"ab");
-
-    if(pProveedores==nullptr){
-        return -1;
-    }
 
     int guardado = fwrite(&obj, _tamProveedor, 1, pProveedores);
 
@@ -43,19 +59,17 @@ int ArchivoProveedores::guardarProveedor(Proveedor obj){
 
 bool ArchivoProveedores::listarProveedores(){
 
+    validarArchivoExiste();
+
     Proveedor obj;
     FILE *pProveedores;
 
     pProveedores = fopen(_nombre,"rb");
 
-    if(pProveedores == nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamProveedor, 1, pProveedores) == 1){
-        if(obj.getEstado()){
+    while(fread(&obj, _tamProveedor, 1, pProveedores) == 1)
+    {
+        if(obj.getEstado())
+        {
             obj.mostrar();
         }
     }
@@ -66,18 +80,16 @@ bool ArchivoProveedores::listarProveedores(){
 
 bool ArchivoProveedores::listarProveedoresInactivos(){
 
+    validarArchivoExiste();
+
     Proveedor obj;
     FILE *pProveedores;
     pProveedores = fopen(_nombre,"rb");
 
-    if(pProveedores==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamProveedor, 1, pProveedores) == 1){
-        if(!obj.getEstado()){
+    while(fread(&obj, _tamProveedor, 1, pProveedores) == 1)
+    {
+        if(!obj.getEstado())
+        {
             obj.mostrar();
         }
     }
@@ -86,23 +98,26 @@ bool ArchivoProveedores::listarProveedoresInactivos(){
     return true;
 }
 
-int ArchivoProveedores::obtenerUbicacionProveedor(int id){
+int ArchivoProveedores::obtenerUbicacionProveedor(int id)
+{
     Proveedor obj;
     FILE *pProveedores;
 
     pProveedores=fopen(_nombre,"rb");
 
     if(pProveedores==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
+        cout<<"ERROR DE ARCHIVO O TODAVÍA NO SE HA CREADO"<<endl;
         return -2;
     }
 
     int pos=0;
-    while(fread(&obj, _tamProveedor , 1, pProveedores) == 1){
-       if(obj.getId() == id){
+    while(fread(&obj, _tamProveedor, 1, pProveedores) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return pos;
-       }
-       pos++;
+        }
+        pos++;
     }
 
     fclose(pProveedores);
@@ -111,16 +126,13 @@ int ArchivoProveedores::obtenerUbicacionProveedor(int id){
 
 Proveedor ArchivoProveedores::obtenerProveedor(int pos){
 
+    validarArchivoExiste();
+
     Proveedor obj;
     FILE *pProveedores;
 
     pProveedores = fopen(_nombre,"rb");
     obj.setId(-1);
-
-    if(pProveedores==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return obj;
-    }
 
     fseek(pProveedores, pos*_tamProveedor, 0);
     fread(&obj, _tamProveedor, 1, pProveedores);
@@ -131,7 +143,8 @@ Proveedor ArchivoProveedores::obtenerProveedor(int pos){
 
 }
 
-bool ArchivoProveedores::modificarProveedor(Proveedor obj, int pos){
+bool ArchivoProveedores::modificarProveedor(Proveedor obj, int pos)
+{
 
     FILE *pProveedores;
     pProveedores=fopen(_nombre,"rb+");
@@ -149,13 +162,10 @@ bool ArchivoProveedores::modificarProveedor(Proveedor obj, int pos){
 
 int ArchivoProveedores::contarProveedores(){
 
+    validarArchivoExiste();
+
     FILE *pProveedores;
     pProveedores=fopen(_nombre,"rb");
-
-    if(pProveedores==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -1;
-    }
 
     fseek(pProveedores, 0, 2);
     int tamTotal=ftell(pProveedores);
@@ -167,14 +177,16 @@ int ArchivoProveedores::contarProveedores(){
     return numProveedores;
 }
 
-bool ArchivoProveedores::bajaProveedor(int dni){
+bool ArchivoProveedores::bajaProveedor(int dni)
+{
     Proveedor obj;
     ArchivoProveedores archivo;
 
     int pos = archivo.obtenerUbicacionProveedor(dni);
 
-    if(pos == -1){
-            return false;
+    if(pos == -1)
+    {
+        return false;
     }
 
     obj = archivo.obtenerProveedor(pos);
@@ -183,18 +195,27 @@ bool ArchivoProveedores::bajaProveedor(int dni){
     return archivo.modificarProveedor(obj, pos);
 }
 
-bool ArchivoProveedores::altaProveedor(int dni){
+bool ArchivoProveedores::altaProveedor(int dni)
+{
     Proveedor obj;
     ArchivoProveedores archivo;
 
     int pos = archivo.obtenerUbicacionProveedor(dni);
 
-    if(pos == -1){
-            return false;
+    if(pos == -1)
+    {
+        return false;
     }
 
     obj = archivo.obtenerProveedor(pos);
     obj.setEstado(true);
 
     return archivo.modificarProveedor(obj, pos);
+}
+
+bool ArchivoProveedores::borrar() {
+    FILE* p = fopen(_nombre, "wb");
+    if (p == NULL) return false;
+    fclose(p);
+    return true;
 }

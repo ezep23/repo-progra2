@@ -51,28 +51,19 @@ void Cliente::cargar(){
     cout <<  "------ NUEVO PROVEEDOR ------" << endl;
 
     cout << " Ingrese su nombre: ";
-    cin.ignore();
     cin.getline(_nombre, 50);
-    cout << endl;
 
     cout << " Ingrese su apellido: ";
-    cin.ignore();
     cin.getline(_apellido, 50);
-    cout << endl;
 
-    cout << "Ingrese su DNI: ";
+    cout << " Ingrese su DNI: ";
     cin >> _dni;
-    cout << endl;
 
     cout << " Ingrese su telefono: ";
-    cin.ignore();
     cin.getline(_telefono, 50);
-    cout << endl;
 
     cout << " Ingrese su email: ";
-    cin.ignore();
     cin.getline(_email, 50);
-    cout << endl;
 
     cout << " -----------------------------" << endl;
     cout << " # Plantilla de cliente completa!" << endl;

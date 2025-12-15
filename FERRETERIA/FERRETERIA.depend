@@ -1,42 +1,43 @@
 # depslib dependency file v1.0
-1765805773 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
+1765831100 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
 	<iostream>
 	"../../clases/Transaccion.h"
 	"../../clases/Almacen.h"
 	"../../clases/Fecha.h"
 	"../../clases/Hora.h"
+	"../../clases/Cliente.h"
 	"../../archivos/Ventas.h"
 	"../../archivos/DetalleVentas.h"
 	"../../archivos/Clientes.h"
 
-1765751169 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\main.cpp
+1765812876 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\main.cpp
 	<iostream>
 	"./menus/ventas.h"
 	"./menus/compras.h"
 	"./menus/inventario.h"
 
-1765796255 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\ventas.h
+1765831196 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\ventas.h
 	"./funciones-menus/funcionesMenuVentas.h"
 
-1765745283 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.h
+1765831196 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.h
 
-1765802266 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallescompras.cpp
+1765837808 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallescompras.cpp
 	<iostream>
 	"../clases/DetalleTransaccion.h"
 	"./DetalleCompras.h"
 
 1765734388 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\detalletransaccion.h
 
-1765798072 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallecompras.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallecompras.h
 	<cstring>
 	"../clases/DetalleTransaccion.h"
 
-1765802266 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallesventas.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detallesventas.cpp
 	<iostream>
 	"../clases/DetalleTransaccion.h"
 	"./DetalleVentas.h"
 
-1765798077 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detalleventas.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\detalleventas.h
 	<cstring>
 	"../clases/DetalleTransaccion.h"
 
@@ -52,24 +53,25 @@
 
 1765560206 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\hora.h
 
-1765802266 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.cpp
+1765837782 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.cpp
 	"Compras.h"
 	"../clases/Transaccion.h"
 	<iostream>
 
-1765804001 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\productos.cpp
+1765837782 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\productos.cpp
 	<iostream>
 	"string.h"
 	"../clases/Almacen.h"
 	"Productos.h"
 
-1765811417 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.cpp
 	"Clientes.h"
 	"../clases/Cliente.h"
 	<iostream>
 	<cstring>
+	"../utiles.cpp"
 
-1765805729 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\clientes.h
 	"../clases/Cliente.h"
 	"string.h"
 
@@ -78,13 +80,13 @@
 
 1765650185 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\persona.h
 
-1765805760 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\proveedores.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\proveedores.cpp
 	"Proveedores.h"
 	"../clases/Proveedor.h"
 	<iostream>
 	<cstring>
 
-1765805729 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\proveedores.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\proveedores.h
 	"../clases/Proveedor.h"
 	"string.h"
 
@@ -101,7 +103,7 @@
 
 1765754309 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\producto.h
 
-1765803926 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\productos.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\productos.h
 	"string.h"
 	"../clases/Producto.h"
 
@@ -109,7 +111,7 @@
 	"Fecha.h"
 	"Hora.h"
 
-1765561298 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\ventas.h
+1765837782 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\ventas.h
 	<cstring>
 	"../clases/Transaccion.h"
 
@@ -119,14 +121,14 @@
 	"../archivos/Productos.h"
 	"Producto.h"
 
-1765796120 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\detalletransaccion.cpp
+1765822721 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\detalletransaccion.cpp
 	<iostream>
 	"DetalleTransaccion.h"
 	"../clases/Almacen.h"
 	"../archivos/Productos.h"
 	"../archivos/DetalleVentas.h"
 
-1765802442 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\ventas.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\ventas.cpp
 	"Ventas.h"
 	"../clases/Transaccion.h"
 	<iostream>
@@ -146,7 +148,7 @@
 	"Categoria.h"
 	"string.h"
 
-1765796216 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\cliente.cpp
+1765827633 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\cliente.cpp
 	<iostream>
 	"Cliente.h"
 	"Persona.h"
@@ -163,19 +165,19 @@
 	"Persona.h"
 	"Proveedor.h"
 
-1765798076 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.h
 	"../clases/Transaccion.h"
 	"string.h"
 
 1765742368 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\categoria.h
 
-1765751169 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\categorias.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\categorias.cpp
 	<iostream>
 	"Categorias.h"
 	"../clases/Categoria.h"
 	"string.h"
 
-1765751177 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\categorias.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\categorias.h
 	"../clases/Categoria.h"
 	"string.h"
 
@@ -203,12 +205,41 @@
 
 1765811417 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\empresa.h
 
-1765812527 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.cpp
+1765837783 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.cpp
 	<iostream>
 	"Empresas.h"
 	"string.h"
 
-1765812527 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.h
+1765837783 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\empresas.h
 	"string.h"
 	"../clases/Empresa.h"
+
+1765830374 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\utiles.cpp
+	<iostream>
+	<string.h>
+	<cctype>
+
+1765830374 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\utiles.cpp
+	<iostream>
+	<string.h>
+	<cctype>
+
+1765837821 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\backups\backups.cpp
+	<iostream>
+	"../menus/funciones-menus/funcionesMenuConfiguraciones.h"
+	"../archivos/Productos.h"
+	"../archivos/Ventas.h"
+	"../archivos/DetalleVentas.h"
+	"../archivos/Compras.h"
+	"../archivos/DetalleCompras.h"
+	"../archivos/Clientes.h"
+	"../archivos/Proveedores.h"
+	"../archivos/Empresas.h"
+	"../archivos/Categorias.h"
+
+1765838959 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuconfiguraciones.h
+
+1765837523 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuconfiguraciones.cpp
+
+1765838661 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\configuraciones.h
 

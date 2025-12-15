@@ -5,6 +5,7 @@ using namespace std;
 #include "../../clases/Almacen.h"
 #include "../../clases/Fecha.h"
 #include "../../clases/Hora.h"
+#include "../../clases/Cliente.h"
 #include "../../archivos/Ventas.h"
 #include "../../archivos/DetalleVentas.h"
 #include "../../archivos/Clientes.h"
@@ -138,8 +139,76 @@ void modificarVenta(){
     ArchivoVentas ventas("Ventas.dat");
     int opc;
     cout << "------ EDITAR VENTA -------" << endl;
-    cout << " Ingrese el ID de la venta: ";
+    cout << " 0. Volver al menu" << endl;
+    cout << " 1. Ingrese el ID de la venta" << endl;;
+    cout << " 2. Listar ventas"<< endl;
+    cout << " Opcion: ";
     cin >> opc;
+
+    switch(opc){
+        case 0: return;
+        case 1: {
+                system("cls");
+                int id = 0;
+                cout << " Ingrese el id: ";
+                cin >> id;
+
+                while( !ventas.validarIdExiste(id) ){
+                    system("cls");
+                    cout << " Ingrese el id: ";
+                    cin >> id;
+                }
+
+                Transaccion venta;
+                ArchivoDetallesVenta archivo;
+
+                int pos = ventas.obtenerUbicacionVenta(id);
+                venta = ventas.obtenerVenta(pos);
+
+
+                venta.mostrar();
+                archivo.listarDetallesDeVenta(id);
+                system("pause");
+
+                int opcEdit = 0;
+                cout << " ----------------------" << endl;
+                cout << "         VENTA         " << endl;
+                cout << " ----------------------" << endl;
+                cout << " 1. ID de Cliente" << endl;
+                cout << " 2. Hora de emision" << endl;
+                cout << " 3. Fecha de emision" << endl;
+                cout << " 4. Tipo de factura" << endl;
+                cout << " ----------------------" << endl;
+                cout << "     DETALLE VENTA     " << endl;
+                cout << " ----------------------" << endl;
+                cout << " 5. ID de Producto" << endl;
+                cout << " 6. Cantidad de Producto" << endl;
+                cout << endl;
+                cout << " # Opcion: ";
+                cin >> opcEdit;
+
+                switch(opcEdit){
+                    case 1: break;
+                    case 2: break;
+                    case 3: break;
+                    case 4: break;
+                    case 5: break;
+                    case 6: break;
+                    default: break;
+                }
+
+
+            }
+            break;
+        case 2: {
+            ventas.listarVentas();
+            system("pause");
+            system("cls");
+
+            }
+            break;
+        default: return;
+    }
 
 
 
@@ -155,8 +224,13 @@ void listarVentas(){
     cout << " ---------------------------" << endl;
     cout << " 1. Listar ventas" << endl;
     cout << " 2. Listar venta por id" << endl;
+    cout << " 3. Volver al menú" << endl;
     cout << " Opcion: ";
     cin >> opc;
+
+    if(opc == 3){
+        return;
+    }
 
     if(opc == 1){
         ventas.listarVentas();
@@ -181,7 +255,48 @@ void listarVentas(){
 }
 
 void eliminarVenta(){
-cout << "Listando ventas..." << endl;
+    ArchivoVentas ventas("Ventas.dat");
+    ArchivoDetallesVenta detalles("DetallesVentas.dat");
+
+    system("cls");
+    int id;
+    cout << "----------------------" << endl;
+    cout << " 0. Volver al menú";
+    cout << " Ingrese el ID: ";
+    cin >> id;
+
+    if(id == 0){
+        return;
+    }
+
+    if(id < 0){
+        while(!ventas.validarIdExiste(id) || id < 0){
+
+        system("cls");
+
+        cout << " Ingrese un ID real: ";
+        cin >> id;
+    }
+
+    system("cls");
+
+    if( detalles.bajaDetallesVentasCliente(id) ){
+        cout << " # DETALLES DE VENTA ELIMINADOS " << endl;
+
+        if( ventas.bajaVentasCliente(id)){
+            cout << " # VENTAS ELIMINADAS";
+
+            return;
+        }
+
+       cout << "NO SE PUDO ELIMINAR LAS VENTAS, PERO SI EL DETALLE";
+    }
+
+    cout << "NO SE PUDO ELIMINAR NI LA VENTA NI SUS DETALLES.";
+
+    system("pause");
+    return;
+    }
 }
 
 void listarClientes(){
@@ -192,10 +307,24 @@ void listarClientes(){
     cout << " ---------------------------" << endl;
     cout << "           SUBMENU          " << endl;
     cout << " ---------------------------" << endl;
+    cout << " 0. Volver al menu" << endl;
     cout << " 1. Listar clientes" << endl;
-    cout << " 2. Listar cliente por id" << endl;
+    cout << " 2. Listar cliente por DNI" << endl;
+    cout << " 3. Listar clientes por NOMBRE" << endl;
+    cout << " 4. Listar clientes por APELLIDO" << endl;
     cout << " Opcion: ";
     cin >> opc;
+
+    if(opc == 0){
+        return;
+    }
+
+    if(opc < 0 || opc > 6){
+        system("cls");
+        cout << "OPCION INCORRECTA";
+        system("pause");
+        return;
+    }
 
     if(opc == 1){
         clientes.listarClientes();
@@ -203,8 +332,39 @@ void listarClientes(){
     }
 
     if(opc == 2){
+        system("cls");
+        int dni;
+        cout << "Ingrese el DNI: ";
+        cin >> dni;
 
+        while(!clientes.validarDniExiste(dni)){
+            system("cls");
+            cout << "Ese DNI es incorrecto o no existe.";
+            system("pause");
+            cout << "Ingrese otro: ";
+            cin >> dni;
+        }
 
+        int pos = clientes.obtenerUbicacionCliente(dni);
+        Cliente busqueda = clientes.obtenerCliente(pos);
+        busqueda.mostrar();
+        return;
+    }
+
+    if(opc == 3){
+        system("cls");
+        char nombre[25];
+        cout << " Ingrese el nombre del cliente: ";
+        cin.getline(nombre,25);
+        cout << nombre;
+    }
+
+    if(opc == 4){
+        system("cls");
+        char apellido[25];
+        cout << " Ingrese el apellido del cliente: ";
+        cin.getline(apellido,25);
+        cout << apellido;
     }
 
     cout << "OPCIÓN INVALIDA";
@@ -212,5 +372,50 @@ void listarClientes(){
     return;
 }
 void eliminarCliente(){
-cout << "Listando ventas..." << endl;
+    ArchivoClientes clientes("Clientes.dat");
+    ArchivoVentas ventas("Ventas.dat");
+    ArchivoDetallesVenta detalles("DetallesVentas.dat");
+    system("cls");
+    int dni = 0;
+    cout << " ---------------------" << endl;
+    cout << " 0. Volver al menu" << endl;
+    cout << " Ingrese el DNI: ";
+    cin >> dni;
+
+    if(dni <= 0){
+        while(!clientes.validarDniExiste(dni) && dni > 0 && dni < 1000000){
+
+        system("cls");
+
+        cout << " Ingrese el DNI: ";
+        cin >> dni;
+    }
+
+    system("cls");
+
+    int id = clientes.obtenerIdCliente(dni);
+
+    if( detalles.bajaDetallesVentasCliente(id) ){
+        cout << " # DETALLES DE VENTA ELIMINADOS " << endl;
+
+        if( ventas.bajaVentasCliente(id)){
+            cout << " # VENTAS ELIMINADAS";
+
+            if( clientes.bajaCliente(dni) ){
+                cout << "# CLIENTE ELIMINADO";
+
+                return;
+            }
+
+            cout << "NO SE PUDO ELIMINAR EL CLIENTE, PERO SI LAS VENTAS Y DETALLES.";
+        }
+
+       cout << "NO SE PUDO ELIMINAR LAS VENTAS, PERO SI EL DETALLE";
+    }
+
+    cout << "NO SE PUDO ELIMINAR NADA RELACIONADO AL CLIENTE.";
+
+    system("pause");
+    return;
+    }
 }

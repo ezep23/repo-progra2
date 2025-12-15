@@ -15,6 +15,7 @@ class ArchivoCategorias{
             _tamCategoria = sizeof(Categoria);
         }
 
+        void validarArchivoExiste();
         bool validarCategoriaExiste(const char * nombre);
 
         int contarCategorias();
@@ -28,6 +29,8 @@ class ArchivoCategorias{
         int modificarCategoria(Categoria obj, int pos);
         bool listarCategorias();
         bool bajaCategoria(int id);
+
+        bool borrar();
 
 };
 

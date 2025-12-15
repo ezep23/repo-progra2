@@ -58,6 +58,7 @@
 		<Unit filename="archivos/Ventas.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="backups/Backups.cpp" />
 		<Unit filename="clases/Almacen.cpp" />
 		<Unit filename="clases/Almacen.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -96,8 +97,11 @@
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="menus/compras.h" />
+		<Unit filename="menus/configuraciones.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuCompras.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuCompras.h" />
+		<Unit filename="menus/funciones-menus/funcionesMenuConfiguraciones.cpp" />
+		<Unit filename="menus/funciones-menus/funcionesMenuConfiguraciones.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuInventario.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuInventario.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.cpp" />
@@ -106,6 +110,7 @@
 		<Unit filename="menus/ventas.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="utiles.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

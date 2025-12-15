@@ -4,13 +4,28 @@ using namespace std;
 #include "../clases/DetalleTransaccion.h"
 #include "./DetalleCompras.h"
 
+void ArchivoDetallesCompra::validarArchivoExiste()
+{
+    FILE *p = fopen(_nombre, "rb");
+
+    if (p == NULL)
+    {
+
+        system("cls");
+        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
+             system("pause");
+
+        return ;
+    }
+    fclose(p);
+
+}
 
 int ArchivoDetallesCompra::contarDetallesCompras(){
-    FILE *p = fopen("DetallesCompras.dat", "rb");
 
-    if (p == NULL) {
-        return 0;
-    }
+    validarArchivoExiste();
+
+    FILE *p = fopen("DetallesCompras.dat", "rb");
 
     fseek(p, 0, SEEK_END);
     int bytes = ftell(p);
@@ -19,23 +34,23 @@ int ArchivoDetallesCompra::contarDetallesCompras(){
     return bytes / sizeof(DetalleTransaccion);
 }
 
-int ArchivoDetallesCompra::generarNuevoID(){
+int ArchivoDetallesCompra::generarNuevoID()
+{
     int numDetalles = contarDetallesCompras();
 
-   if (numDetalles == 0) {
+    if (numDetalles == 0){
         return 1;
-   }
+    }
 
-   DetalleTransaccion detalle = obtenerDetalleCompra(numDetalles - 1);
-   return detalle.getId() + 1;
+    DetalleTransaccion detalle = obtenerDetalleCompra(numDetalles - 1);
+    return detalle.getId() + 1;
 }
 
 int ArchivoDetallesCompra::guardarDetalleCompra(DetalleTransaccion detalle){
-    FILE *p=fopen(_nombre, "ab");
 
-    if(p==nullptr){
-        return -1;
-    }
+    validarArchivoExiste();
+
+    FILE *p=fopen(_nombre, "ab");
 
     bool guardado=fwrite(&detalle, _tamDetalleCompra, 1, p);
     fclose(p);
@@ -44,10 +59,10 @@ int ArchivoDetallesCompra::guardarDetalleCompra(DetalleTransaccion detalle){
 }
 
 bool ArchivoDetallesCompra::editarDetalleCompra(DetalleTransaccion detalle, int pos){
+
+    validarArchivoExiste();
+
     FILE *p=fopen(_nombre, "rb+");
-    if(p==NULL){
-        return false;
-    }
 
     fseek(p, pos*sizeof detalle,0);
     bool escribio=fwrite(&detalle, sizeof detalle, 1, p);
@@ -57,20 +72,19 @@ bool ArchivoDetallesCompra::editarDetalleCompra(DetalleTransaccion detalle, int 
 }
 
 int ArchivoDetallesCompra::obtenerUbicacionDetalleCompra(int id){
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -2;
-    }
-
     int pos=0;
-    while(fread(&obj, _tamDetalleCompra , 1, p) == 1){
-       if(obj.getId() == id){
+    while(fread(&obj, _tamDetalleCompra, 1, p) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return pos;
-       }
-       pos++;
+        }
+        pos++;
     }
 
     fclose(p);
@@ -79,18 +93,17 @@ int ArchivoDetallesCompra::obtenerUbicacionDetalleCompra(int id){
 
 float ArchivoDetallesCompra::obtenerMontoTotal(int idTransaccion){
 
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return 0;
-    }
-
     float total = 0;
 
-    while(fread(&obj, _tamDetalleCompra, 1, p)==1){
-        if(obj.getIdTransaccion() == idTransaccion ){
+    while(fread(&obj, _tamDetalleCompra, 1, p)==1)
+    {
+        if(obj.getIdTransaccion() == idTransaccion )
+        {
             total += (obj.getCantidad() * obj.getPrecioUnitario());
         }
     }
@@ -103,14 +116,11 @@ float ArchivoDetallesCompra::obtenerMontoTotal(int idTransaccion){
 
 DetalleTransaccion ArchivoDetallesCompra::obtenerDetalleCompra(int pos){
 
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p = fopen(_nombre,"rb");
     obj.setId(-1);
-
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return obj;
-    }
 
     fseek(p, pos*_tamDetalleCompra, 0);
     fread(&obj, _tamDetalleCompra, 1, p);
@@ -122,17 +132,15 @@ DetalleTransaccion ArchivoDetallesCompra::obtenerDetalleCompra(int pos){
 
 void ArchivoDetallesCompra::listarDetallesDeCompra(int idTransaccion){
 
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-
-    while(fread(&obj, _tamDetalleCompra, 1, p)==1){
-        if(obj.getIdTransaccion() == idTransaccion ){
+    while(fread(&obj, _tamDetalleCompra, 1, p)==1)
+    {
+        if(obj.getIdTransaccion() == idTransaccion )
+        {
             cout << " ----------------------------- " << endl;
             obj.mostrar();
             cout << " Estado: " << obj.getEstado() << endl;
@@ -145,17 +153,16 @@ void ArchivoDetallesCompra::listarDetallesDeCompra(int idTransaccion){
 }
 
 bool ArchivoDetallesCompra::listarDetallesTransaccion(){
+
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamDetalleCompra, 1, p)==1){
-        if(obj.getEstado()){
+    while(fread(&obj, _tamDetalleCompra, 1, p)==1)
+    {
+        if(obj.getEstado())
+        {
             obj.mostrar();
         }
     }
@@ -165,16 +172,16 @@ bool ArchivoDetallesCompra::listarDetallesTransaccion(){
 }
 
 bool ArchivoDetallesCompra::listarDetallesTransaccionInactivas(){
+
+    validarArchivoExiste();
+
     DetalleTransaccion obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-    while(fread(&obj, _tamDetalleCompra , 1, p)==1){
-        if(!obj.getEstado()){
+    while(fread(&obj, _tamDetalleCompra, 1, p)==1)
+    {
+        if(!obj.getEstado())
+        {
             obj.mostrar();
         }
     }
@@ -183,7 +190,8 @@ bool ArchivoDetallesCompra::listarDetallesTransaccionInactivas(){
     return true;
 }
 
-bool ArchivoDetallesCompra::bajaDetalleCompra(int id){
+bool ArchivoDetallesCompra::bajaDetalleCompra(int id)
+{
     DetalleTransaccion obj;
     ArchivoDetallesCompra archivo;
 
@@ -196,7 +204,8 @@ bool ArchivoDetallesCompra::bajaDetalleCompra(int id){
     return archivo.editarDetalleCompra(obj, pos);
 }
 
-bool ArchivoDetallesCompra::altaDetalleCompra(int id){
+bool ArchivoDetallesCompra::altaDetalleCompra(int id)
+{
     DetalleTransaccion obj;
     ArchivoDetallesCompra archivo;
 
@@ -209,5 +218,11 @@ bool ArchivoDetallesCompra::altaDetalleCompra(int id){
     return archivo.editarDetalleCompra(obj, pos);
 }
 
+bool ArchivoDetallesCompra::borrar() {
+    FILE* p = fopen(_nombre, "wb");
+    if (p == NULL) return false;
+    fclose(p);
+    return true;
+}
 
 

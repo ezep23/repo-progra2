@@ -17,6 +17,7 @@ class ArchivoProductos{
     int contarProductos();
     int generarNuevoID();
 
+     void validarArchivoExiste();
     bool validarNombre(const char* nombre);
     bool validarDisponibilidad(int id);
 
@@ -40,6 +41,7 @@ class ArchivoProductos{
     bool bajaProducto(int id);
     bool altaProducto(int id);
 
+    bool borrar();
 };
 
 #endif // PRODUCTOS_H_INCLUDED

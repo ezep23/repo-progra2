@@ -15,6 +15,8 @@ class ArchivoDetallesVenta{
         _tamDetalleVenta=sizeof(DetalleTransaccion);
     }
 
+     void validarArchivoExiste();
+
     int contarDetallesVentas();
     int generarNuevoID();
 
@@ -30,8 +32,11 @@ class ArchivoDetallesVenta{
     bool listarDetallesTransaccionInactivas();
 
     bool bajaDetalleVenta(int id);
+    bool bajaDetallesVentasCliente(int id);
     bool altaDetalleVenta(int id);
+    bool altaDetallesVentasCliente(int id);
 
+    bool borrar();
 };
 
 #endif // DETALLEVENTAS_H_INCLUDED

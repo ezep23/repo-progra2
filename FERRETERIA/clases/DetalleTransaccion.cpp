@@ -93,8 +93,9 @@ void DetalleTransaccion::cargar(int idTransaccion){
 
 void DetalleTransaccion::mostrar(){
     cout << endl;
-    cout << "ID Detalle: " << _id << endl;
+    cout << "---" << "ID Detalle: " << _id << "--------------" << endl;
     cout << "ID Articulo: " << _idProducto << endl;
     cout << "Precio unitario: " << _precioUnitario << endl;
     cout << "Cantidad: " << _cantidad << endl;
+    cout << endl;
 }

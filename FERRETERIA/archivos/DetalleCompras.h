@@ -15,6 +15,8 @@ class ArchivoDetallesCompra{
         _tamDetalleCompra=sizeof(DetalleTransaccion);
     }
 
+     void validarArchivoExiste();
+
     int contarDetallesCompras();
     int generarNuevoID();
 
@@ -32,6 +34,7 @@ class ArchivoDetallesCompra{
     bool bajaDetalleCompra(int id);
     bool altaDetalleCompra(int id);
 
+    bool borrar();
 
 };
 

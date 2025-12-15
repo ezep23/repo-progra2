@@ -6,12 +6,29 @@ using namespace std;
 #include "../clases/Almacen.h"
 #include "Productos.h"
 
-bool ArchivoProductos::guardarProducto(Producto obj){
-    FILE *p = fopen(_nombre,"ab");
+void ArchivoProductos::validarArchivoExiste()
+{
+    FILE *p = fopen(_nombre, "rb");
 
-    if(p==nullptr){
-        return -1;
+    if (p == NULL)
+    {
+
+        system("cls");
+        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
+             system("pause");
+
+        return ;
     }
+    fclose(p);
+
+}
+
+
+bool ArchivoProductos::guardarProducto(Producto obj){
+
+    validarArchivoExiste();
+
+    FILE *p = fopen(_nombre,"ab");
 
     int guardado = fwrite(&obj, _tamProducto, 1, p);
 
@@ -20,10 +37,9 @@ bool ArchivoProductos::guardarProducto(Producto obj){
 }
 
 bool ArchivoProductos::editarProducto(Producto obj, int pos){
+    validarArchivoExiste();
+
     FILE *p=fopen(_nombre, "rb+");
-    if(p==NULL){
-        return false;
-    }
 
     fseek(p, pos*sizeof obj,0);
     bool escribio=fwrite(&obj, sizeof obj, 1, p);
@@ -32,16 +48,16 @@ bool ArchivoProductos::editarProducto(Producto obj, int pos){
 }
 
 void ArchivoProductos::listarProducto(int id){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getId() == id ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getId() == id )
+        {
             cout << " ----------------------------- " << endl;
             obj.mostrar();
             cout << " ----------------------------- " << endl;
@@ -53,16 +69,16 @@ void ArchivoProductos::listarProducto(int id){
 }
 
 void ArchivoProductos::listarProductos(){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getEstado() ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getEstado() )
+        {
             cout << " ----------------------------- " << endl;
             obj.mostrar();
             cout << " ----------------------------- " << endl;
@@ -74,16 +90,16 @@ void ArchivoProductos::listarProductos(){
 }
 
 void ArchivoProductos::listarProductosCategoria(int idCat){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getIdCategoria() == idCat && obj.getEstado() ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getIdCategoria() == idCat && obj.getEstado() )
+        {
             cout << " ----------------------------- " << endl;
             obj.mostrar();
             cout << " ----------------------------- " << endl;
@@ -95,16 +111,16 @@ void ArchivoProductos::listarProductosCategoria(int idCat){
 }
 
 void ArchivoProductos::listarProductosInactivos(){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(!obj.getEstado() ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(!obj.getEstado() )
+        {
             cout << " ----------------------------- " << endl;
             cout << " ID: " << obj.getId() << endl;
             cout << " NOMBRE: " << obj.getNombre() << endl;
@@ -117,16 +133,16 @@ void ArchivoProductos::listarProductosInactivos(){
 }
 
 void ArchivoProductos::listarProductoStock(int id){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getEstado() && obj.getId() == id ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getEstado() && obj.getId() == id )
+        {
             cout << " ----------------------------- " << endl;
             cout << " ID: " << obj.getId() << endl;
             cout << " NOMBRE: " << obj.getNombre() << endl;
@@ -141,16 +157,16 @@ void ArchivoProductos::listarProductoStock(int id){
 }
 
 void ArchivoProductos::listarProductosBajoStock(){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getEstado() && obj.getStock() <= 5 ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getEstado() && obj.getStock() <= 5 )
+        {
             cout << " ----------------------------- " << endl;
             cout << " ID: " << obj.getId() << endl;
             cout << " NOMBRE: " << obj.getNombre() << endl;
@@ -164,16 +180,16 @@ void ArchivoProductos::listarProductosBajoStock(){
 
 }
 void ArchivoProductos::listarProductosBajoStock(int idCat){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if( obj.getEstado() && obj.getIdCategoria() == idCat && obj.getStock() <= 5 ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if( obj.getEstado() && obj.getIdCategoria() == idCat && obj.getStock() <= 5 )
+        {
             cout << " ----------------------------- " << endl;
             cout << " ID: " << obj.getId() << endl;
             cout << " NOMBRE: " << obj.getNombre() << endl;
@@ -187,16 +203,16 @@ void ArchivoProductos::listarProductosBajoStock(int idCat){
 }
 
 void ArchivoProductos::listarProductosInactivosCategoria(int idCat){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return;
-    }
-
-    while(fread(&obj, _tamProducto, 1, p)==1){
-        if(obj.getIdCategoria() == idCat && !obj.getEstado() ){
+    while(fread(&obj, _tamProducto, 1, p)==1)
+    {
+        if(obj.getIdCategoria() == idCat && !obj.getEstado() )
+        {
             cout << " ----------------------------- " << endl;
             cout << " ID: " << obj.getId() << endl;
             cout << " NOMBRE: " << obj.getNombre() << endl;
@@ -210,12 +226,9 @@ void ArchivoProductos::listarProductosInactivosCategoria(int idCat){
 
 int ArchivoProductos::contarProductos(){
 
+    validarArchivoExiste();
     FILE *p=fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -1;
-    }
     fseek(p,0,2);
     int tamTotal=ftell(p);
 
@@ -226,18 +239,18 @@ int ArchivoProductos::contarProductos(){
     return numProductos;
 }
 
-bool ArchivoProductos::validarNombre(const char* nombre ) {
+bool ArchivoProductos::validarNombre(const char* nombre ){
+
+    validarArchivoExiste();
     Producto obj;
 
     FILE *p;
     p = fopen("Productos.dat", "rb");
 
-    if (p == NULL){
-        return false;
-    }
-
-    while (fread(&obj, sizeof obj, 1, p) == 1) {
-        if (strcmp(obj.getNombre(), nombre) == 0 ) {
+    while (fread(&obj, sizeof obj, 1, p) == 1)
+    {
+        if (strcmp(obj.getNombre(), nombre) == 0 )
+        {
             fclose(p);
             return true;
         }
@@ -248,16 +261,17 @@ bool ArchivoProductos::validarNombre(const char* nombre ) {
 }
 
 bool ArchivoProductos::validarDisponibilidad(int id){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *p;
     p = fopen("Productos.dat", "rb");
 
-    if (p == NULL){
-        return false;
-    }
-
-    while (fread(&obj, sizeof obj, 1, p) == 1) {
-        if (obj.getId() == id && obj.getEstado() && obj.getStock() >= 0) {
+    while (fread(&obj, sizeof obj, 1, p) == 1)
+    {
+        if (obj.getId() == id && obj.getEstado() && obj.getStock() >= 0)
+        {
             fclose(p);
             return true;
         }
@@ -267,14 +281,16 @@ bool ArchivoProductos::validarDisponibilidad(int id){
     return false;
 }
 
-int ArchivoProductos::generarNuevoID(){
+int ArchivoProductos::generarNuevoID()
+{
 
     ArchivoProductos archivo("Productos.dat");
     Producto obj;
 
     int numProductos = archivo.contarProductos();
 
-    if (numProductos == 0){
+    if (numProductos == 0)
+    {
         return 0;
     }
 
@@ -284,22 +300,22 @@ int ArchivoProductos::generarNuevoID(){
 }
 
 int ArchivoProductos::obtenerUbicacionProducto(int id){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *pProductos;
 
     pProductos=fopen(_nombre,"rb");
 
-    if(pProductos==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -2;
-    }
-
     int pos=0;
-    while(fread(&obj, _tamProducto , 1, pProductos) == 1){
-       if(obj.getId() == id){
+    while(fread(&obj, _tamProducto, 1, pProductos) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return pos;
-       }
-       pos++;
+        }
+        pos++;
     }
 
     fclose(pProductos);
@@ -307,20 +323,20 @@ int ArchivoProductos::obtenerUbicacionProducto(int id){
 }
 
 Producto ArchivoProductos::obtenerProducto(const char* nombre){
+
+    validarArchivoExiste();
+
     Producto obj;
     FILE *pProductos;
 
     pProductos = fopen(_nombre,"rb");
 
-    if(pProductos==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return obj;
-    }
-
-    while(fread(&obj, _tamProducto , 1, pProductos) == 1){
-       if(strcmp(_nombre, nombre) == 0){
+    while(fread(&obj, _tamProducto, 1, pProductos) == 1)
+    {
+        if(strcmp(_nombre, nombre) == 0)
+        {
             return obj;
-       }
+        }
     }
 
     fclose(pProductos);
@@ -332,16 +348,13 @@ Producto ArchivoProductos::obtenerProducto(const char* nombre){
 
 Producto ArchivoProductos::obtenerProducto(int pos){
 
+    validarArchivoExiste();
+
     Producto obj;
     FILE *pProductos;
 
     pProductos = fopen(_nombre,"rb");
     obj.setId(-1);
-
-    if(pProductos==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return obj;
-    }
 
     fseek(pProductos, pos*_tamProducto, 0);
     fread(&obj, _tamProducto, 1, pProductos);
@@ -351,14 +364,16 @@ Producto ArchivoProductos::obtenerProducto(int pos){
 
 }
 
-bool ArchivoProductos::bajaProducto(int id){
+bool ArchivoProductos::bajaProducto(int id)
+{
     Producto obj;
     ArchivoProductos archivo;
 
     int pos=archivo.obtenerUbicacionProducto(id);
 
-    if(pos==-1){
-            return false;
+    if(pos==-1)
+    {
+        return false;
     }
 
     obj=archivo.obtenerProducto(pos);
@@ -366,14 +381,16 @@ bool ArchivoProductos::bajaProducto(int id){
     return archivo.editarProducto(obj, pos);
 }
 
-bool ArchivoProductos::altaProducto(int id){
+bool ArchivoProductos::altaProducto(int id)
+{
     Producto obj;
     ArchivoProductos archivo;
 
     int pos=archivo.obtenerUbicacionProducto(id);
 
-    if(pos==-1){
-            return false;
+    if(pos==-1)
+    {
+        return false;
     }
 
     obj=archivo.obtenerProducto(pos);
@@ -381,3 +398,9 @@ bool ArchivoProductos::altaProducto(int id){
     return archivo.editarProducto(obj, pos);
 }
 
+bool ArchivoProductos::borrar() {
+    FILE* p = fopen(_nombre, "wb");
+    if (p == NULL) return false;
+    fclose(p);
+    return true;
+}

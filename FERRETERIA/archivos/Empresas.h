@@ -14,8 +14,10 @@ class ArchivoEmpresas{
             _tamEmpresa=sizeof(Empresa);
         }
 
+
         int generarNuevoID();
 
+        void validarArchivoExiste();
         bool validarIdExiste(int id);
         bool validarEmpresaExiste(const char * nombre);
 
@@ -32,6 +34,8 @@ class ArchivoEmpresas{
 
         bool bajaEmpresa(int _id);
         bool altaEmpresa(int _id);
+
+        bool borrar();
 };
 
 #endif // EMPRESAS_H_INCLUDED

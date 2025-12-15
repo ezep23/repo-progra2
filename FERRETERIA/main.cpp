@@ -5,6 +5,8 @@ using namespace std;
 #include "./menus/compras.h"
 #include "./menus/inventario.h"
 
+#include "./menus/configuraciones.h"
+
 int main(){
     int opc;
 
@@ -38,6 +40,12 @@ int main(){
             break;
         case 3:
             inventario();
+            break;
+        case 4:
+            inventario();
+            break;
+        case 5:
+            configuraciones();
             break;
         case 0:
             return 0;

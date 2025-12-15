@@ -47,7 +47,7 @@ void ventas(){
                 system("pause");
                 break;
             case 5:
-                //listarCliente();
+                listarClientes();
                 system("pause");
                 break;
             case 6:

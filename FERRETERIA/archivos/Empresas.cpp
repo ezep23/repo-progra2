@@ -4,6 +4,24 @@ using namespace std;
 #include "Empresas.h"
 #include "string.h"
 
+
+void ArchivoEmpresas::validarArchivoExiste()
+{
+    FILE *p = fopen(_nombre, "rb");
+
+    if (p == NULL)
+    {
+
+        system("cls");
+        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
+             system("pause");
+
+        return ;
+    }
+    fclose(p);
+
+}
+
 int ArchivoEmpresas::generarNuevoID(){
 
     ArchivoEmpresas archivo("Empresas.dat");
@@ -21,17 +39,16 @@ int ArchivoEmpresas::generarNuevoID(){
 }
 
 bool ArchivoEmpresas::validarIdExiste(int id){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamEmpresa, 1, p) == 1){
-        if(obj.getId() == id){
+    while(fread(&obj, _tamEmpresa, 1, p) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return true;
         }
     }
@@ -41,17 +58,16 @@ bool ArchivoEmpresas::validarIdExiste(int id){
 }
 
 bool ArchivoEmpresas::validarEmpresaExiste(const char * nombre){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamEmpresa, 1, p) == 1){
-        if(strcmp(_nombre, nombre) == 0){
+    while(fread(&obj, _tamEmpresa, 1, p) == 1)
+    {
+        if(strcmp(_nombre, nombre) == 0)
+        {
             return true;
         }
     }
@@ -62,13 +78,10 @@ bool ArchivoEmpresas::validarEmpresaExiste(const char * nombre){
 
 
 int ArchivoEmpresas::contarEmpresas(){
-     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -1;
-    }
+    validarArchivoExiste();
 
+    FILE *p = fopen(_nombre,"rb");
     fseek(p,0,2);
     int tamTotal=ftell(p);
 
@@ -79,11 +92,9 @@ int ArchivoEmpresas::contarEmpresas(){
 }
 
 bool ArchivoEmpresas::guardarEmpresa(Empresa obj){
-    FILE *p = fopen(_nombre,"ab");
 
-    if(p==nullptr){
-        return false;
-    }
+    validarArchivoExiste();
+    FILE *p = fopen(_nombre,"ab");
 
     bool guardado = fwrite(&obj, _tamEmpresa, 1, p);
 
@@ -92,17 +103,16 @@ bool ArchivoEmpresas::guardarEmpresa(Empresa obj){
 }
 
 bool ArchivoEmpresas::listarEmpresas(){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p == nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamEmpresa, 1, p) == 1){
-        if(obj.getEstado()){
+    while(fread(&obj, _tamEmpresa, 1, p) == 1)
+    {
+        if(obj.getEstado())
+        {
             cout << " # ID:" << obj.getId() << " - " << obj.getNombre() << endl;
         }
     }
@@ -112,17 +122,16 @@ bool ArchivoEmpresas::listarEmpresas(){
 }
 
 bool ArchivoEmpresas::listarEmpresasInactivas(){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p == nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return false;
-    }
-
-
-    while(fread(&obj, _tamEmpresa, 1, p) == 1){
-        if(!obj.getEstado()){
+    while(fread(&obj, _tamEmpresa, 1, p) == 1)
+    {
+        if(!obj.getEstado())
+        {
             cout << " # ID:" << obj.getId() << " - " << obj.getNombre() << endl;
         }
     }
@@ -132,20 +141,20 @@ bool ArchivoEmpresas::listarEmpresasInactivas(){
 }
 
 int ArchivoEmpresas::obtenerUbicacionEmpresa(int id){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p = fopen(_nombre,"rb");
 
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return -2;
-    }
-
     int pos=0;
-    while(fread(&obj, _tamEmpresa, 1, p) == 1){
-       if(obj.getId() == id){
+    while(fread(&obj, _tamEmpresa, 1, p) == 1)
+    {
+        if(obj.getId() == id)
+        {
             return pos;
-       }
-       pos++;
+        }
+        pos++;
     }
 
     fclose(p);
@@ -153,14 +162,12 @@ int ArchivoEmpresas::obtenerUbicacionEmpresa(int id){
 }
 
 Empresa ArchivoEmpresas::obtenerEmpresa(int pos){
+
+    validarArchivoExiste();
+
     Empresa obj;
     FILE *p=fopen(_nombre,"rb");
     obj.setId(-1);
-
-    if(p==nullptr){
-        cout<<"ERROR DE ARCHIVO"<<endl;
-        return obj;
-    }
 
     fseek(p, pos*_tamEmpresa, 0);
     fread(&obj, _tamEmpresa, 1, p);
@@ -170,11 +177,10 @@ Empresa ArchivoEmpresas::obtenerEmpresa(int pos){
 }
 
 bool ArchivoEmpresas::modificarEmpresa(Empresa obj, int pos){
-    FILE *p=fopen(_nombre,"rb+");
 
-    if(p==nullptr){
-        return false;
-    }
+    validarArchivoExiste();
+
+    FILE *p=fopen(_nombre,"rb+");
 
     fseek(p, pos*_tamEmpresa, 0);
     bool modificado=fwrite(&obj, _tamEmpresa, 1, p);
@@ -191,7 +197,7 @@ bool ArchivoEmpresas::bajaEmpresa(int id){
     int pos = archivo.obtenerUbicacionEmpresa(id);
 
     if(pos == -1){
-            return false;
+        return false;
     }
 
     obj = archivo.obtenerEmpresa(pos);
@@ -200,14 +206,16 @@ bool ArchivoEmpresas::bajaEmpresa(int id){
     return archivo.modificarEmpresa(obj, pos);
 }
 
-bool ArchivoEmpresas::altaEmpresa(int id){
+bool ArchivoEmpresas::altaEmpresa(int id)
+{
     Empresa obj;
     ArchivoEmpresas archivo;
 
     int pos = archivo.obtenerUbicacionEmpresa(id);
 
-    if(pos == -1){
-            return false;
+    if(pos == -1)
+    {
+        return false;
     }
 
     obj = archivo.obtenerEmpresa(pos);
@@ -216,3 +224,9 @@ bool ArchivoEmpresas::altaEmpresa(int id){
     return archivo.modificarEmpresa(obj, pos);
 }
 
+bool ArchivoEmpresas::borrar() {
+    FILE* p = fopen(_nombre, "wb");
+    if (p == NULL) return false;
+    fclose(p);
+    return true;
+}

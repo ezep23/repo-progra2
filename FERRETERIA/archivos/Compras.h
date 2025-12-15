@@ -14,6 +14,8 @@ class ArchivoCompras{
         _tamCompra=sizeof(Transaccion);
     }
 
+    void validarArchivoExiste();
+
     int contarCompras();
     int generarNuevoID();
 
@@ -29,6 +31,8 @@ class ArchivoCompras{
     bool bajaCompra(int id);
     bool altaCompra(int id);
 
+
+    bool borrar();
 };
 
 #endif // COMPRAS_H_INCLUDED
