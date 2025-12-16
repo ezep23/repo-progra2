@@ -10,6 +10,7 @@ void backupClientes();
 void backupProveedores();
 void backupEmpresas();
 void backupCategorias();
+void backupGeneral();
 
 void restaurarBackupProductos();
 void restaurarBackupVentas();
@@ -20,5 +21,6 @@ void restaurarBackupClientes();
 void restaurarBackupProveedores();
 void restaurarBackupEmpresas();
 void restaurarBackupCategorias();
+void restaurarBackupGeneral();
 
 #endif // FUNCIONESMENUCONFIGURACIONES_H_INCLUDED

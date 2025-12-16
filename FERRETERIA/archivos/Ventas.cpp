@@ -5,29 +5,15 @@
 #include <iostream>
 using namespace std;
 
-
-void ArchivoVentas::validarArchivoExiste()
-{
-    FILE *p = fopen(_nombre, "rb");
-
-    if (p == NULL){
-
-        system("cls");
-        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
-             system("pause");
-
-        return ;
-    }
-    fclose(p);
-
-}
-
 bool ArchivoVentas::validarIdExiste(int id){
-
-    validarArchivoExiste();
 
     Transaccion obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamVenta, 1, p) == 1){
 
@@ -44,8 +30,13 @@ bool ArchivoVentas::validarIdExiste(int id){
 
 
 int ArchivoVentas::contarVentas(){
-    validarArchivoExiste();
+
     FILE *p = fopen("Ventas.dat", "rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p, 0, SEEK_END);
     int bytes = ftell(p);
@@ -59,8 +50,7 @@ int ArchivoVentas::generarNuevoID()
 
     int numVentas = contarVentas();
 
-    if (numVentas == 0)
-    {
+    if (numVentas == 0){
         return 1;
     }
 
@@ -70,7 +60,6 @@ int ArchivoVentas::generarNuevoID()
 
 bool ArchivoVentas::guardarVenta(Transaccion venta){
 
-    validarArchivoExiste();
     FILE *p=fopen(_nombre, "ab");
 
     bool guardado=fwrite(&venta, _tamVenta, 1, p);
@@ -80,9 +69,12 @@ bool ArchivoVentas::guardarVenta(Transaccion venta){
 }
 
 int ArchivoVentas::editarVenta(Transaccion venta, int pos){
-
-    validarArchivoExiste();
     FILE *p=fopen(_nombre, "rb+");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p, pos*sizeof venta,0);
     bool escribio=fwrite(&venta, sizeof venta, 1, p);
@@ -100,8 +92,7 @@ Transaccion ArchivoVentas::obtenerVenta(int pos)
 
     venta.setMontoTotal(-1);
 
-    if(p==nullptr)
-    {
+    if(p==nullptr){
         return venta;
     }
 
@@ -112,13 +103,15 @@ Transaccion ArchivoVentas::obtenerVenta(int pos)
     return venta;
 }
 
-int ArchivoVentas::obtenerUbicacionVenta(int id)
-{
-
-    validarArchivoExiste();
+int ArchivoVentas::obtenerUbicacionVenta(int id){
 
     Transaccion venta;
     FILE *p=fopen("Ventas.dat","rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
 
@@ -137,10 +130,14 @@ int ArchivoVentas::obtenerUbicacionVenta(int id)
 
 bool ArchivoVentas::listarVentas(){
 
-    validarArchivoExiste();
 
     Transaccion venta;
     FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&venta, _tamVenta, 1, p)==1)
     {
@@ -157,10 +154,13 @@ bool ArchivoVentas::listarVentas(){
 
 bool ArchivoVentas::listarVentasInactivas(){
 
-    validarArchivoExiste();
-
     Transaccion venta;
     FILE *p = fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&venta, _tamVenta, 1, p)==1)
     {
@@ -192,10 +192,13 @@ bool ArchivoVentas::bajaVenta(int id){
 
 bool ArchivoVentas::bajaVentasCliente(int id){
 
-    validarArchivoExiste();
-
     Transaccion venta;
     FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&venta, _tamVenta, 1, p)==1){
 
@@ -226,10 +229,13 @@ bool ArchivoVentas::altaVenta(int id){
 
 bool ArchivoVentas::altaVentasCliente(int id){
 
-    validarArchivoExiste();
-
     Transaccion venta;
     FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&venta, _tamVenta, 1, p)==1){
 

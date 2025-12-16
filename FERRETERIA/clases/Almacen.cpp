@@ -82,3 +82,17 @@ void Almacen::consultarProductosBajoStock(int idCat){
     ArchivoProductos archivo("Productos.dat");
     archivo.listarProductosBajoStock(idCat);
 }
+
+void Almacen::consultarProductosProveedor(int idProv){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosProveedor(idProv);
+}
+
+void Almacen::consultarProductosMismoNombre(const char* nombre){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosMismoNombre(nombre);
+}
+void Almacen::consultarProductoMimasMarca(const char* marca){
+    ArchivoProductos archivo("Productos.dat");
+    archivo.listarProductosMismaMarca(marca);
+}

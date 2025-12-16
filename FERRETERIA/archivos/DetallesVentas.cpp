@@ -4,29 +4,15 @@ using namespace std;
 #include "../clases/DetalleTransaccion.h"
 #include "./DetalleVentas.h"
 
-
-void ArchivoDetallesVenta::validarArchivoExiste()
-{
-    FILE *p = fopen(_nombre, "rb");
-
-    if (p == NULL)
-    {
-
-        system("cls");
-        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
-             system("pause");
-
-        return ;
-    }
-    fclose(p);
-
-}
-
-
 int ArchivoDetallesVenta::contarDetallesVentas(){
-    validarArchivoExiste();
 
     FILE *p = fopen("DetallesVentas.dat", "rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
+
     fseek(p, 0, SEEK_END);
     int bytes = ftell(p);
     fclose(p);
@@ -46,8 +32,6 @@ int ArchivoDetallesVenta::generarNuevoID(){
 }
 
 int ArchivoDetallesVenta::guardarDetalleVenta(DetalleTransaccion detalle){
-    validarArchivoExiste();
-
     FILE *p=fopen(_nombre, "ab");
     bool guardado=fwrite(&detalle, _tamDetalleVenta, 1, p);
     fclose(p);
@@ -56,9 +40,13 @@ int ArchivoDetallesVenta::guardarDetalleVenta(DetalleTransaccion detalle){
 }
 
 bool ArchivoDetallesVenta::editarDetalleVenta(DetalleTransaccion detalle, int pos){
-    validarArchivoExiste();
-
     FILE *p=fopen(_nombre, "rb+");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
+
     fseek(p, pos*sizeof detalle,0);
     bool escribio=fwrite(&detalle, sizeof detalle, 1, p);
     fclose(p);
@@ -67,10 +55,13 @@ bool ArchivoDetallesVenta::editarDetalleVenta(DetalleTransaccion detalle, int po
 
 int ArchivoDetallesVenta::obtenerUbicacionDetalleVenta(int id){
 
-    validarArchivoExiste();
-
     DetalleTransaccion obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
     while(fread(&obj, _tamDetalleVenta, 1, p) == 1)
@@ -88,10 +79,13 @@ int ArchivoDetallesVenta::obtenerUbicacionDetalleVenta(int id){
 
 float ArchivoDetallesVenta::obtenerMontoTotal(int idTransaccion){
 
-    validarArchivoExiste();
-
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     float total = 0;
 
@@ -110,10 +104,14 @@ float ArchivoDetallesVenta::obtenerMontoTotal(int idTransaccion){
 
 DetalleTransaccion ArchivoDetallesVenta::obtenerDetalleVenta(int pos){
 
-    validarArchivoExiste();
-
     DetalleTransaccion obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return obj;
+    }
+
     obj.setId(-1);
 
     fseek(p, pos*_tamDetalleVenta, 0);
@@ -126,10 +124,13 @@ DetalleTransaccion ArchivoDetallesVenta::obtenerDetalleVenta(int pos){
 
 void ArchivoDetallesVenta::listarDetallesDeVenta(int idTransaccion){
 
-    validarArchivoExiste();
-
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return;
+    }
 
     while(fread(&obj, _tamDetalleVenta, 1, p)==1)
     {
@@ -148,10 +149,13 @@ void ArchivoDetallesVenta::listarDetallesDeVenta(int idTransaccion){
 
 bool ArchivoDetallesVenta::listarDetallesTransaccion(){
 
-    validarArchivoExiste();
-
     DetalleTransaccion obj;
     FILE *p=fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamDetalleVenta, 1, p)==1)
     {
@@ -167,10 +171,13 @@ bool ArchivoDetallesVenta::listarDetallesTransaccion(){
 
 bool ArchivoDetallesVenta::listarDetallesTransaccionInactivas(){
 
-    validarArchivoExiste();
-
     DetalleTransaccion detalle;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&detalle, _tamDetalleVenta, 1, p)==1)
     {
@@ -199,7 +206,16 @@ bool ArchivoDetallesVenta::bajaDetalleVenta(int id)
 }
 
 bool ArchivoDetallesVenta::bajaDetallesVentasCliente(int id){
+    DetalleTransaccion obj;
+    ArchivoDetallesVenta archivo;
 
+    int pos=archivo.obtenerUbicacionDetalleVenta(id);
+
+    if(pos==-1) return false;
+
+    obj=archivo.obtenerDetalleVenta(pos);
+    obj.setEstado(false);
+    return archivo.editarDetalleVenta(obj, pos);
 }
 
 
@@ -218,7 +234,16 @@ bool ArchivoDetallesVenta::altaDetalleVenta(int id)
 }
 
 bool ArchivoDetallesVenta::altaDetallesVentasCliente(int id){
+    DetalleTransaccion obj;
+    ArchivoDetallesVenta archivo;
 
+    int pos=archivo.obtenerUbicacionDetalleVenta(id);
+
+    if(pos==-1) return false;
+
+    obj=archivo.obtenerDetalleVenta(pos);
+    obj.setEstado(true);
+    return archivo.editarDetalleVenta(obj, pos);
 }
 
 bool ArchivoDetallesVenta::borrar() {

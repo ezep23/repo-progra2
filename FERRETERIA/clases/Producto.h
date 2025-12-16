@@ -8,6 +8,7 @@ class Producto{
      int _idCategoria;
      char _nombre[50];
      char _marca[50];
+     char _categoria[50];
      float _precio;
      int _stock;
      bool _estado;
@@ -20,7 +21,7 @@ class Producto{
     int getIdProveedor();
     int getIdCategoria();
     const char* getNombre();
-    void getMarca();
+    const char* getMarca();
     float getPrecio();
     int getStock();
     bool getEstado();

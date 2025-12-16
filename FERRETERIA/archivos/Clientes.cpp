@@ -26,10 +26,14 @@ void ArchivoClientes::validarArchivoExiste()
 
 
 int ArchivoClientes::obtenerIdCliente(int dni){
-    validarArchivoExiste();
 
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1){
         if(obj.getEstado() && obj.getId() == dni){
@@ -44,10 +48,13 @@ int ArchivoClientes::obtenerIdCliente(int dni){
 
 bool ArchivoClientes::validarIdExiste(int id){
 
-    validarArchivoExiste();
-
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1)
     {
@@ -63,10 +70,14 @@ bool ArchivoClientes::validarIdExiste(int id){
 }
 
 bool ArchivoClientes::validarDniExiste(int dni){
-    validarArchivoExiste();
 
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1)
     {
@@ -81,10 +92,7 @@ bool ArchivoClientes::validarDniExiste(int dni){
 
 }
 
-int ArchivoClientes::generarNuevoID()
-{
-
-    validarArchivoExiste();
+int ArchivoClientes::generarNuevoID(){
 
     ArchivoClientes archivo("Clientes.dat");
     Cliente obj;
@@ -96,7 +104,6 @@ int ArchivoClientes::generarNuevoID()
 }
 
 int ArchivoClientes::guardarCliente(Cliente obj){
-    validarArchivoExiste();
 
     FILE *p = fopen(_nombre,"ab");
 
@@ -108,13 +115,16 @@ int ArchivoClientes::guardarCliente(Cliente obj){
 
 void ArchivoClientes::listarClientesNombre(const char* nom){
 
-    validarArchivoExiste();
-
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
 
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return;
+    }
+
     while(fread(&obj, _tamCliente, 1, p) == 1){
-        if(obj.getEstado() && sonIguales(obj.getNombre(), nom) == 0 ){
+        if(obj.getEstado() && sonIguales(obj.getNombre(), nom) ){
             obj.mostrar();
         }
     }
@@ -125,10 +135,14 @@ void ArchivoClientes::listarClientesNombre(const char* nom){
 }
 
 void ArchivoClientes::listarClientesApellido(const char* ape){
-    validarArchivoExiste();
 
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1){
 
@@ -143,10 +157,13 @@ void ArchivoClientes::listarClientesApellido(const char* ape){
 
 bool ArchivoClientes::listarClientes(){
 
-    validarArchivoExiste();
-
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1)
     {
@@ -162,10 +179,13 @@ bool ArchivoClientes::listarClientes(){
 
 bool ArchivoClientes::listarClientesInactivos(){
 
-    validarArchivoExiste();
-
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamCliente, 1, p) == 1)
     {
@@ -180,10 +200,14 @@ bool ArchivoClientes::listarClientesInactivos(){
 }
 
 int ArchivoClientes::obtenerUbicacionCliente(int dni){
-    validarArchivoExiste();
 
     Cliente obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
     while(fread(&obj, _tamCliente, 1, p) == 1){
@@ -199,10 +223,13 @@ int ArchivoClientes::obtenerUbicacionCliente(int dni){
 
 Cliente ArchivoClientes::obtenerCliente(int pos){
 
-    validarArchivoExiste();
-
     Cliente obj;
     FILE *p=fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return obj;
+    }
     obj.setDni(-1);
 
     fseek(p, pos*_tamCliente, 0);
@@ -214,9 +241,13 @@ Cliente ArchivoClientes::obtenerCliente(int pos){
 }
 
 int ArchivoClientes::modificarCliente(Cliente obj, int pos){
-    validarArchivoExiste();
 
     FILE *p=fopen(_nombre,"rb+");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p, pos*_tamCliente, 0);
     int modificado=fwrite(&obj, _tamCliente, 1, p);
@@ -227,9 +258,13 @@ int ArchivoClientes::modificarCliente(Cliente obj, int pos){
 
 int ArchivoClientes::contarClientes(){
 
-    validarArchivoExiste();
 
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     fseek(p,0,2);
     int tamTotal=ftell(p);

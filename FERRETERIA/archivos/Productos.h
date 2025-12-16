@@ -17,7 +17,8 @@ class ArchivoProductos{
     int contarProductos();
     int generarNuevoID();
 
-     void validarArchivoExiste();
+    bool validarIdExiste(int id);
+    void validarArchivoExiste();
     bool validarNombre(const char* nombre);
     bool validarDisponibilidad(int id);
 
@@ -28,6 +29,8 @@ class ArchivoProductos{
     Producto obtenerProducto(int pos);
     int obtenerUbicacionProducto(int id);
 
+    void listarProductosMismaMarca(const char* marca);
+    void listarProductosMismoNombre(const char* nombre);
     void listarProducto(int id);
     void listarProductoStock(int id);
     void listarProductosBajoStock();
@@ -37,6 +40,7 @@ class ArchivoProductos{
     void listarProductosCategoria(int idCat);
     void listarProductosInactivos();
     void listarProductosInactivosCategoria(int idCat);
+    void listarProductosProveedor(int id);
 
     bool bajaProducto(int id);
     bool altaProducto(int id);

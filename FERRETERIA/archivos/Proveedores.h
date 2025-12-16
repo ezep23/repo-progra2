@@ -14,7 +14,9 @@ class ArchivoProveedores{
             _tamProveedor=sizeof(Proveedor);
         }
 
-         void validarArchivoExiste();
+        int generarNuevoID();
+
+        void validarArchivoExiste();
         bool validarIdExiste(int id);
 
         int contarProveedores();

@@ -10,8 +10,8 @@ void menuRestaurarCopias();
 
 void configuraciones(){
 
-    int opc = 0;
-    while(true){
+    int opc = 1;
+    while(opc !=0){
 
     system("cls");
     cout << " --------------------------" <<endl;
@@ -20,6 +20,7 @@ void configuraciones(){
     cout << " 1. EXPORTAR DATOS A CSV" << endl;
     cout << " 2. REALIZAR COPIA DE SEGURIDAD" << endl;
     cout << " 3. RESTAURAR COPIA DE SEGURIDAD" << endl;
+    cout << " 0. Volver al menu" << endl;
     cout << " --------------------------" <<endl;
     cout << " Opcion: ";
     cin >> opc;
@@ -59,6 +60,7 @@ void menuRealizarCopias(){
     cout << " 7. REALIZAR COPIA DE PROVEEDORES" << endl;
     cout << " 8. REALIZAR COPIA DE EMPRESAS" << endl;
     cout << " 9. REALIZAR COPIA DE CATEGORIAS" << endl;
+    cout << " 10. REALIZAR BACKUP GENERAL" << endl;
     cout << " 0. Volver al submenu de config." << endl;
     cout << " -----------------------------" <<endl;
     cout << " Opcion: ";
@@ -75,13 +77,14 @@ void menuRealizarCopias(){
         case 7: backupProveedores(); break;
         case 8: backupEmpresas(); break;
         case 9: backupCategorias(); break;
+        case 10: backupGeneral(); break;
     }
   }
 }
 void menuRestaurarCopias(){
 
-    int subopc = 0;
-    while(true){
+    int subopc = 1;
+    while(subopc == 0){
 
     system("cls");
     cout << " ------------------------------" <<endl;
@@ -96,6 +99,7 @@ void menuRestaurarCopias(){
     cout << " 7. RESTAURAR COPIA DE PROVEEDORES" << endl;
     cout << " 8. RESTAURAR COPIA DE EMPRESAS" << endl;
     cout << " 9. RESTAURAR COPIA DE CATEGORIAS" << endl;
+    cout << " 10. RESTAURAR BACKUP GENERAL" << endl;
     cout << " 0. Volver al submenu de config." << endl;
     cout << " ------------------------------" <<endl;
     cout << " Opcion: ";
@@ -112,6 +116,7 @@ void menuRestaurarCopias(){
         case 7: restaurarBackupProveedores(); break;
         case 8: restaurarBackupEmpresas(); break;
         case 9: restaurarBackupCategorias(); break;
+        case 10: restaurarBackupGeneral(); break;
     }
 
   }

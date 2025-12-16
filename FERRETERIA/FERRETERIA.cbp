@@ -102,10 +102,12 @@
 		<Unit filename="menus/funciones-menus/funcionesMenuCompras.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuConfiguraciones.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuConfiguraciones.h" />
+		<Unit filename="menus/funciones-menus/funcionesMenuInformes.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuInventario.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuInventario.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.h" />
+		<Unit filename="menus/informes.h" />
 		<Unit filename="menus/inventario.h" />
 		<Unit filename="menus/ventas.h">
 			<Option target="&lt;{~None~}&gt;" />

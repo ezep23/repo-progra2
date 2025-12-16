@@ -5,29 +5,15 @@ using namespace std;
 #include "../clases/Categoria.h"
 #include "string.h"
 
-void ArchivoCategorias::validarArchivoExiste()
-{
-    FILE *p = fopen(_nombre, "rb");
-
-    if (p == NULL)
-    {
-
-        system("cls");
-        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
-             system("pause");
-
-        return ;
-    }
-    fclose(p);
-
-}
-
 bool ArchivoCategorias::validarCategoriaExiste(const char * nombre){
-
-    validarArchivoExiste();
 
     Categoria obj;
     FILE *p=fopen("Categorias.dat", "rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while (fread(&obj, sizeof obj, 1, p) == 1)
     {
@@ -44,9 +30,12 @@ bool ArchivoCategorias::validarCategoriaExiste(const char * nombre){
 
 int ArchivoCategorias::contarCategorias(){
 
-    validarArchivoExiste();
-
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p,0,2);
     int tamTotal=ftell(p);
@@ -77,8 +66,6 @@ int ArchivoCategorias::generarNuevoID( )
 
 int ArchivoCategorias::guardarCategoria(Categoria obj){
 
-    validarArchivoExiste();
-
     FILE *p = fopen(_nombre,"ab");
 
     int guardado = fwrite(&obj, _tamCategoria, 1, p);
@@ -88,10 +75,14 @@ int ArchivoCategorias::guardarCategoria(Categoria obj){
 }
 
 int ArchivoCategorias::obtenerUbicacionCategoria(int id){
-    validarArchivoExiste();
 
     Categoria obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
     while(fread(&obj, _tamCategoria, 1, p) == 1)
@@ -109,10 +100,14 @@ int ArchivoCategorias::obtenerUbicacionCategoria(int id){
 
 int ArchivoCategorias::obtenerUbicacionCategoria(const char* categoria){
 
-    validarArchivoExiste();
-
     Categoria obj;
     FILE *p = fopen(_nombre,"rb");
+
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
     while(fread(&obj, _tamCategoria, 1, p) == 1)
@@ -131,10 +126,14 @@ int ArchivoCategorias::obtenerUbicacionCategoria(const char* categoria){
 
 Categoria ArchivoCategorias::obtenerCategoria(int pos){
 
-    validarArchivoExiste();
 
     Categoria obj;
     FILE *p=fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return obj;
+    }
 
     fseek(p, pos*_tamCategoria, 0);
     fread(&obj, _tamCategoria, 1, p);
@@ -145,9 +144,13 @@ Categoria ArchivoCategorias::obtenerCategoria(int pos){
 }
 
 int ArchivoCategorias::modificarCategoria(Categoria obj, int pos){
-    validarArchivoExiste();
 
     FILE *p=fopen(_nombre,"rb+");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p, pos*_tamCategoria, 0);
     int modificado=fwrite(&obj, _tamCategoria, 1, p);
@@ -158,10 +161,13 @@ int ArchivoCategorias::modificarCategoria(Categoria obj, int pos){
 
 bool ArchivoCategorias::listarCategorias(){
 
-    validarArchivoExiste();
-
     Categoria obj;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&obj, _tamCategoria, 1, p) == 1)
     {

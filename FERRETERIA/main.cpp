@@ -4,7 +4,7 @@ using namespace std;
 #include "./menus/ventas.h"
 #include "./menus/compras.h"
 #include "./menus/inventario.h"
-
+#include "./menus/informes.h"
 #include "./menus/configuraciones.h"
 
 int main(){
@@ -42,7 +42,7 @@ int main(){
             inventario();
             break;
         case 4:
-            inventario();
+            informes();
             break;
         case 5:
             configuraciones();

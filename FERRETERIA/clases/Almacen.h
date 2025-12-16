@@ -14,6 +14,9 @@ class Almacen{
      void consultarStock(int id);
      void consultarProductosBajoStock();
      void consultarProductosBajoStock(int idCat);
+     void consultarProductosProveedor(int id);
+     void consultarProductosMismoNombre(const char* nombre);
+     void consultarProductoMimasMarca(const char* marca);
 };
 
 

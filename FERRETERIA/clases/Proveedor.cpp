@@ -64,29 +64,24 @@ bool Proveedor::getEstado(){
 
 void Proveedor::cargar(){
     cout << "------ NUEVO PROVEEDOR ------" << endl;
+    cin.ignore();
 
     cout << "Ingrese su nombre: ";
-    cin.ignore();
     cin.getline(_nombre, 50);
 
     cout << "Ingrese su apellido: ";
-    cin.ignore();
     cin.getline(_apellido, 50);
 
     cout << "Ingrese su telefono: ";
-    cin.ignore();
     cin.getline(_telefono, 50);
 
     cout << "Ingrese su email: ";
-    cin.ignore();
     cin.getline(_email, 50);
 
     cout << "Nombre de empresa: ";
-    cin.ignore();
     cin.getline(_nombreEmpresa, 50);
 
     cout << "Razon social: ";
-    cin.ignore();
     cin.getline(_razonSocial, 50);
 
 

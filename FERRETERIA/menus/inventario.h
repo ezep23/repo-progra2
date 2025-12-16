@@ -16,9 +16,8 @@ void inventario(){
         cout << endl;
         cout << "   1. Agregar producto" << endl;
         cout << "   2. Listar productos" << endl;
-        cout << "   3. Eliminar producto" << endl;
-        cout << "   4. " << endl;
-        cout << "   5. " << endl;
+        cout << "   3. Editar producto" << endl;
+        cout << "   4. Eliminar producto" << endl;
         cout << "   0. Volver al menu principal " << endl;
         cout << endl;
         cout << " ----------------------------" << endl;
@@ -30,7 +29,7 @@ void inventario(){
 
         switch (opc){
             case 1:
-                nuevaProducto();
+                nuevoProducto();
                 system("pause");
                 break;
             case 2:
@@ -38,19 +37,11 @@ void inventario(){
                 system("pause");
                 break;
             case 3:
-                eliminarProducto();
+                editarProducto();
                 system("pause");
                 break;
             case 4:
-                //eliminarVenta();
-                system("pause");
-                break;
-            case 5:
-                //listarCliente();
-                system("pause");
-                break;
-            case 6:
-                //eliminarCliente();
+                eliminarProducto();
                 system("pause");
                 break;
             default:

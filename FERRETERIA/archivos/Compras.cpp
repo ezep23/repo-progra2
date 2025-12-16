@@ -4,28 +4,14 @@
 #include <iostream>
 using namespace std;
 
-
-void ArchivoCompras::validarArchivoExiste()
-{
-    FILE *p = fopen(_nombre, "rb");
-
-    if (p == NULL)
-    {
-
-        system("cls");
-        cout << " EL ARCHIVO NO EXISTE O AUN NO SE HA CREADO.";
-             system("pause");
-
-        return ;
-    }
-    fclose(p);
-
-}
-
 int ArchivoCompras::contarCompras(){
-    validarArchivoExiste();
 
     FILE *p = fopen("Ventas.dat", "rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     fseek(p, 0, SEEK_END);
     int bytes = ftell(p);
@@ -36,16 +22,15 @@ int ArchivoCompras::contarCompras(){
 
 int ArchivoCompras::generarNuevoID(){
 
-    validarArchivoExiste();
+    ArchivoCompras archivo("Compras.dat");
+    Transaccion obj;
 
-    int numCompras = contarCompras();
-    Transaccion compra = obtenerCompra(numCompras - 1);
-    return compra.getIdTransaccion() + 1;
+    int numCompras = archivo.contarCompras();
+    obj = archivo.obtenerCompra(numCompras-1);
+    return obj.getIdTransaccion()+1;
 }
 
 bool ArchivoCompras::guardarCompra(Transaccion compra){
-
-    validarArchivoExiste();
 
     FILE *p=fopen(_nombre, "ab");
     bool guardado=fwrite(&compra, _tamCompra, 1, p);
@@ -55,9 +40,13 @@ bool ArchivoCompras::guardarCompra(Transaccion compra){
 }
 
 bool ArchivoCompras::editarCompra(Transaccion compra, int pos){
-    validarArchivoExiste();
 
     FILE *p=fopen(_nombre, "rb+");
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
+
     fseek(p, pos*sizeof compra,0);
     bool escribio=fwrite(&compra, sizeof compra, 1, p);
     fclose(p);
@@ -66,10 +55,13 @@ bool ArchivoCompras::editarCompra(Transaccion compra, int pos){
 
 Transaccion ArchivoCompras::obtenerCompra(int pos){
 
-    validarArchivoExiste();
-
     Transaccion compra;
     FILE *p = fopen(_nombre, "rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return compra;
+    }
 
     compra.setMontoTotal(-1);
 
@@ -82,10 +74,13 @@ Transaccion ArchivoCompras::obtenerCompra(int pos){
 
 int ArchivoCompras::obtenerUbicacionCompra(int id){
 
-    validarArchivoExiste();
-
     Transaccion compra;
     FILE *p=fopen("Compras.dat","rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return 0;
+    }
 
     int pos=0;
 
@@ -104,10 +99,13 @@ int ArchivoCompras::obtenerUbicacionCompra(int id){
 
 bool ArchivoCompras::listarCompras(){
 
-    validarArchivoExiste();
-
     Transaccion compra;
     FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&compra, _tamCompra, 1, p)==1){
 
@@ -123,10 +121,13 @@ bool ArchivoCompras::listarCompras(){
 
 bool ArchivoCompras::listarComprasInactivas(){
 
-    validarArchivoExiste();
-
     Transaccion compra;
     FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
 
     while(fread(&compra, _tamCompra, 1, p)==1){
 
@@ -179,3 +180,48 @@ bool ArchivoCompras::borrar() {
     fclose(p);
     return true;
 }
+
+bool ArchivoCompras::altaComprasProveedor(int id){
+
+    Transaccion compra;
+    FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
+
+    while(fread(&compra, _tamCompra, 1, p)==1){
+
+        if(compra.getEstado() && compra.getIdPersona() == id){
+            compra.setEstado(false);
+        }
+    }
+
+    fclose(p);
+    return true;
+
+}
+
+bool ArchivoCompras::bajaComprasProveedor(int id){
+
+    Transaccion compra;
+    FILE *p=fopen(_nombre,"rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
+
+    while(fread(&compra, _tamCompra, 1, p)==1){
+
+        if(!compra.getEstado() && compra.getIdPersona() == id){
+            compra.setEstado(true);
+        }
+    }
+
+    fclose(p);
+    return true;
+
+}
+

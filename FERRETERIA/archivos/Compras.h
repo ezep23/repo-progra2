@@ -31,6 +31,8 @@ class ArchivoCompras{
     bool bajaCompra(int id);
     bool altaCompra(int id);
 
+    bool bajaComprasProveedor(int id);
+    bool altaComprasProveedor(int id);
 
     bool borrar();
 };

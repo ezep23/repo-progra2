@@ -3,6 +3,8 @@
 using namespace std;
 
 #include "../archivos/Productos.h"
+#include "../archivos/Categorias.h"
+#include "Categoria.h"
 #include "Producto.h"
 
 Producto::Producto(){
@@ -43,8 +45,8 @@ const char* Producto::getNombre(){
     return _nombre;
 }
 
-void Producto::getMarca(){
-    cout << _marca;
+const char* Producto::getMarca(){
+    return _marca;
 }
 
 float Producto::getPrecio(){
@@ -93,14 +95,15 @@ void Producto::setEstado(bool e){
 
 void Producto::cargar(int proveedor){
     ArchivoProductos archivo("Productos.dat");
+    ArchivoCategorias categorias("Categorias.dat");
+    Categoria cat;
     Producto obj;
 
     _idProveedor = proveedor;
-    cout << "ID PROVEEDOR: " << _idProveedor;
+    cout << " ID PROVEEDOR: " << _idProveedor << endl;
 
     _id = archivo.generarNuevoID();
-    cout<<"ID ARTICULO: "<< _id <<endl;
-
+    cout<<" ID ARTICULO: "<< _id <<endl;
 
     cout<<"NOMBRE: ";
     cin>>_nombre;
@@ -110,15 +113,33 @@ void Producto::cargar(int proveedor){
         cin>>_nombre;
     }
 
+    cin.ignore();
     cout<<"MARCA: ";
     cin.getline(_marca, 50);
 
+    cin.ignore();
     cout<<"PRECIO UNITARIO DE ARTICULO: ";
     cin>>_precio;
 
-    cout<<"ID CATEGORIA: ";
-    cin>>_idCategoria;
+    cout<<"NOMBRE DE CATEGORIA: ";
+    cin.ignore();
+    cin.getline(_categoria, 50);
 
+    if(categorias.validarCategoriaExiste(_categoria)){
+        int ubi = categorias.obtenerUbicacionCategoria(_categoria);
+        Categoria catnueva = categorias.obtenerCategoria(ubi);
+        _idCategoria = catnueva.getId();
+    }else{
+        _idCategoria = categorias.generarNuevoID();
+
+        cat.setId(_idCategoria);
+        cat.setNombre(_categoria);
+        categorias.guardarCategoria(cat);
+
+    }
+
+
+    cin.ignore();
     cout<<"STOCK: ";
     cin>>_stock;
 

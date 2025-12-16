@@ -9,8 +9,10 @@ using namespace std;
 #include "../../archivos/Ventas.h"
 #include "../../archivos/DetalleVentas.h"
 #include "../../archivos/Clientes.h"
+#include "../../archivos/Productos.h"
 
 void nuevaVenta(){
+    ArchivoProductos productos("Productos.dat");
     ArchivoVentas ventas("Ventas.dat");
     ArchivoDetallesVenta detallesVenta("DetallesVentas.dat");
     ArchivoClientes clientes("Clientes.dat");
@@ -52,12 +54,20 @@ void nuevaVenta(){
 
         if(opcId <= 0){
 
-            cout << "No puede ingresar ese ID.";
-            system("pause");
 
             while(opcId <= 0){
+
+                if(opcId < 0){
+                     cout << "No puede ingresar ese ID.";
+                    system("pause");
+                }
+
                 system("cls");
-                clientes.listarClientes();
+
+                if(opcId == 0){
+                    system("cls");
+                    clientes.listarClientes();
+                }
 
                 cout << " Ingrese el ID del cliente: ";
                 cin >> opcId;
@@ -87,6 +97,9 @@ void nuevaVenta(){
     cout << " ------------------------------------" << endl;
     cout << "         Detalles de la venta        " << endl;
     cout << " ------------------------------------" << endl;
+    cout << endl;
+    cout << " Productos disponibles actualmente:" << endl;
+    productos.listarProductos();
     system("pause");
 
     int opcDetalle=1;
@@ -224,7 +237,7 @@ void listarVentas(){
     cout << " ---------------------------" << endl;
     cout << " 1. Listar ventas" << endl;
     cout << " 2. Listar venta por id" << endl;
-    cout << " 3. Volver al menú" << endl;
+    cout << " 3. Volver al menu" << endl;
     cout << " Opcion: ";
     cin >> opc;
 
@@ -327,6 +340,7 @@ void listarClientes(){
     }
 
     if(opc == 1){
+        system("cls");
         clientes.listarClientes();
         return;
     }
@@ -353,69 +367,93 @@ void listarClientes(){
 
     if(opc == 3){
         system("cls");
+
+        cin.ignore();
+
         char nombre[25];
         cout << " Ingrese el nombre del cliente: ";
         cin.getline(nombre,25);
-        cout << nombre;
+
+        system("cls");
+        cout << " #BUSQUEDAS CON NOMBRE: " << nombre << endl;
+
+        clientes.listarClientesNombre(nombre);
+        system("pause");
     }
 
     if(opc == 4){
         system("cls");
+
+        cin.ignore();
+
         char apellido[25];
         cout << " Ingrese el apellido del cliente: ";
         cin.getline(apellido,25);
-        cout << apellido;
+
+
+        system("cls");
+        cout << " #BUSQUEDAS CON APELLIDO: " << apellido << endl;
+
+        clientes.listarClientesApellido(apellido);
+        system("pause");
+
     }
 
     cout << "OPCIÓN INVALIDA";
     system("pause");
     return;
 }
+
 void eliminarCliente(){
     ArchivoClientes clientes("Clientes.dat");
     ArchivoVentas ventas("Ventas.dat");
     ArchivoDetallesVenta detalles("DetallesVentas.dat");
+
     system("cls");
     int dni = 0;
+
+    cout << " === ELIMINAR CLIENTE ===" << endl;
     cout << " ---------------------" << endl;
     cout << " 0. Volver al menu" << endl;
-    cout << " Ingrese el DNI: ";
+    cout << " Ingrese el DNI del cliente a borrar: ";
     cin >> dni;
 
-    if(dni <= 0){
-        while(!clientes.validarDniExiste(dni) && dni > 0 && dni < 1000000){
+    if (dni == 0) return;
 
-        system("cls");
-
-        cout << " Ingrese el DNI: ";
+    while (!clientes.validarDniExiste(dni)) {
+        cout << " [!] El DNI ingresado no existe en la base de datos." << endl;
+        cout << " Ingrese el DNI nuevamente (0 para salir): ";
         cin >> dni;
+
+        if (dni == 0) return;
     }
 
     system("cls");
+    cout << " Buscando cliente con DNI: " << dni << "..." << endl;
 
     int id = clientes.obtenerIdCliente(dni);
 
+
+    bool huboCambios = false;
+
     if( detalles.bajaDetallesVentasCliente(id) ){
-        cout << " # DETALLES DE VENTA ELIMINADOS " << endl;
-
-        if( ventas.bajaVentasCliente(id)){
-            cout << " # VENTAS ELIMINADAS";
-
-            if( clientes.bajaCliente(dni) ){
-                cout << "# CLIENTE ELIMINADO";
-
-                return;
-            }
-
-            cout << "NO SE PUDO ELIMINAR EL CLIENTE, PERO SI LAS VENTAS Y DETALLES.";
-        }
-
-       cout << "NO SE PUDO ELIMINAR LAS VENTAS, PERO SI EL DETALLE";
+        cout << " Detalles de ventas historicos eliminados." << endl;
+        huboCambios = true;
     }
 
-    cout << "NO SE PUDO ELIMINAR NADA RELACIONADO AL CLIENTE.";
+    if( ventas.bajaVentasCliente(id)){
+        cout << " Historial de ventas eliminado." << endl;
+        huboCambios = true;
+    }
+
+    if( clientes.bajaCliente(dni) ){
+        cout << " CLIENTE ELIMINADO EXITOSAMENTE." << endl;
+        huboCambios = true;
+    }
+
+    if (!huboCambios) {
+        cout << " No se pudo eliminar el cliente o ya estaba dado de baja." << endl;
+    }
 
     system("pause");
-    return;
-    }
 }

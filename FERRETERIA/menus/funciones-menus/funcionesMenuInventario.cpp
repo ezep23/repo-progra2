@@ -5,27 +5,107 @@ using namespace std;
 
 #include "../../archivos/Productos.h"
 #include "../../archivos/Categorias.h"
+#include "../../archivos/Proveedores.h"
+#include "../../clases/Proveedor.h"
 #include "../../clases/Producto.h"
+#include "../../clases/Almacen.h"
 
 void busquedaProfunda();
 
-void nuevaProducto(){
+void nuevoProducto()
+{
     ArchivoProductos productos("Productos.dat");
+    ArchivoProveedores proveedores("Proveedores.dat");
     Producto nuevoProducto;
 
-    int id=0;
-    nuevoProducto.cargar(id);
+    char opcProveedor;
+    cout << " El producto va a tener un proveedor nuevo? - Si 'S', No 'N'"<< endl;
+    cout << " Opcion:";
+    cin >> opcProveedor;
 
+    if(opcProveedor == 'S' || opcProveedor == 's')
+    {
+        Proveedor nuevoProveedor;
+        nuevoProveedor.cargar();
+
+        int newID = proveedores.generarNuevoID();
+
+        if( newID <= 0 )
+        {
+            cout << "Error al crear nuevo id" << endl;
+            return;
+        }
+
+        nuevoProveedor.setId(newID);
+        proveedores.guardarProveedor(nuevoProveedor);
+
+        system("cls");
+        nuevoProveedor.mostrar();
+
+        system("pause");
+        system("cls");
+
+        cout << " # CREACION DEL NUEVO PRODUCTO ASIGNADO AL PROVEEDOR" << endl;
+
+        nuevoProducto.cargar( nuevoProveedor.getId() );
+        system("cls");
+        nuevoProducto.mostrar();
+        system("pause");
+
+        productos.guardarProducto(nuevoProducto);
+    }
+    else
+    {
+
+        int opcId = 0;
+        while(opcId <= 0)
+        {
+
+            system("cls");
+            cout << " - SUB SUB SUB MENU -" << endl;
+            cout << " # Ingrese el ID del proveedor, Presione '0' - 'CERO' para listar proveedores" << endl;
+            cout << " Opcion:";
+            cin >> opcId;
+
+            if(opcId == 0)
+            {
+                system("cls");
+                cout << endl;
+                cout << " ### PROVEEDORES ###" << endl;
+                proveedores.listarProveedores();
+                system("pause");
+            }
+
+        }
+
+        while(!proveedores.validarIdExiste(opcId))
+        {
+            system("cls");
+
+            cout << "# Ingrese un id valido:";
+            cin >> opcId;
+        }
+
+        system("cls");
+        cout << endl;
+        cout << "CREANDO NUEVO PRODUCTO ASOCIADO AL PROVEEDOR!" << endl;
+        nuevoProducto.cargar(opcId);
+
+    }
 }
 
-void listarProductos(){
+void listarProductos()
+{
     ArchivoCategorias categorias("Categorias.dat");
     ArchivoProductos productos("Productos.dat");
     Producto producto;
+    Almacen almacen;
 
     system("cls");
-    int opc = 0;
-    while(opc != 5){
+    int opc = -1;
+    while(opc != 0)
+    {
+        opc = -1;
         cout << " ------------------------------" << endl;
         cout << "            SUBMENU            " << endl;
         cout << " ------------------------------" << endl;
@@ -33,26 +113,138 @@ void listarProductos(){
         cout << " 2. Ingresar categoria " << endl;
         cout << " 3. Ingresar nombre del producto " << endl;
         cout << " 4. Ingresar marca" << endl;
-        cout << " 5. Volver al menú inventario" << endl;
+        cout << " 0. Volver al menú inventario" << endl;
         cout << " ------------------------------" << endl;
         cout << " Opcion: ";
         cin >> opc;
 
-        switch(opc){
-            case 1: productos.listarProductos(); break;
-            case 2: busquedaProfunda(); break;
+        switch(opc)
+        {
+        case 1:
+            system("cls");
+            productos.listarProductos();
+            system("pause");
+            system("cls");
+            break;
+        case 2:
+            busquedaProfunda();
+            break;
+
+        case 3:
+            char nombre[30];
+            system("cls");
+            cout << " Ingrese el nombre del producto: " << endl;
+            cout << " Nombre: ";
+            cin.getline(nombre, 30);
+
+            almacen.consultarProductosMismoNombre(nombre);
+
+            break;
+        case 4:
+            char marca[30];
+            system("cls");
+            cout << " Ingrese la marca del producto: " << endl;
+            cout << " Marca: ";
+            cin.getline(marca, 30);
+
+            almacen.consultarProductosMismoNombre(marca);
+            break;
         }
 
+    }
+}
 
-   }
-
- }
-
-void eliminarProducto(){
+void editarProducto()
+{
 
 }
 
- void busquedaProfunda(){
+void eliminarProducto()
+{
+    system("cls");
+    ArchivoProductos productos("Productos.dat");
+    ArchivoCategorias categorias("Categorias.dat");
+
+    int opc = 0;
+    cout << " ------ SUBMENU ------" << endl;
+    cout << " 1. Ingresar el ID a eliminar" << endl;
+    cout << " 2. Consultar productos " << endl;
+    cout << " 0. Volver " << endl;
+    cout << " Opcion: " << endl;
+    cin >> opc;
+
+    if(opc == 0)
+    {
+        return;
+    }
+
+    while(true)
+    {
+
+        if(opc == 1)
+        {
+
+            int id=0;
+            system("cls");
+            cout << " Ingrese el ID: ";
+            cin >> id;
+
+            while(!productos.validarIdExiste(id))
+            {
+                cout << " Ingrese un ID que exista: " << endl;
+                cin >> id;
+            }
+
+            if(productos.bajaProducto(id))
+            {
+                system("cls");
+                cout << "# PRODUCTO ELIMINADO CORRECTAMENTE"<< endl;
+                system("pause");
+                return;
+            }
+
+            system("cls");
+            cout << " # NO SE PUDO BORRAR EL PRODUCTO " << endl;
+            system("pause");
+        }
+
+        if(opc == 2)
+        {
+            char opcion[25];
+
+            system("cls");
+
+            cout << " Ingrese el nombre de la categoria: ";
+            cin.getline(opcion, 25);
+            system("pause");
+
+            if( categorias.validarCategoriaExiste(opcion) )
+            {
+
+                while(categorias.validarCategoriaExiste(opcion))
+                {
+                    cout << "Ingrese un nombre correcto: ";
+                    cin.getline(opcion,25);
+                    system("pause");
+                }
+
+            }
+
+
+            int pos = categorias.obtenerUbicacionCategoria(opcion);
+            Categoria obj = categorias.obtenerCategoria(pos);
+            productos.listarProductosCategoria(obj.getId());
+
+            system("pause");
+            opc=1;
+        }
+
+    }
+
+}
+
+void busquedaProfunda()
+{
     ArchivoCategorias categorias("Categorias.dat");
     ArchivoProductos productos("Productos.dat");
 
@@ -63,7 +255,8 @@ void eliminarProducto(){
     cout << " Opcion: ";
     cin >> eleccion;
 
-    if(eleccion == 'S' || eleccion == 's'){
+    if(eleccion == 'S' || eleccion == 's')
+    {
 
         char opcion[25];
 
@@ -73,9 +266,11 @@ void eliminarProducto(){
         cin.getline(opcion, 25);
         system("pause");
 
-        if( categorias.validarCategoriaExiste(opcion) ){
+        if( categorias.validarCategoriaExiste(opcion) )
+        {
 
-            while(categorias.validarCategoriaExiste(opcion)){
+            while(categorias.validarCategoriaExiste(opcion))
+            {
                 cout << "Ingrese un nombre correcto: ";
                 cin.getline(opcion,25);
                 system("pause");
@@ -98,14 +293,19 @@ void eliminarProducto(){
 
     system("pause");
 
-    while(true){
+    while(true)
+    {
 
-         if( productos.validarNombre(prod) ){
+        if( productos.validarNombre(prod) )
+        {
             Producto producto = productos.obtenerProducto(prod);
 
-            if(producto.getEstado()){
+            if(producto.getEstado())
+            {
                 producto.mostrar();
-            }else{
+            }
+            else
+            {
                 cout << "HA OCURRIDO UN ERROR INESPARADO";
                 system("pause");
             }
@@ -121,4 +321,52 @@ void eliminarProducto(){
 
 
 
- }
+}
+
+/**
+system("cls");
+        cout << " # PRODUCTOS DEL PROVEEDOR" << endl;
+
+        Almacen almacen;
+        almacen.consultarProductosProveedor(opcId);
+
+        if(opcId < 0){
+            cout << "No puede ingresar ese ID.";
+            system("pause");
+
+            while(opcId <= 0){
+                system("cls");
+                proveedores.listarProveedores();
+
+                cout << " Ingrese el ID del proveedor: ";
+                cin >> opcId;
+            }
+
+            while(!proveedores.validarIdExiste(opcId) && opcId > 0){
+                system("cls");
+                cout << " Ese id no existe, ingrese uno existente: ";
+                cin >> opcId;
+            }
+
+           system("cls");
+           cout << " # PRODUCTOS DEL PROVEEDOR" << endl;
+           almacen.consultarProductosProveedor(opcId);
+
+        }else{
+
+            while(!proveedores.validarIdExiste(opcId) && opcId > 0){
+                system("cls");
+                cout << " Ese id no existe, ingrese uno existente: ";
+                cin >> opcId;
+            }
+
+            system("cls");
+            cout << " # PRODUCTOS DEL PROVEEDOR" << endl;
+            almacen.consultarProductosProveedor(opcId);
+
+        }
+    }
+    return;
+
+*/
+

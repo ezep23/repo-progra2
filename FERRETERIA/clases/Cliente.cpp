@@ -49,6 +49,7 @@ bool Cliente::getEstado(){
 void Cliente::cargar(){
     system("cls");
     cout <<  "------ NUEVO PROVEEDOR ------" << endl;
+    cin.ignore();
 
     cout << " Ingrese su nombre: ";
     cin.getline(_nombre, 50);
@@ -58,6 +59,7 @@ void Cliente::cargar(){
 
     cout << " Ingrese su DNI: ";
     cin >> _dni;
+    cin.ignore();
 
     cout << " Ingrese su telefono: ";
     cin.getline(_telefono, 50);

@@ -18,8 +18,9 @@ void ventas(){
         cout << "   1. Nueva venta" << endl;
         cout << "   2. Editar venta" << endl;
         cout << "   3. Listar ventas" << endl;
-        cout << "   4. Listar cliente" << endl;
-        cout << "   5. Eliminar cliente" << endl;
+        cout << "   4. Eliminar venta" << endl;
+        cout << "   5. Listar clientes" << endl;
+        cout << "   6. Eliminar cliente" << endl;
         cout << "   0. Volver al menu principal " << endl;
         cout << endl;
         cout << " ----------------------------" << endl;
