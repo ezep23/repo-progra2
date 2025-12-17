@@ -105,7 +105,7 @@
 
 1765933229 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\almacen.h
 
-1765914727 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\producto.h
+1765938766 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\producto.h
 
 1765933564 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\productos.h
 	"string.h"
@@ -119,7 +119,7 @@
 	<cstring>
 	"../clases/Transaccion.h"
 
-1765936205 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\producto.cpp
+1765938829 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\producto.cpp
 	<iostream>
 	<string>
 	"../archivos/Productos.h"
@@ -274,4 +274,9 @@
 	"./funciones-menus/funcionesMenuInformes.h"
 
 1765936205 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuinformes.h
+
+1765938329 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenusinformes.cpp
+	<iostream>
+	"../../archivos/Ventas.h"
+	"../../clases/Fecha.h"
 

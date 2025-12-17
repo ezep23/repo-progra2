@@ -13,17 +13,19 @@ Producto::Producto(){
     _idCategoria = 0;
     strcpy(_nombre, "");
     strcpy(_marca, "");
+    strcpy(_categoria, "");
     _precio = 0;
     _stock = 0;
     _estado = true;
 }
 
-Producto::Producto(int id, int idProveedor, int idCategoria, const char* nombre, const char* marca, float precio, int stock, bool estado){
+Producto::Producto(int id, int idProveedor, int idCategoria, const char* nombre, const char* marca, const char* categoria, float precio, int stock, bool estado){
     _id = id;
     _idProveedor = idProveedor;
     _idCategoria = idCategoria;
     strcpy(_nombre, nombre);
     strcpy(_marca, marca);
+    strcpy(_categoria, categoria);
     _precio = precio;
     _stock = stock;
     _estado = estado;
@@ -79,6 +81,14 @@ void Producto::setNombre(const char * n){
 
 void Producto::setMarca(const char* m){
     strcpy(_marca, m);
+}
+
+const char* Producto::getCategoria(){
+    return _categoria;
+}
+
+void Producto::setCategoria(const char * n){
+    strcpy(_categoria, n);
 }
 
 void Producto::setPrecio(float p){

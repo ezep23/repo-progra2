@@ -6,7 +6,7 @@ using namespace std;
 
 
 float listarRecaudacionMensual(){
-
+ /**
     char anio[4];
     cout << "Ingrese el año: ";
     cin.ignore();
@@ -42,6 +42,8 @@ float listarRecaudacionMensual(){
 
     return acumRecaudacionMes;
 
+
+*/
 }
 
 

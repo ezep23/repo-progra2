@@ -15,13 +15,14 @@ class Producto{
  public:
 
     Producto();
-    Producto(int id, int idProveedor, int idCategoria, const char* nombre, const char* marca, float precio, int stock, bool estado);
+    Producto(int id, int idProveedor, int idCategoria, const char* nombre, const char* marca, const char* categoria, float precio, int stock, bool estado);
 
     int getId();
     int getIdProveedor();
     int getIdCategoria();
     const char* getNombre();
     const char* getMarca();
+    const char* getCategoria();
     float getPrecio();
     int getStock();
     bool getEstado();
@@ -31,6 +32,7 @@ class Producto{
     void setIdCategoria(int);
     void setNombre(const char *);
     void setMarca(const char*);
+    void setCategoria(const char*);
     void setPrecio(float);
     void setStock(int);
     void setEstado(bool);
