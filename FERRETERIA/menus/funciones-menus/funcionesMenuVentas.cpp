@@ -147,84 +147,204 @@ void nuevaVenta(){
 
 }
 
-void modificarVenta(){
+void modificarVenta() {
     system("cls");
+    ArchivoDetallesVenta detalles("DetallesVentas.dat");
+    ArchivoProductos productos("Productos.dat");
     ArchivoVentas ventas("Ventas.dat");
+
     int opc;
     cout << "------ EDITAR VENTA -------" << endl;
     cout << " 0. Volver al menu" << endl;
-    cout << " 1. Ingrese el ID de la venta" << endl;;
-    cout << " 2. Listar ventas"<< endl;
+    cout << " 1. Ingrese el ID de la venta" << endl;
+    cout << " 2. Listar ventas" << endl;
     cout << " Opcion: ";
     cin >> opc;
 
-    switch(opc){
+    switch (opc) {
         case 0: return;
         case 1: {
+            system("cls");
+            int id = 0;
+            cout << " Ingrese el id: ";
+            cin >> id;
+
+            while (!ventas.validarIdExiste(id)) {
                 system("cls");
-                int id = 0;
-                cout << " Ingrese el id: ";
+                cout << " ID no encontrado. Ingrese el id: ";
                 cin >> id;
-
-                while( !ventas.validarIdExiste(id) ){
-                    system("cls");
-                    cout << " Ingrese el id: ";
-                    cin >> id;
-                }
-
-                Transaccion venta;
-                ArchivoDetallesVenta archivo;
-
-                int pos = ventas.obtenerUbicacionVenta(id);
-                venta = ventas.obtenerVenta(pos);
-
-
-                venta.mostrar();
-                archivo.listarDetallesDeVenta(id);
-                system("pause");
-
-                int opcEdit = 0;
-                cout << " ----------------------" << endl;
-                cout << "         VENTA         " << endl;
-                cout << " ----------------------" << endl;
-                cout << " 1. ID de Cliente" << endl;
-                cout << " 2. Hora de emision" << endl;
-                cout << " 3. Fecha de emision" << endl;
-                cout << " 4. Tipo de factura" << endl;
-                cout << " ----------------------" << endl;
-                cout << "     DETALLE VENTA     " << endl;
-                cout << " ----------------------" << endl;
-                cout << " 5. ID de Producto" << endl;
-                cout << " 6. Cantidad de Producto" << endl;
-                cout << endl;
-                cout << " # Opcion: ";
-                cin >> opcEdit;
-
-                switch(opcEdit){
-                    case 1: break;
-                    case 2: break;
-                    case 3: break;
-                    case 4: break;
-                    case 5: break;
-                    case 6: break;
-                    default: break;
-                }
-
-
             }
-            break;
+
+            Transaccion venta;
+            int posVenta = ventas.obtenerUbicacionVenta(id);
+            venta = ventas.obtenerVenta(posVenta);
+
+            venta.mostrar();
+            ArchivoDetallesVenta archivoTemp("DetallesVentas.dat");
+            archivoTemp.listarDetallesDeVenta(id);
+            system("pause");
+
+            system("cls");
+            int opcEdit = 0;
+            cout << " ----------------------" << endl;
+            cout << "         VENTA         " << endl;
+            cout << " ----------------------" << endl;
+            cout << " 1. Hora de emision" << endl;
+            cout << " 2. Fecha de emision" << endl;
+            cout << " 3. Tipo de factura" << endl;
+            cout << " ----------------------" << endl;
+            cout << "     DETALLE VENTA     " << endl;
+            cout << " ----------------------" << endl;
+            cout << " 4. ID de producto" << endl;
+            cout << " 5. Cantidad de Producto" << endl;
+            cout << endl;
+            cout << " # Opcion: ";
+            cin >> opcEdit;
+
+            switch (opcEdit) {
+                case 1: {
+                    system("cls");
+                    cout << " HORA ANTIGUA: ";
+                    venta.getHoraTransaccion().mostrar();
+                    cout << endl;
+                    Hora horaNueva;
+
+                    horaNueva.cargar();
+                    venta.setHoraEmision(horaNueva);
+
+                    ventas.editarVenta(venta, posVenta);
+
+                    system("cls");
+                    cout << " # NUEVA HORA CARGADA" << endl;
+                    break;
+                }
+                case 2: {
+                    system("cls");
+                    cout << " FECHA ANTIGUA: ";
+                    venta.getFechaTransaccion().mostrar();
+                    cout << endl;
+                    Fecha fechaNueva;
+
+                    fechaNueva.cargar();
+                    venta.setFechaEmision(fechaNueva);
+
+                    ventas.editarVenta(venta, posVenta);
+
+                    system("cls");
+                    cout << " # NUEVA FECHA CARGADA" << endl;
+                    break;
+                }
+                case 3: {
+                    system("cls");
+                    cout << " FACTURA ANTIGUA: " << venta.getTipoFactura() << endl;
+
+                    char tipoFactura;
+                    cout << " Ingrese el tipo de factura (A/B): ";
+                    cin >> tipoFactura;
+                    tipoFactura = toupper(tipoFactura);
+
+                    while (tipoFactura != 'A' && tipoFactura != 'B') {
+                        system("cls");
+                        cout << " Opcion invalida. Ingrese A o B: ";
+                        cin >> tipoFactura;
+                        tipoFactura = toupper(tipoFactura);
+                    }
+
+                    venta.setTipoFactura(tipoFactura);
+                    ventas.editarVenta(venta, posVenta);
+
+                    system("cls");
+                    cout << " TIPO FACTURA ACTUALIZADO." << endl;
+                    system("pause");
+                    break;
+                }
+                case 4: {
+                    system("cls");
+                    detalles.listarDetallesDeVenta(venta.getIdTransaccion());
+
+                    cout << endl;
+                    int idDet = 0;
+                    cout << " # Ingrese el ID del detalle de venta a modificar: ";
+                    cin >> idDet;
+
+                    int posDetalle = detalles.obtenerUbicacionDetalleVenta(idDet);
+                    if (posDetalle == -1) {
+                        cout << "Detalle no encontrado." << endl;
+                        system("pause");
+                        return;
+                    }
+
+                    DetalleTransaccion detalle = detalles.obtenerDetalleVenta(posDetalle);
+
+                    system("cls");
+                    productos.listarProductos();
+
+                    int idProd = 0;
+                    cout << " Ingrese el NUEVO ID del producto: " << endl;
+                    cin >> idProd;
+
+
+                    int pos =productos.obtenerUbicacionProducto(idProd);
+                    Producto prodSeleccionado = productos.obtenerProducto(pos);
+
+                    detalle.setIdProducto(idProd);
+                    detalle.setPrecioUnitario(prodSeleccionado.getPrecio());
+                    detalles.editarDetalleVenta(detalle, posDetalle);
+
+                    system("cls");
+                    detalle.mostrar();
+                    system("pause");
+                    break;
+                }
+                case 5: {
+                    system("cls");
+                    detalles.listarDetallesDeVenta(venta.getIdTransaccion());
+                    Almacen almacen;
+
+                    cout << endl;
+                    int idDet = 0;
+                    cout << " # Ingrese el ID del detalle de venta a modificar: ";
+                    cin >> idDet;
+
+                    int posDetalle = detalles.obtenerUbicacionDetalleVenta(idDet);
+                    DetalleTransaccion detalle = detalles.obtenerDetalleVenta(posDetalle);
+
+                    system("cls");
+                    int nuevaCantidad = 0;
+                    cout << " Cantidad actual: " << detalle.getCantidad() << endl;
+                    cout << " Ingrese la NUEVA cantidad: ";
+                    cin >> nuevaCantidad;
+
+                    int antiguaCantidad = detalle.getCantidad();
+                    int diferencia = antiguaCantidad - nuevaCantidad;
+
+                    if (diferencia > 0) {
+                        almacen.reponerStock(detalle.getIdProducto(), diferencia);
+                    } else if (diferencia < 0) {
+                        almacen.descontarStock(detalle.getIdProducto(), diferencia * -1);
+                    }
+
+                    detalle.setCantidad(nuevaCantidad);
+                    detalles.editarDetalleVenta(detalle, posDetalle);
+
+                    system("cls");
+                    detalle.mostrar();
+                    system("pause");
+                    break;
+                }
+                default: break;
+            }
+        }
+        break;
+
         case 2: {
             ventas.listarVentas();
             system("pause");
             system("cls");
-
-            }
-            break;
+        }
+        break;
         default: return;
     }
-
-
-
 }
 
 void listarVentas(){
@@ -267,48 +387,49 @@ void listarVentas(){
     return;
 }
 
-void eliminarVenta(){
+void eliminarVenta() {
     ArchivoVentas ventas("Ventas.dat");
     ArchivoDetallesVenta detalles("DetallesVentas.dat");
 
     system("cls");
     int id;
-    cout << "----------------------" << endl;
-    cout << " 0. Volver al menú";
-    cout << " Ingrese el ID: ";
+    cout << "------ ELIMINAR VENTA ------" << endl;
+    cout << " 0. Volver al menu" << endl;
+    cout << " Ingrese el ID de la venta a eliminar: ";
     cin >> id;
 
-    if(id == 0){
-        return;
-    }
+    if (id == 0) return;
 
-    if(id < 0){
-        while(!ventas.validarIdExiste(id) || id < 0){
-
+    while (!ventas.validarIdExiste(id)) {
         system("cls");
-
+        cout << " ID no encontrado en el archivo de Ventas." << endl;
+        cout << " 0. Cancelar" << endl;
         cout << " Ingrese un ID real: ";
         cin >> id;
+        if (id == 0) return;
     }
 
     system("cls");
+    cout << " Eliminando registros..." << endl;
 
-    if( detalles.bajaDetallesVentasCliente(id) ){
-        cout << " # DETALLES DE VENTA ELIMINADOS " << endl;
+    bool detallesEliminados = detalles.bajaDetallesVentasCliente(id);
+    bool cabeceraEliminada = ventas.bajaVentasCliente(id);
 
-        if( ventas.bajaVentasCliente(id)){
-            cout << " # VENTAS ELIMINADAS";
+    cout << " ---------------------------------" << endl;
 
-            return;
+    if (cabeceraEliminada) {
+        cout << " # VENTA ELIMINADA CORRECTAMENTE." << endl;
+
+        if (detallesEliminados) {
+            cout << " # Sus detalles tambien fueron eliminados." << endl;
+        } else {
+            cout << " ! Nota: No se encontraron detalles asociados para borrar (o ya estaban borrados)." << endl;
         }
-
-       cout << "NO SE PUDO ELIMINAR LAS VENTAS, PERO SI EL DETALLE";
-    }
-
-    cout << "NO SE PUDO ELIMINAR NI LA VENTA NI SUS DETALLES.";
-
-    system("pause");
-    return;
+    } else {
+        cout << " ! ERROR CRITICO: No se pudo eliminar la venta del archivo Ventas.dat." << endl;
+        if (detallesEliminados) {
+            cout << " Sin embargo, los detalles si fueron eliminados. Cuidado: Inconsistencia." << endl;
+        }
     }
 }
 

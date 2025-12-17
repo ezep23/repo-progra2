@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1765924412 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
+1765946722 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
 	<iostream>
 	"../../clases/Transaccion.h"
 	"../../clases/Almacen.h"
@@ -111,7 +111,7 @@
 	"string.h"
 	"../clases/Producto.h"
 
-1765754308 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\transaccion.h
+1765947172 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\transaccion.h
 	"Fecha.h"
 	"Hora.h"
 
@@ -139,7 +139,7 @@
 	"../clases/Transaccion.h"
 	<iostream>
 
-1765754343 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\transaccion.cpp
+1765947193 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\transaccion.cpp
 	<cstring>
 	<iostream>
 	"Transaccion.h"
@@ -209,7 +209,7 @@
 	"../../archivos/Proveedores.h"
 	"../../archivos/Productos.h"
 
-1765936205 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuinventario.cpp
+1765939638 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuinventario.cpp
 	<iostream>
 	"string.h"
 	"../../archivos/Productos.h"

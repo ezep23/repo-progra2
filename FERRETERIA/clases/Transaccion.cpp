@@ -17,10 +17,10 @@ Transaccion::Transaccion(){
     _hora=Hora(0,0);
     _idPersona=0;
     _montoTotal=0;
-    strcpy(_tipoFactura, "");
+    _tipoFactura='B';
 }
 
-Transaccion::Transaccion(int id, int idPersona, float montoTotal, Hora hora, Fecha fecha, const char* tipoFactura){
+Transaccion::Transaccion(int id, int idPersona, float montoTotal, Hora hora, Fecha fecha, char tipoFactura){
 
     setIdTransaccion(id);
     setIdPersona(idPersona);
@@ -50,8 +50,8 @@ void Transaccion::setFechaEmision(Fecha f){
     _fecha = f;
 }
 
-void Transaccion::setTipoFactura(const char* tipoFactura){
-    strcpy(_tipoFactura, tipoFactura);
+void Transaccion::setTipoFactura(char tipoFactura){
+    _tipoFactura = tipoFactura;
 }
 
 void Transaccion::setEstado(bool estado){
@@ -78,8 +78,8 @@ Fecha Transaccion::getFechaTransaccion(){
     return _fecha;
 }
 
-void Transaccion::getTipoFactura(){
-    cout << _tipoFactura;
+char Transaccion::getTipoFactura(){
+    return _tipoFactura;
 }
 
 bool Transaccion::getEstado(){

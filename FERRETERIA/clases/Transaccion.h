@@ -11,12 +11,12 @@ class Transaccion{
     float _montoTotal;
     Hora _hora;
     Fecha _fecha;
-    char _tipoFactura[4];
+    char _tipoFactura;
     bool _estado=true;
  public:
 
     Transaccion();
-    Transaccion(int _id, int _idPersona, float _montoTotal, Hora _hora, Fecha _fecha, const char* _tipoFactura);
+    Transaccion(int _id, int _idPersona, float _montoTotal, Hora _hora, Fecha _fecha, char _tipoFactura);
 
     /// VER ESTO
     void setIdTransaccion(int);
@@ -24,7 +24,7 @@ class Transaccion{
     void setMontoTotal(float);
     void setHoraEmision(Hora);
     void setFechaEmision(Fecha);
-    void setTipoFactura(const char*);
+    void setTipoFactura(char);
     void setEstado(bool);
 
     int getIdTransaccion();
@@ -32,7 +32,7 @@ class Transaccion{
     float getMontoTotal();
     Hora getHoraTransaccion();
     Fecha getFechaTransaccion();
-    void getTipoFactura();
+    char getTipoFactura();
     bool getEstado();
 
     void mostrar();
