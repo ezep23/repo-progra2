@@ -14,10 +14,8 @@ void informes(){
         cout << endl;
         cout << " ----------------------------" << endl;
         cout << endl;
-        cout << "   1. Agregar producto" << endl;
-        cout << "   2. Listar productos" << endl;
-        cout << "   3. Editar producto" << endl;
-        cout << "   4. Eliminar producto" << endl;
+
+
         cout << "   0. Volver al menu principal " << endl;
         cout << endl;
         cout << " ----------------------------" << endl;
@@ -29,7 +27,7 @@ void informes(){
 
         switch (opc){
             case 1:
-                //nuevoProducto();
+                listarRecaudacionMensual();
                 system("pause");
                 break;
             case 2:

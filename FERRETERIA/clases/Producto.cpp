@@ -114,10 +114,6 @@ void Producto::cargar(int proveedor){
     }
 
     cin.ignore();
-    cout<<"MARCA: ";
-    cin.getline(_marca, 50);
-
-    cin.ignore();
     cout<<"PRECIO UNITARIO DE ARTICULO: ";
     cin>>_precio;
 
@@ -148,13 +144,14 @@ void Producto::cargar(int proveedor){
 }
 
 void Producto::mostrar(){
-cout<<"-------------------------------" << endl;
-cout<<"ID: "<< _id << endl;
-cout<<"ID PROVEEDOR: " << _idProveedor << endl;
-cout<<"ID CATEGORIA: "<<_idCategoria<<endl;
-cout<<"NOMBRE: "<< _nombre <<endl;
-cout<<"MARCA: "<<_marca<<endl;
-cout<<"PRECIO UNITARIO DE ARTICULO: "<< _precio <<endl;
-cout<<"STOCK: "<<_stock<<endl;
-cout<<"-------------------------------" << endl;
+cout<<" -------------------------------" << endl;
+cout<<"  ID: "<< _id << endl;
+cout<<"  ID PROVEEDOR: " << _idProveedor << endl;
+cout<<"  ID CATEGORIA: "<<_idCategoria<<endl;
+cout<<"  NOMBRE: "<< _nombre <<endl;
+cout<<"  CATEGORIA: "<< _categoria << endl;
+cout<<"  MARCA: "<<_marca<<endl;
+cout<<"  PRECIO UNITARIO DE ARTICULO: "<< _precio <<endl;
+cout<<"  STOCK: "<<_stock<<endl;
+cout<<" -------------------------------" << endl;
 }

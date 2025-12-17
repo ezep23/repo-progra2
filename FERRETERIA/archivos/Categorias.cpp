@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "Categorias.h"
+#include "../utiles.cpp"
 #include "../clases/Categoria.h"
 #include "string.h"
 
@@ -17,7 +18,7 @@ bool ArchivoCategorias::validarCategoriaExiste(const char * nombre){
 
     while (fread(&obj, sizeof obj, 1, p) == 1)
     {
-        if (strcmp(obj.getNombre(), nombre) == 0 )
+        if ( sonIguales(obj.getNombre(), nombre))
         {
             fclose(p);
             return true;

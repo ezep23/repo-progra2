@@ -92,7 +92,7 @@ void Almacen::consultarProductosMismoNombre(const char* nombre){
     ArchivoProductos archivo("Productos.dat");
     archivo.listarProductosMismoNombre(nombre);
 }
-void Almacen::consultarProductoMimasMarca(const char* marca){
+void Almacen::consultarProductoMismaMarca(const char* marca){
     ArchivoProductos archivo("Productos.dat");
     archivo.listarProductosMismaMarca(marca);
 }

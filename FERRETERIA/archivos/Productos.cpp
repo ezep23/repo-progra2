@@ -316,7 +316,7 @@ bool ArchivoProductos::validarNombre(const char* nombre ){
 
     while (fread(&obj, sizeof obj, 1, p) == 1)
     {
-        if (strcmp(obj.getNombre(), nombre) == 0 )
+        if ( sonIguales(obj.getNombre(), nombre) )
         {
             fclose(p);
             return true;
@@ -326,6 +326,32 @@ bool ArchivoProductos::validarNombre(const char* nombre ){
     fclose(p);
     return false;
 }
+
+bool ArchivoProductos::validarMarca(const char* marca ){
+
+    Producto obj;
+
+    FILE *p;
+    p = fopen("Productos.dat", "rb");
+
+     if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
+
+    while (fread(&obj, sizeof obj, 1, p) == 1)
+    {
+        if ( sonIguales(obj.getMarca(), marca) )
+        {
+            fclose(p);
+            return true;
+        }
+    }
+
+    fclose(p);
+    return false;
+}
+
 
 bool ArchivoProductos::validarDisponibilidad(int id){
 
@@ -407,8 +433,7 @@ Producto ArchivoProductos::obtenerProducto(const char* nombre){
 
     while(fread(&obj, _tamProducto, 1, p) == 1)
     {
-        if(strcmp(_nombre, nombre) == 0)
-        {
+        if(sonIguales(obj.getNombre(), nombre)){
             return obj;
         }
     }

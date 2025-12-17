@@ -20,6 +20,7 @@ class ArchivoProductos{
     bool validarIdExiste(int id);
     void validarArchivoExiste();
     bool validarNombre(const char* nombre);
+    bool validarMarca(const char* marca);
     bool validarDisponibilidad(int id);
 
     bool guardarProducto(Producto obj);

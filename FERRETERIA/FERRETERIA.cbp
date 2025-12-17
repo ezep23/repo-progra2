@@ -107,6 +107,7 @@
 		<Unit filename="menus/funciones-menus/funcionesMenuInventario.h" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.cpp" />
 		<Unit filename="menus/funciones-menus/funcionesMenuVentas.h" />
+		<Unit filename="menus/funciones-menus/funcionesMenusInformes.cpp" />
 		<Unit filename="menus/informes.h" />
 		<Unit filename="menus/inventario.h" />
 		<Unit filename="menus/ventas.h">
