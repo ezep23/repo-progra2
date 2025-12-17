@@ -2,7 +2,7 @@
 #define FUNCIONESMENUCOMPRAS_H_INCLUDED
 
 void nuevaCompra();
-void modificarCompra();
+void editarCompra();
 void listarCompra();
 void eliminarCompra();
 void listarProveedores();

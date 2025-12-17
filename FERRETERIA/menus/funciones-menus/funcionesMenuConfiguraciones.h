@@ -1,6 +1,17 @@
 #ifndef FUNCIONESMENUCONFIGURACIONES_H_INCLUDED
 #define FUNCIONESMENUCONFIGURACIONES_H_INCLUDED
 
+void exportarProductosCSV();
+void exportarClientesCSV();
+void exportarProveedoresCSV();
+void exportarVentasCSV();
+void exportarDetalleVentasCSV();
+void exportarComprasCSV();
+void exportarDetalleComprasCSV();
+void exportarEmpresasCSV();
+void exportarCategoriasCSV();
+void exportarCSVGeneral();
+
 void backupProductos();
 void backupVentas();
 void backupDetalleVentas();

@@ -15,6 +15,7 @@ class ArchivoCompras{
     }
 
     void validarArchivoExiste();
+    bool validarIdExiste(int id);
 
     int contarCompras();
     int generarNuevoID();

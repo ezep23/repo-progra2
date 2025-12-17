@@ -4,6 +4,27 @@
 #include <iostream>
 using namespace std;
 
+bool ArchivoCompras::validarIdExiste(int id){
+    Transaccion obj;
+    FILE *p = fopen(_nombre,"rb");
+
+    if(p == NULL){
+        cout << "ERROR DE ARCHIVO";
+        return false;
+    }
+
+    while(fread(&obj, _tamCompra, 1, p) == 1){
+
+        if(obj.getIdTransaccion() == id){
+            return true;
+        }
+    }
+
+    fclose(p);
+    return false;
+
+}
+
 int ArchivoCompras::contarCompras(){
 
     FILE *p = fopen("Ventas.dat", "rb");

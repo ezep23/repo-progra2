@@ -36,7 +36,7 @@ void compras(){
                 system("pause");
                 break;
             case 2:
-                modificarCompra();
+                editarCompra();
                 system("pause");
                 break;
             case 3:

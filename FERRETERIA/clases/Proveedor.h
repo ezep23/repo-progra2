@@ -3,7 +3,7 @@
 
 #include "Persona.h"
 
-class Proveedor : protected Persona{
+class Proveedor : public Persona{
  private:
     int _id;
     int _idEmpresa;

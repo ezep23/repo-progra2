@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1765946722 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
+1765948135 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuventas.cpp
 	<iostream>
 	"../../clases/Transaccion.h"
 	"../../clases/Almacen.h"
@@ -56,7 +56,7 @@
 
 1765560206 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\hora.h
 
-1765924594 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.cpp
+1765949758 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.cpp
 	"Compras.h"
 	"../clases/Transaccion.h"
 	<iostream>
@@ -94,7 +94,7 @@
 	"../clases/Proveedor.h"
 	"string.h"
 
-1765796156 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\proveedor.h
+1765958481 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\proveedor.h
 	"Persona.h"
 
 1765933229 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\clases\almacen.cpp
@@ -171,7 +171,7 @@
 	"Persona.h"
 	"Proveedor.h"
 
-1765924594 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.h
+1765949758 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\archivos\compras.h
 	"../clases/Transaccion.h"
 	"string.h"
 
@@ -188,7 +188,7 @@
 	"../clases/Categoria.h"
 	"string.h"
 
-1765924412 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\compras.h
+1765949901 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\compras.h
 	"./funciones-menus/funcionesMenuCompras.h"
 
 1765890865 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\inventario.h
@@ -196,14 +196,17 @@
 
 1765890865 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuinventario.h
 
-1765924594 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenucompras.cpp
+1765950420 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenucompras.cpp
 	<iostream>
-	"string.h"
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	"funcionesMenuCompras.h"
 	"../../clases/Transaccion.h"
+	"../../clases/DetalleTransaccion.h"
 	"../../clases/Almacen.h"
 	"../../clases/Fecha.h"
 	"../../clases/Hora.h"
-	"../../clases/Proveedor.h"
 	"../../archivos/Compras.h"
 	"../../archivos/DetalleCompras.h"
 	"../../archivos/Proveedores.h"
@@ -261,14 +264,14 @@
 	"../archivos/Categorias.h"
 	"../clases/Fecha.h"
 
-1765887252 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuconfiguraciones.h
+1765958255 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuconfiguraciones.h
 
 1765837523 source:c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenuconfiguraciones.cpp
 
-1765917081 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\configuraciones.h
+1765958120 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\configuraciones.h
 	"./funciones-menus/funcionesMenuConfiguraciones.h"
 
-1765924524 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenucompras.h
+1765949901 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\funciones-menus\funcionesmenucompras.h
 
 1765936205 c:\users\ezequ\onedrive\desktop\fesheteshia\ferreteria\menus\informes.h
 	"./funciones-menus/funcionesMenuInformes.h"

@@ -38,9 +38,44 @@ void configuraciones(){
 }
 
 void menuCSV(){
+    int subopc = 0;
+    while(true){
 
+    system("cls");
+    cout << " -----------------------------" <<endl;
+    cout << "  SUB-SUB-MENU REALIZAR CSV " <<endl;
+    cout << endl;
+    cout << " 1. REALIZAR COPIA DE PRODUCTOS" << endl;
+    cout << " 2. REALIZAR COPIA DE VENTAS" << endl;
+    cout << " 3. REALIZAR COPIA DE DETALLE VENTAS" << endl;
+    cout << " 4. REALIZAR COPIA DE COMPRAS" << endl;
+    cout << " 5. REALIZAR COPIA DE DETALLE COMPRAS" << endl;
+    cout << " 6. REALIZAR COPIA DE CLIENTES" << endl;
+    cout << " 7. REALIZAR COPIA DE PROVEEDORES" << endl;
+    cout << " 8. REALIZAR COPIA DE EMPRESAS" << endl;
+    cout << " 9. REALIZAR COPIA DE CATEGORIAS" << endl;
+    cout << " 10. REALIZAR CSVS GENERAL" << endl;
+    cout << " 0. Volver al submenu de config." << endl;
+    cout << " -----------------------------" <<endl;
+    cout << " Opcion: ";
+    cin >> subopc;
 
+    switch(subopc){
+        case 0: break;
+        case 1: exportarProductosCSV(); break;
+        case 2: exportarVentasCSV(); break;
+        case 3: exportarDetalleVentasCSV(); break;
+        case 4: exportarComprasCSV(); break;
+        case 5: exportarDetalleComprasCSV(); break;
+        case 6: exportarClientesCSV(); break;
+        case 7: exportarProveedoresCSV(); break;
+        case 8: exportarEmpresasCSV(); break;
+        case 9: exportarCategoriasCSV(); break;
+        case 10: exportarCSVGeneral(); break;
+    }
+  }
 }
+
 
 void menuRealizarCopias(){
 
