@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Ferretería" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Ferretería" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Ferretería" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Archivos/ClienteArchivo.cpp" />
+		<Unit filename="Archivos/ClienteArchivo.h" />
+		<Unit filename="Archivos/VentaArchivo.cpp" />
+		<Unit filename="Archivos/VentaArchivo.h" />
+		<Unit filename="Entidades/Categoria.cpp" />
+		<Unit filename="Entidades/Categoria.h" />
+		<Unit filename="Entidades/Cliente.cpp" />
+		<Unit filename="Entidades/Cliente.h" />
+		<Unit filename="Entidades/DetalleTransaccion.cpp" />
+		<Unit filename="Entidades/DetalleTransaccion.h" />
+		<Unit filename="Entidades/Empresa.cpp" />
+		<Unit filename="Entidades/Empresa.h" />
+		<Unit filename="Entidades/Fecha.cpp" />
+		<Unit filename="Entidades/Fecha.h" />
+		<Unit filename="Entidades/Hora.cpp" />
+		<Unit filename="Entidades/Hora.h" />
+		<Unit filename="Entidades/Persona.cpp" />
+		<Unit filename="Entidades/Persona.h" />
+		<Unit filename="Entidades/Proveedor.cpp" />
+		<Unit filename="Entidades/Proveedor.h" />
+		<Unit filename="Entidades/Transaccion.cpp" />
+		<Unit filename="Entidades/Transaccion.h" />
+		<Unit filename="Managers/ClienteManager.cpp" />
+		<Unit filename="Managers/ClienteManager.h" />
+		<Unit filename="Managers/VentaManager.cpp" />
+		<Unit filename="Managers/VentaManager.h" />
+		<Unit filename="Menus/AppMenu.cpp" />
+		<Unit filename="Menus/AppMenu.h" />
+		<Unit filename="Menus/ClienteMenu.cpp" />
+		<Unit filename="Menus/ClienteMenu.h" />
+		<Unit filename="Menus/Menu.cpp" />
+		<Unit filename="Menus/Menu.h" />
+		<Unit filename="Menus/VentaMenu.cpp" />
+		<Unit filename="Menus/VentaMenu.h" />
+		<Unit filename="Utils.cpp" />
+		<Unit filename="Utils.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,150 @@
+# depslib dependency file v1.0
+1769276646 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menu.cpp
+	<iostream>
+	"Menu.h"
+
+1769276646 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menu.h
+
+1769472722 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\main.cpp
+	<iostream>
+	"./Menus/AppMenu.h"
+
+1769292715 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\detalletransaccion.cpp
+	"DetalleTransaccion.h"
+
+1769292715 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\detalletransaccion.h
+
+1769292715 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1769292715 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\fecha.h
+
+1769292715 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\categoria.cpp
+	"Categoria.h"
+	<cstring>
+
+1769292750 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\categoria.h
+	<string>
+
+1769292716 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\hora.cpp
+	<iostream>
+	"Hora.h"
+
+1769292715 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\hora.h
+
+1769445644 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\persona.cpp
+	"Persona.h"
+	<cstring>
+
+1769445484 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\persona.h
+	<string>
+
+1769472472 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\cliente.cpp
+	"string.h"
+	"Cliente.h"
+
+1769472456 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\cliente.h
+	<string>
+	"Persona.h"
+
+1769293143 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\empresa.cpp
+	"Empresa.h"
+	"string.h"
+
+1769292715 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\empresa.h
+	<string>
+
+1769445484 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\proveedor.cpp
+	<iostream>
+	<cstring>
+	"Proveedor.h"
+
+1769445483 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\proveedor.h
+	"Persona.h"
+	<string>
+
+1769293309 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\transaccion.cpp
+	<cstring>
+	<iostream>
+	"Transaccion.h"
+	"Fecha.h"
+	"Hora.h"
+
+1769477778 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\entidades\transaccion.h
+	"Fecha.h"
+	"Hora.h"
+
+1769445857 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\archivos\ventaarchivo.cpp
+	<iostream>
+	"VentaArchivo.h"
+
+1769445483 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\archivos\ventaarchivo.h
+	"../Entidades/Transaccion.h"
+
+1769473465 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\appmenu.cpp
+	<iostream>
+	"AppMenu.h"
+
+1769473282 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\appmenu.h
+	"Menu.h"
+	"VentaMenu.h"
+	"ClienteMenu.h"
+
+1769306252 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\menu.h
+
+1769306253 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\ventamenu.h
+	"Menu.h"
+	"../Managers/VentaManager.h"
+
+1769445857 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\managers\ventamanager.h
+	"../Archivos/VentaArchivo.h"
+	"../Archivos/ClienteArchivo.h"
+
+1769472061 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\archivos\clientearchivo.h
+	<string>
+	"../Entidades/Cliente.h"
+
+1769306249 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\menu.cpp
+	<iostream>
+	"Menu.h"
+
+1769450835 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\ventamenu.cpp
+	<iostream>
+	"VentaMenu.h"
+
+1769450969 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\managers\ventamanager.cpp
+	<iostream>
+	"../utils.h"
+	"../Entidades/Cliente.h"
+	"../Entidades/Transaccion.h"
+	"VentaManager.h"
+
+1769445483 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\utils.h
+	<string>
+
+1769445484 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\utils.cpp
+	<iostream>
+	"utils.h"
+
+1769472155 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\archivos\clientearchivo.cpp
+	<iostream>
+	"ClienteArchivo.h"
+
+1769477632 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\managers\clientemanager.cpp
+	<iostream>
+	"ClienteManager.h"
+	"../Entidades/Cliente.h"
+	"../Utils.h"
+
+1769445483 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\managers\clientemanager.h
+	"../Archivos/ClienteArchivo.h"
+
+1769473282 c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\clientemenu.h
+	"Menu.h"
+	"../Managers/ClienteManager.h"
+
+1769473282 source:c:\users\ezequ\onedrive\desktop\ferreteria-febrero\ferretería\menus\clientemenu.cpp
+	<iostream>
+	"ClienteMenu.h"
+

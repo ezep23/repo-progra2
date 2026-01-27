@@ -1,8 +1,0 @@
-Menú principal
-     | | | | | 
-     | | | | Submenú ventas -> FuncionesMenuVentas ( lógica ventas) -> Archivo (guardar, modificar, listar, eliminar del archivo)
-     | | | Submenú compras -> FuncionesMenuCompras ( lógica compras) -> Archivo (guardar, modificar, listar, eliminar del archivo)
-     | | Submenú inventario -> FuncionesMenuInventario -> Almácen -> guarda en un archivo dependiendo la función (productos, ventas, compras)
-     | Submenú informes -> ni idea
-     Submenú configuración -> Menú backup -> saca backup de los archivos
-			   -> Menú restaurar backup -> restaura el backup de los archivos

@@ -1,0 +1,20 @@
+#pragma once
+#include <string>
+#include "../Entidades/Cliente.h"
+
+class ClienteArchivo{
+  public:
+    ClienteArchivo(std::string nombreArchivo = "Clientes.dat");
+    bool guardar(const Cliente &reg);
+    bool guardar(int pos, const Cliente &reg);
+
+    int buscarID(int id);
+    Cliente leer(int pos);
+
+    int leerTodos(Cliente regs[], int cantidad);
+    int getCantidadRegistros();
+    int getNuevoID();
+
+  private:
+    std::string _nombreArchivo;
+};
