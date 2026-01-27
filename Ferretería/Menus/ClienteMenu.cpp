@@ -8,8 +8,8 @@ ClienteMenu::ClienteMenu(){
 }
 
 void ClienteMenu::mostrarOpciones(){
-  cout << "--- MENU PERSONAL ---" << endl;
-  cout << "1 - NUEVO CLIENTE" << endl;
+  cout << "--- MENU CLIENTES ---" << endl;
+  cout << "1 - CARGAR CLIENTE" << endl;
   cout << "2 - MOSTRAR CLIENTES" << endl;
   cout << "3 - ACTUALIZAR CLIENTE " << endl;
   cout << "4 - ELIMINAR CLIENTE " << endl;

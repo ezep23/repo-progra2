@@ -14,7 +14,7 @@ Transaccion::Transaccion(){
     setIdPersona(0);
     setMontoTotal(0);
     setTipoFactura('B');
-    setEstado("false");
+    setEstado(false);
 }
 
 Transaccion::Transaccion(int id, int idPersona, float montoTotal, Hora hora, Fecha fecha, char tipoFactura){
@@ -25,6 +25,7 @@ Transaccion::Transaccion(int id, int idPersona, float montoTotal, Hora hora, Fec
     setHoraEmision(hora);
     setFechaEmision(fecha);
     setTipoFactura(tipoFactura);
+    setEstado(true);
 }
 
 void Transaccion::setIdTransaccion(int id){

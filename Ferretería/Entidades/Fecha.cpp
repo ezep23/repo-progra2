@@ -41,7 +41,7 @@ bool Fecha::esBisiesto(int a){
 
 bool Fecha::validarFecha(int d, int m, int a){
 
-    if (a < 2024 || a > 2025){
+    if (a < 1950 || a > 2026){
         return false;
     }
 

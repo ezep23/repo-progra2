@@ -8,11 +8,14 @@ class Categoria {
      bool _estado;
  public:
 
+    Categoria();
+    Categoria(int id, std::string nombre);
+
     void setId(int);
     void setNombre(std::string);
     void setEstado(bool);
 
-    int getId();
-    std::string getNombre();
-    bool getEstado();
+    int getId() const;
+    std::string getNombre() const;
+    bool getEstado() const;
 };

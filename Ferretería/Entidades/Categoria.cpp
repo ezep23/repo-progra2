@@ -1,7 +1,18 @@
 
 #include "Categoria.h"
 #include <cstring>
+
 using namespace std;
+
+Categoria::Categoria(){
+    setId(0);
+    setNombre("");
+}
+
+Categoria::Categoria(int id, string nombre){
+    setId(id);
+    setNombre(nombre);
+}
 
 void Categoria::setId(int id){
     _id = id;
@@ -13,12 +24,12 @@ void Categoria::setEstado(bool est){
     _estado = est;
 }
 
-int Categoria::getId(){
+int Categoria::getId() const{
     return _id;
 }
-string Categoria::getNombre(){
+string Categoria::getNombre() const{
     return string(_nombre);
 }
-bool Categoria::getEstado(){
+bool Categoria::getEstado() const{
     return _estado;
 }

@@ -12,7 +12,7 @@ class Hora {
     void setHora(int);
     void setMinutos(int);
 
-    int getHora( );
+    int getHora();
     int getMinutos();
 
     bool validarHora(int h, int m);

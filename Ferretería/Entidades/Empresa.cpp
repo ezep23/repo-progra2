@@ -4,21 +4,21 @@ using namespace std;
 
 Empresa::Empresa(){
     setId(0);
-    setNombre("");
+    setRazonSocial("");
     setEstado(false);
 }
 
-Empresa::Empresa(int id, string nom, bool est){
+Empresa::Empresa(int id, string rS){
     setId(id);
-    setNombre(nom);
-    setEstado(est);
+    setRazonSocial(rS);
+    setEstado(true);
 }
 
 void Empresa::setId(int id){
     _id = id;
 }
-void Empresa::setNombre(string n){
-    strncpy(_nombre, n.c_str(), 19);
+void Empresa::setRazonSocial(string rS){
+    strncpy(_razonSocial, rS.c_str(), 49);
 }
 void Empresa::setEstado(bool est){
     _estado = est;
@@ -27,8 +27,8 @@ void Empresa::setEstado(bool est){
 int Empresa::getId() const{
     return _id;
 }
-string Empresa::getNombre() const{
-    return  string(_nombre);
+string Empresa::getRazonSocial() const{
+    return  string(_razonSocial);
 }
 bool Empresa::getEstado() const{
     return _estado;

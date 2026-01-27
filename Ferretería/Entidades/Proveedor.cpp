@@ -12,12 +12,10 @@ Proveedor::Proveedor(){
     setDni("");
     setId(0);
     setIdEmpresa(0);
-    setNombreEmpresa("");
-    setRazonSocial("");
-    _estado=false;
+    setEstado(false);
 }
 
-Proveedor::Proveedor(string nom, string ape, string tel, string em, string dni, int id, int idE, string nE, string rS){
+Proveedor::Proveedor(string nom, string ape, string tel, string em, string dni, int id, int idE){
     setNombre(nom);
     setApellido(ape);
     setTelefono(tel);
@@ -25,8 +23,7 @@ Proveedor::Proveedor(string nom, string ape, string tel, string em, string dni, 
     setDni(dni);
     setId(id);
     setIdEmpresa(idE);
-    setNombreEmpresa(nE);
-    setRazonSocial(rS);
+    setEstado(true);
 }
 
 
@@ -36,28 +33,16 @@ void Proveedor::setId(int id){
 void Proveedor::setIdEmpresa(int idEmpresa){
     _idEmpresa = idEmpresa;
 }
-void Proveedor::setNombreEmpresa(string nE){
-    strncpy(_nombreEmpresa, nE.c_str(), 50);
-}
-void Proveedor::setRazonSocial(string razon){
-    strncpy(_razonSocial, razon.c_str(), 50);
-}
 void Proveedor::setEstado(bool est){
     _estado = est;
 }
 
-int Proveedor::getId(){
+int Proveedor::getId() const{
     return _id;
 }
-int Proveedor::getIdEmpresa(){
+int Proveedor::getIdEmpresa() const{
     return _idEmpresa;
 }
-string Proveedor::getNombreEmpresa(){
-    return string(_nombreEmpresa);
-}
-string Proveedor::getRazonSocial(){
-    return string(_razonSocial);
-}
-bool Proveedor::getEstado(){
+bool Proveedor::getEstado() const{
     return _estado;
 }

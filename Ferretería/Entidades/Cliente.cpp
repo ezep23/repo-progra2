@@ -9,7 +9,7 @@ Cliente::Cliente(){
     setApellido("");
     setEmail("");
     setTelefono("");
-    setEstado("false");
+    setEstado(false);
 }
 
 Cliente::Cliente(std::string nombre, std::string apellido, std::string telefono, std::string email, std::string dni, int id){
@@ -19,6 +19,7 @@ Cliente::Cliente(std::string nombre, std::string apellido, std::string telefono,
     setApellido(apellido);
     setTelefono(telefono);
     setEmail(email);
+    setEstado(true);
 }
 
 void Cliente::setId(int id){

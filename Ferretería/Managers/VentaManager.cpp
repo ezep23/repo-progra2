@@ -52,7 +52,30 @@ void VentaManager::cargarVenta(){
     if(reg.getEstado()){
         cout << "El cliente asignado es: " << reg.getNombre() << endl;
 
-        if(_repo.guardar(Transaccion(id, idCliente, )))
+        venta.setIdTransaccion(id);
+        venta.setIdPersona(idCliente);
+
+        int dia, mes, anio;
+        Fecha fecha;
+        do{
+            system("cls");
+            cout << "Ingrese el dia de hoy: ";
+            cin >> dia;
+
+            cout << "Ingrese el mes actual: ";
+            cin >> mes;
+
+            cout << "Ingrese el anio actual: ";
+            cin >> anio;
+        }while(!fecha.validarFecha(dia, mes, anio));
+        cout << "FECHA REGISTRADA CORRECTAMENTE";
+
+        venta.setFechaEmision(fecha);
+
+        cout << "TIPO DE FACTURA" << endl;
+        cout << " 1 - 'A' " << endl;
+        cout << " 2 - 'B' " << endl;
+
     }else{
         cout << "Ese cliente no existe" << endl;
         return;
@@ -77,15 +100,20 @@ void VentaManager::modificarVenta(){
   cin >> id;
 
   pos = _repo.buscarID(id);
+
+  if(pos == -1){
+    cout << "ESE REGISTRO NO EXISTE" << endl;
+    return;
+  }
+
   Transaccion reg = _repo.leer(pos);
 
   system("cls");
-  cout << "Que desea eliminar?" << endl;
-  cout << " 1 - ID PERSONA" << endl;
-  cout << " 2 - HORA" << endl;
-  cout << " 3 - FECHA" << endl;
+  cout << "Que desea modificar?" << endl;
+  cout << " 1 - ID CLIENTE" << endl;
+  cout << " 2 - FECHA" << endl;
+  cout << " 3 - HORA" << endl;
   cout << " 4 - TIPO DE FACTURA" << endl;
-  cout << " 5 - ESTADO" << endl;
   cout << " Opcion: ";
   cin >> opc;
 
@@ -95,17 +123,41 @@ void VentaManager::modificarVenta(){
         return;
      }
     case 1:{
-        int idCliente;
-        cout << "ID cliente: ";
-        cin >> idCliente;
 
-        Cliente cli = _repoCliente.buscarID(id);
+        if(reg.getEstado()){
 
-        if(cli.getEstado()){
-            reg.setIdPersona(cli.getId());
+            int posCliente = _repoCliente.buscarID(reg.getIdPersona());
+            Cliente cli = _repoCliente.leer(posCliente);
+            cout << " ID CLIENTE: " << cli.getId() << endl;
+            cout << " NOMBRE Y APELLIDO: " << cli.getNombre() << " " << cli.getApellido() << endl;
 
-            if(_repo.guardar(pos, reg)){
-                cout << "SE MODIFICO LA VENTA" << endl;
+            int opc;
+
+            cout << " Ingrese el ID del cliente (0 - salir)" << endl;
+            cin >> opc;
+
+            if(opc <= 0){
+                return;
+            }
+
+            if(opc > 0 ){
+
+                posCliente = _repoCliente.buscarID(opc);
+                Cliente cli = _repoCliente.leer(posCliente);
+
+                if(cli.getEstado()){
+                    reg.setIdPersona(opc);
+
+                    if(_repo.guardar(pos, reg)){
+                        cout << "SE GUARDO EL REGISTRO" << endl;
+                        return;
+                    }
+
+                    cout << "NO SE PUDO GUARDAR EL REGISTRO" << endl;
+                    return;
+                }
+
+                cout << "NO SE ENCONTRÓ ESE CLIENTE" << endl;
                 return;
             }
 
@@ -117,88 +169,101 @@ void VentaManager::modificarVenta(){
         return;
     }
     case 2:{
-        string nombre;
-        nombre = cargarCadena();
 
-        reg.setNombre(nombre);
-        _repo.guardar(pos, reg);
+        int dia, mes, anio;
+        Fecha fecha;
+        do{
+            system("cls");
+            cout << "Ingrese el dia de hoy: ";
+            cin >> dia;
 
-        cout << "NOMBRE ACTUALIZADO" << endl;
-        return;
+            cout << "Ingrese el mes actual: ";
+            cin >> mes;
+
+            cout << "Ingrese el anio actual: ";
+            cin >> anio;
+        }while(!fecha.validarFecha(dia, mes, anio));
+
+        reg.setFechaEmision(fecha);
+
+        if(_repo.guardar(pos, reg)){
+            cout << "FECHA ACTUALIZADA CORRECTAMENTE";
+        }
 
      }
     case 3:{
-        string apellido;
-        apellido = cargarCadena();
 
-        reg.setApellido(apellido);
-        _repo.guardar(pos, reg);
-
-        cout << "APELLIDO ACTUALIZADO" << endl;
-        return;
      }
      case 4:{
-        string tel;
-        tel = cargarCadena();
 
-        reg.setTelefono(tel);
-        _repo.guardar(pos, reg);
-
-        cout << "TELEFONO ACTUALIZADO" << endl;
-        return;
-     }
-     case 5:{
-        string email;
-        email = cargarCadena();
-
-        reg.setEmail(email);
-        _repo.guardar(pos, reg);
-
-        cout << "EMAIL ACTUALIZADO" << endl;
-        return;
-     }
-    case 6:{
-        reg.setEstado(!reg.getEstado());
-        _repo.guardar(pos, reg);
-
+        cout << "TIPO DE FACTURA ACTUAL: " << reg.getTipoFactura() <<endl;
         system("cls");
-        cout << "ESTADO ACTUALIZADO" << endl;
+
+        cout << "---- NUEVO TIPO DE FACTURA ---- "<< endl;
+        cout << " 0 - SALIR " << endl;
+        cout << " 1 - TIPO 'A' " << endl;
+        cout << " 2 - TIPO 'B' " << endl;
+        int opc;
+        cout << "Opcion: ";
+        cin >> opc;
+
+        if(opc == 0){
+            return;
+        }
+
+        if(opc == 1){
+            reg.setTipoFactura('A');
+            _repo.guardar(pos, reg);
+            cout << "TIPO DE FACTURA MODIFICADO" << endl;
+            return;
+        }
+
+        if(opc == 2){
+            reg.setTipoFactura('B');
+            _repo.guardar(pos, reg);
+            cout << "TIPO DE FACTURA MODIFICADO" << endl;
+            return;
+        }
+
+        cout << "ERROR" << endl;
         return;
-    }
+
+     }
  }
 }
 
 void VentaManager::eliminarVenta(){
-  int id, pos;
-  Transaccion venta;
-  char respuesta;
+    int id, pos;
+    Transaccion venta;
+    char respuesta;
 
-  cout << "---- Eliminar venta ----"<<endl;
-  cout << "Ingrese ID de la venta: ";
-  cin >> id;
+    cout << "---- Eliminar venta ----"<<endl;
+    cout << "Ingrese ID de la venta: ";
+    cin >> id;
 
-  pos = _repo.buscarID(id);
+    pos = _repo.buscarID(id);
 
-  if(pos != -1){
-    venta = _repo.leer(pos);
+    if(pos != -1){
+        venta = _repo.leer(pos);
 
-    cout << "Tarea a eliminar: "<<endl;
-    mostrarVentaCompleta(venta);
+        cout << "Tarea a eliminar: "<<endl;
+        mostrarVentaCompleta(venta);
 
-    cout << "Esta segudro de que lo quiere eliminar ? (S/N):";
-    cin >> respuesta;
+        cout << "Esta segudro de que lo quiere eliminar ? (S/N):";
+        cin >> respuesta;
 
-    if(respuesta == 'S' || respuesta == 's'){
-      if(_repo.eliminar(pos)){
-        cout << "La tarea fue eliminada con exito!" << endl;
-      }else{
-        cout << "Ocurrio un error al intentar actualizar la tarea." <<endl;
-      }
+        if(respuesta == 'S' || respuesta == 's'){
+
+            if(_repo.eliminar(pos)){
+                cout << "La tarea fue eliminada con exito!" << endl;
+            }else{
+                cout << "Ocurrio un error al intentar actualizar la tarea." <<endl;
+            }
+        }
+
+    }else{
+        cout << "La tarea no existe en el archivo" << endl;
     }
-
-  }else{
-    cout << "La tarea no existe en el archivo" << endl;
-  }
 }
 
 void VentaManager::mostrarVentaCompleta(const Transaccion &reg){
@@ -206,8 +271,25 @@ void VentaManager::mostrarVentaCompleta(const Transaccion &reg){
     cout << " ID: " << reg.getIdTransaccion() << endl;
     cout << " ID Cliente: " << reg.getIdPersona() << endl;
     cout << " Monto total: " << reg.getMontoTotal() << endl;
-    cout << " Hora: " << reg.getHoraTransaccion() << endl;
-    cout << " Fecha: " << reg.getFechaTransaccion() << endl;
+
+
+    cout << " Hora: ";
+    Hora h = reg.getHoraTransaccion();
+
+    if(h.getHora() < 10){
+        cout << "0";
+    }
+    cout << h.getHora() << ":";
+
+    if(h.getMinutos() < 10){
+        cout << "0";
+    }
+    cout << h.getMinutos();
+
+
+    Fecha f = reg.getFechaTransaccion();
+    cout << " Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
+
     cout << " Tipo factura: " << reg.getTipoFactura() << endl;
     cout << "-----------------------------------" << endl;
 }

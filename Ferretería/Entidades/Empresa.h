@@ -4,20 +4,21 @@
 class Empresa{
  private:
      int  _id;
-     char _nombre[20];
-     bool _estado=true;
+     char _razonSocial[50];
+     bool _estado;
  public:
 
     Empresa();
-    Empresa(int id, std::string nombre, bool estado);
+    Empresa(int id, std::string razonSocial);
 
     void setId(int);
-    void setNombre(std::string nombre);
+    void setRazonSocial(std::string rS);
     void setEstado(bool);
 
     int getId() const;
-    std::string getNombre() const;
+    std::string getRazonSocial() const;
     bool getEstado() const;
 
     void mostrar();
 };
+
