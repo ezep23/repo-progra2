@@ -11,6 +11,8 @@ class ClienteArchivo{
     int buscarID(int id);
     Cliente leer(int pos);
 
+    bool eliminar(int pos);
+
     int leerTodos(Cliente regs[], int cantidad);
     int getCantidadRegistros();
     int getNuevoID();

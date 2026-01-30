@@ -11,6 +11,8 @@ class ProveedorArchivo{
     int buscarID(int id);
     Proveedor leer(int pos);
 
+    bool eliminar(int pos);
+
     int leerTodos(Proveedor regs[], int cantidad);
     int getCantidadRegistros();
     int getNuevoID();

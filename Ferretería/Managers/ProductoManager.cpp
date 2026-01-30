@@ -43,10 +43,13 @@ void ProductoManager::eliminar(){
   cin >> id;
 
   pos = _repo.buscarID(id);
-  Producto reg = _repo.leer(pos);
+  if(_repo.eliminar(pos)){
+    cout << "REGISTRO ELIMINADO" << endl;
+    return;
+  }
 
-  reg.setEstado(false);
-  cout << "PRODUCTO ELIMINADO" << endl;
+  cout << "NO SE PUDO ELIMINAR EL REGISTRO" << endl;
+  return;
 }
 
 void ProductoManager::actualizar(){

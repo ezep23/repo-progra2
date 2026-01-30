@@ -124,3 +124,14 @@ int ClienteArchivo::getCantidadRegistros(){
 int ClienteArchivo::getNuevoID(){
     return getCantidadRegistros() + 1;
 }
+
+bool ClienteArchivo::eliminar(int pos){
+  Cliente reg = leer(pos);
+  if(reg.getId() == -1){
+    return false;
+  }
+
+  reg.setEstado(false);
+
+  return guardar(pos, reg);
+}

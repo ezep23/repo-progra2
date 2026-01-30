@@ -7,11 +7,13 @@ using namespace std;
 Categoria::Categoria(){
     setId(0);
     setNombre("");
+    setEstado(false);
 }
 
 Categoria::Categoria(int id, string nombre){
     setId(id);
     setNombre(nombre);
+    setEstado(true);
 }
 
 void Categoria::setId(int id){

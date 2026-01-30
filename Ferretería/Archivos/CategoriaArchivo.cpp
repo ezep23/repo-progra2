@@ -124,3 +124,14 @@ int CategoriaArchivo::getCantidadRegistros(){
 int CategoriaArchivo::getNuevoID(){
     return getCantidadRegistros() + 1;
 }
+
+bool CategoriaArchivo::eliminar(int pos){
+  Categoria reg = leer(pos);
+  if(reg.getId() == -1){
+    return false;
+  }
+
+  reg.setEstado(false);
+
+  return guardar(pos, reg);
+}

@@ -36,6 +36,8 @@
 		<Unit filename="Archivos/CategoriaArchivo.h" />
 		<Unit filename="Archivos/ClienteArchivo.cpp" />
 		<Unit filename="Archivos/ClienteArchivo.h" />
+		<Unit filename="Archivos/EmpresaArchivo.cpp" />
+		<Unit filename="Archivos/EmpresaArchivo.h" />
 		<Unit filename="Archivos/ProductoArchivo.cpp" />
 		<Unit filename="Archivos/ProductoArchivo.h" />
 		<Unit filename="Archivos/ProveedorArchivo.cpp" />
@@ -66,6 +68,8 @@
 		<Unit filename="Managers/CategoriaManager.h" />
 		<Unit filename="Managers/ClienteManager.cpp" />
 		<Unit filename="Managers/ClienteManager.h" />
+		<Unit filename="Managers/EmpresaManager.cpp" />
+		<Unit filename="Managers/EmpresaManager.h" />
 		<Unit filename="Managers/ProductoManager.cpp" />
 		<Unit filename="Managers/ProductoManager.h" />
 		<Unit filename="Managers/ProveedorManager.cpp" />
@@ -78,6 +82,8 @@
 		<Unit filename="Menus/CategoriaMenu.h" />
 		<Unit filename="Menus/ClienteMenu.cpp" />
 		<Unit filename="Menus/ClienteMenu.h" />
+		<Unit filename="Menus/EmpresaMenu.cpp" />
+		<Unit filename="Menus/EmpresaMenu.h" />
 		<Unit filename="Menus/Menu.cpp" />
 		<Unit filename="Menus/Menu.h" />
 		<Unit filename="Menus/ProductoMenu.cpp" />

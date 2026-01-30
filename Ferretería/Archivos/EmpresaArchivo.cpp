@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-#include "ProveedorArchivo.h"
+#include "EmpresaArchivo.h"
 
-ProveedorArchivo::ProveedorArchivo(std::string nombreArchivo): _nombreArchivo(nombreArchivo){
+EmpresaArchivo::EmpresaArchivo(std::string nombreArchivo): _nombreArchivo(nombreArchivo){
 
 }
 
-bool ProveedorArchivo::guardar(const Proveedor &reg){
+bool EmpresaArchivo::guardar(const Empresa &reg){
   bool result;
   FILE *pFile;
 
@@ -17,14 +17,14 @@ bool ProveedorArchivo::guardar(const Proveedor &reg){
     return false;
   }
 
-  result = fwrite(&reg, sizeof(Proveedor), 1, pFile);
+  result = fwrite(&reg, sizeof(Empresa), 1, pFile);
 
   fclose(pFile);
 
   return result;
 }
 
-bool ProveedorArchivo::guardar(int pos, const Proveedor &registro){
+bool EmpresaArchivo::guardar(int pos, const Empresa &registro){
   bool result;
   FILE *pFile;
 
@@ -34,17 +34,17 @@ bool ProveedorArchivo::guardar(int pos, const Proveedor &registro){
     return false;
   }
 
-  fseek(pFile, sizeof(Proveedor)*pos, SEEK_SET);
+  fseek(pFile, sizeof(Empresa)*pos, SEEK_SET);
 
-  result = fwrite(&registro, sizeof(Proveedor), 1, pFile);
+  result = fwrite(&registro, sizeof(Empresa), 1, pFile);
 
   fclose(pFile);
 
   return result;
 }
 
-int ProveedorArchivo::buscarID(int id){
-  Proveedor reg;
+int EmpresaArchivo::buscarID(int id){
+  Empresa reg;
   FILE *pFile;
   int pos = -1;
 
@@ -54,9 +54,9 @@ int ProveedorArchivo::buscarID(int id){
     return pos;
   }
 
-  while(fread(&reg, sizeof(Proveedor), 1, pFile)){
+  while(fread(&reg, sizeof(Empresa), 1, pFile)){
     if(reg.getId() == id){
-      pos = ftell(pFile) / sizeof(Proveedor) - 1;
+      pos = ftell(pFile) / sizeof(Empresa) - 1;
       break;
     }
   }
@@ -66,8 +66,8 @@ int ProveedorArchivo::buscarID(int id){
   return pos;
 }
 
-Proveedor ProveedorArchivo::leer(int pos){
-  Proveedor reg;
+Empresa EmpresaArchivo::leer(int pos){
+  Empresa reg;
   FILE *pFile;
 
   pFile = fopen(_nombreArchivo.c_str(), "rb");
@@ -77,16 +77,16 @@ Proveedor ProveedorArchivo::leer(int pos){
     return reg;
   }
 
-  fseek(pFile, sizeof(Proveedor)*pos, SEEK_SET);
+  fseek(pFile, sizeof(Empresa)*pos, SEEK_SET);
 
-  fread(&reg, sizeof(Proveedor), 1, pFile);
+  fread(&reg, sizeof(Empresa), 1, pFile);
 
   fclose(pFile);
 
   return reg;
 }
 
-int ProveedorArchivo::leerTodos(Proveedor regs[], int cantidad){
+int EmpresaArchivo::leerTodos(Empresa regs[], int cantidad){
   int result;
   FILE *pFile;
 
@@ -96,14 +96,14 @@ int ProveedorArchivo::leerTodos(Proveedor regs[], int cantidad){
     return 0;
   }
 
-  result = fread(regs, sizeof(Proveedor), cantidad, pFile);
+  result = fread(regs, sizeof(Empresa), cantidad, pFile);
 
   fclose(pFile);
 
   return result;
 }
 
-int ProveedorArchivo::getCantidadRegistros(){
+int EmpresaArchivo::getCantidadRegistros(){
   int cantidad;
   FILE *pFile;
 
@@ -114,19 +114,19 @@ int ProveedorArchivo::getCantidadRegistros(){
   }
 
   fseek(pFile, 0, SEEK_END);
-  cantidad = ftell(pFile) / sizeof(Proveedor);
+  cantidad = ftell(pFile) / sizeof(Empresa);
 
   fclose(pFile);
 
   return cantidad;
 }
 
-int ProveedorArchivo::getNuevoID(){
+int EmpresaArchivo::getNuevoID(){
     return getCantidadRegistros() + 1;
 }
 
-bool ProveedorArchivo::eliminar(int pos){
-  Proveedor reg = leer(pos);
+bool EmpresaArchivo::eliminar(int pos){
+  Empresa reg = leer(pos);
   if(reg.getId() == -1){
     return false;
   }
@@ -135,4 +135,3 @@ bool ProveedorArchivo::eliminar(int pos){
 
   return guardar(pos, reg);
 }
-

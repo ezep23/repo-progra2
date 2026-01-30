@@ -40,7 +40,7 @@ void CategoriaManager::mostrar(){
 
   _repo.leerTodos(vCategoria, cantidad);
 
-  cout << "CLIENTES: " << endl;
+  cout << "CATEGORIAS: " << endl;
 
   for(int i=0; i<cantidad; i++){
     if(vCategoria[i].getEstado()){
@@ -56,15 +56,18 @@ void CategoriaManager::eliminar(){
   cin >> id;
 
   pos = _repo.buscarID(id);
-  Categoria reg = _repo.leer(pos);
+  if(_repo.eliminar(pos)){
+    cout << "REGISTRO ELIMINADO" << endl;
+    return;
+  }
 
-  reg.setEstado(false);
-  cout << "CATEGORIA ELIMINADO" << endl;
+  cout << "NO SE PUDO ELIMINAR EL REGISTRO" << endl;
+  return;
 }
 
 void CategoriaManager::actualizar(){
   int id, pos, opc;
-  cout << "Ingrese el ID del proveedor: ";
+  cout << "Ingrese el ID de la categoria: ";
   cin >> id;
 
   pos = _repo.buscarID(id);
@@ -83,6 +86,9 @@ void CategoriaManager::actualizar(){
      }
     case 1:{
         string nombre;
+
+        cout << "Ingrese el nuevo nombre: ";
+
         nombre = cargarCadena();
 
         reg.setNombre(nombre);
@@ -98,6 +104,6 @@ void CategoriaManager::actualizar(){
 
 void CategoriaManager::mostrarLista(const Categoria &reg){
   cout << "ID: " << reg.getId() << endl;
-  cout << "ID Empresa: " << reg.getNombre() << endl;
+  cout << "Nombre categoria: " << reg.getNombre() << endl;
   cout << "------------" <<endl;
 }

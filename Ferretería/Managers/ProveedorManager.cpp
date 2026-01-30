@@ -101,10 +101,13 @@ void ProveedorManager::eliminar(){
   cin >> id;
 
   pos = _repo.buscarID(id);
-  Proveedor reg = _repo.leer(pos);
+  if(_repo.eliminar(pos)){
+    cout << "REGISTRO ELIMINADO" << endl;
+    return;
+  }
 
-  reg.setEstado(false);
-  cout << "CLIENTE ELIMINADO" << endl;
+  cout << "NO SE PUDO ELIMINAR EL REGISTRO" << endl;
+  return;
 }
 
 void ProveedorManager::actualizar(){

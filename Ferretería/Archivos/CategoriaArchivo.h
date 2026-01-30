@@ -11,6 +11,8 @@ class CategoriaArchivo{
     int buscarID(int id);
     Categoria leer(int pos);
 
+    bool eliminar(int pos);
+
     int leerTodos(Categoria regs[], int cantidad);
     int getCantidadRegistros();
     int getNuevoID();

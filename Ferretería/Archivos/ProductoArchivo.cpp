@@ -124,3 +124,14 @@ int ProductoArchivo::getCantidadRegistros(){
 int ProductoArchivo::getNuevoID(){
     return getCantidadRegistros() + 1;
 }
+
+bool ProductoArchivo::eliminar(int pos){
+  Producto reg = leer(pos);
+  if(reg.getId() == -1){
+    return false;
+  }
+
+  reg.setEstado(false);
+
+  return guardar(pos, reg);
+}

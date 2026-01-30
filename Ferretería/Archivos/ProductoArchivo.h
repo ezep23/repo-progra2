@@ -11,6 +11,8 @@ class ProductoArchivo{
     int buscarID(int id);
     Producto leer(int pos);
 
+    bool eliminar(int pos);
+
     int leerTodos(Producto regs[], int cantidad);
     int getCantidadRegistros();
     int getNuevoID();
