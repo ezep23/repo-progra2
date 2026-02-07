@@ -8,16 +8,22 @@ AppMenu::AppMenu(){
 }
 
 void AppMenu::mostrarOpciones(){
+    cout << endl;
   cout << "--- MENU PRINCIPAL ---" << endl;
-  cout << "1 - VENTAS " << endl;
-  cout << "2 - COMPRAS " << endl;
-  cout << "3 - CLIENTES" << endl;
-  cout << "4 - PROVEEDORES" << endl;
-  cout << "5 - PRODUCTOS" << endl;
-  cout << "6 - CATEGORIAS" <<endl;
-  cout << "7 - EMPRESA" << endl;
+  cout << endl;
+  cout << " 1 - VENTAS " << endl;
+  cout << " 2 - COMPRAS " << endl;
+  cout << " 3 - CLIENTES" << endl;
+  cout << " 4 - PROVEEDORES" << endl;
+  cout << " 5 - ALMACEN" << endl;
+  cout << " 6 - CATEGORIAS" <<endl;
+  cout << " 7 - EMPRESAS" << endl;
+  cout << " 8 - REPORTES" << endl;
+  cout << endl;
   cout << "----------------------" << endl;
-  cout << "0 - SALIR" << endl;
+  cout << endl;
+  cout << " 0 - SALIR" << endl;
+  cout << endl;
   cout << "----------------------"<<endl;
 }
 
@@ -36,7 +42,7 @@ void AppMenu::ejecutarOpcion(int opcion){
     _proveedorMenu.mostrar();
     break;
   case 5:
-    _productoMenu.mostrar();
+    _almacenMenu.mostrar();
     break;
   case 6:
     _categoriaMenu.mostrar();

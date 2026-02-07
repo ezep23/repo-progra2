@@ -11,6 +11,8 @@ class EmpresaManager{
     void eliminar();
     void actualizar();
 
+    bool validarEmpresaExiste(int id);
+
   protected:
     void mostrarLista(const Empresa &reg);
   private:

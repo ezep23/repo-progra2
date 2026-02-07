@@ -7,13 +7,22 @@ class VentaManager
   public:
     VentaManager();
 
-    void cargarVenta();
-    void mostrarVentas();
-    void modificarVenta();
-    void eliminarVenta();
-  protected:
+    int cargar();
+    bool guardar(int pos, Transaccion reg);
+
+    int buscarPosicion(int id);
+    Transaccion traerRegistro(int pos);
+
+    int obtenerNumeroRegistros();
+
+    void mostrar();
+    void mostrar(int id);
+
+    void modificar();
+    void eliminar();
+
     void mostrarVentaCompleta(const Transaccion &reg);
   private:
-    VentaArchivo _repo;
     ClienteArchivo _repoCliente;
+    VentaArchivo _repo;
 };

@@ -9,6 +9,10 @@ class DetalleTransaccion{
     float _precioUnitario;
     bool _estado;
  public:
+
+    DetalleTransaccion();
+    DetalleTransaccion(int id, int idTransaccion, int idProducto, int cantidad, float precioUnitario);
+
     void setId(int);
     void setIdTransaccion(int);
     void setIdProducto(int);
@@ -16,11 +20,11 @@ class DetalleTransaccion{
     void setPrecioUnitario(float);
     void setEstado(bool);
 
-    int getId();
-    int getIdTransaccion();
-    int getIdProducto();
-    int getCantidad();
-    float getPrecioUnitario();
-    bool getEstado();
+    int getId() const;
+    int getIdTransaccion() const;
+    int getIdProducto() const;
+    int getCantidad() const;
+    float getPrecioUnitario() const;
+    bool getEstado() const;
 
 };

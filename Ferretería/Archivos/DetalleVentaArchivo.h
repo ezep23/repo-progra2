@@ -1,0 +1,23 @@
+#pragma once
+#include <string>
+#include "../Entidades/DetalleTransaccion.h"
+
+class DetalleVentaArchivo{
+  public:
+    DetalleVentaArchivo(std::string nombreArchivo = "DetallesVenta.dat");
+    bool guardar(const DetalleTransaccion &registro); // guardar al final
+    bool guardar(int pos, const DetalleTransaccion &registro); // guardar x posición (modificar)
+
+    int buscarID(int id);
+
+    bool eliminar(int pos);
+
+    DetalleTransaccion leer(int pos);
+    int leerTodos(DetalleTransaccion detalles[], int cantidad);
+
+    int getCantidadRegistros();
+    int getNuevoID();
+
+  private:
+    std::string _nombreArchivo;
+};

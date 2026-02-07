@@ -13,7 +13,7 @@ EmpresaManager::EmpresaManager(){
 }
 
 void EmpresaManager::cargar(){
-  string razonSocial;
+  string razonSocial, nombreComercial;
   int id;
 
   id = _repo.getNuevoID();
@@ -22,7 +22,10 @@ void EmpresaManager::cargar(){
   cout << "Ingrese la razon social: ";
   razonSocial = cargarCadena();
 
-  if(_repo.guardar(Empresa(id, razonSocial))){
+  cout << "Ingrese el nombre comercial: ";
+  nombreComercial = cargarCadena();
+
+  if(_repo.guardar(Empresa(id, razonSocial, nombreComercial))){
     cout << "EMPRESA GUARDADA" << endl;
   }else{
     cout << "NO SE PUDO GUARDAR LA EMPRESA" << endl;
@@ -76,6 +79,7 @@ void EmpresaManager::actualizar(){
   system("cls");
   cout << "Que desea modificar?" << endl;
   cout << " 1 - RAZON SOCIAL" << endl;
+  cout << " 2 - NOMBRE COMERCIAL " << endl;
   cout << " 0 - SALIR" << endl;
   cout << " Opcion: ";
   cin >> opc;
@@ -98,12 +102,38 @@ void EmpresaManager::actualizar(){
         return;
 
      }
+    case 2:{
+        string nombreComercial;
+
+        cout << "Ingrese el nuevo nombre comercial: ";
+
+        nombreComercial = cargarCadena();
+
+        reg.setNombreComercial(nombreComercial);
+        _repo.guardar(pos, reg);
+
+        cout << "NOMBRE COMERCIAL ACTUALIZADO" << endl;
+        return;
+
+    }
   }
 
+}
+
+bool EmpresaManager::validarEmpresaExiste(int idE){
+    int pos = _repo.buscarID(idE);
+    Empresa reg = _repo.leer(pos);
+
+    if(reg.getEstado()){
+        return true;
+    }
+
+    return false;
 }
 
 void EmpresaManager::mostrarLista(const Empresa &reg){
   cout << "ID: " << reg.getId() << endl;
   cout << "Razon social: " << reg.getRazonSocial() << endl;
+  cout << "Nombre comercial: " << reg.getNombreComercial() << endl;
   cout << "------------" <<endl;
 }

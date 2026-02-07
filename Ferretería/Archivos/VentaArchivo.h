@@ -1,9 +1,10 @@
 #pragma once
+#include <string>
 #include "../Entidades/Transaccion.h"
 
 class VentaArchivo{
   public:
-    VentaArchivo(std::string nombreArchivo = "ventas.dat");
+    VentaArchivo(std::string nombreArchivo = "Ventas.dat");
     bool guardar(const Transaccion &registro); // guardar al final
     bool guardar(int pos, const Transaccion &registro); // guardar x posición (modificar)
 

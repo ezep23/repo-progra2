@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Menu.h"
-#include "../Managers/VentaManager.h"
+#include "../Managers/VentasManager.h"
 
 class VentaMenu: public Menu{
   public:
@@ -11,5 +11,5 @@ class VentaMenu: public Menu{
     void mostrarOpciones();
     void ejecutarOpcion(int opcion);
 
-    VentaManager _ventaManager;
+    VentasManager _ventasManager;
 };

@@ -10,18 +10,16 @@ Producto::Producto(){
     setIdProveedor(0);
     setIdCategoria(0);
     setNombre("");
-    setMarca("");
     setPrecio(0);
     setStock(0);
     setEstado(false);
 }
 
-Producto::Producto(int id, int idProveedor, int idCategoria, string nombre, string marca, float precio, int stock, bool estado){
+Producto::Producto(int id, int idProveedor, int idCategoria, string nombre, float precio, int stock){
     setId(id);
     setIdProveedor(idProveedor);
     setIdCategoria(idCategoria);
     setNombre(nombre);
-    setMarca(marca);
     setPrecio(precio);
     setStock(stock);
     setEstado(true);
@@ -40,10 +38,6 @@ int Producto::getIdCategoria() const{
 
 string Producto::getNombre() const{
     return string(_nombre);
-}
-
-string Producto::getMarca() const{
-    return string(_marca);
 }
 
 float Producto::getPrecio() const{
@@ -72,10 +66,6 @@ void Producto::setIdCategoria(int id){
 
 void Producto::setNombre(string n){
     strncpy(_nombre, n.c_str(), 29);
-}
-
-void Producto::setMarca(string m){
-    strncpy(_marca, m.c_str(), 29);
 }
 
 void Producto::setPrecio(float p){

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Archivos/ProveedorArchivo.h"
+#include "EmpresaManager.h"
 
 
 class ProveedorManager{
@@ -11,8 +12,11 @@ class ProveedorManager{
     void eliminar();
     void actualizar();
 
+    bool existeProveedor(int id);
+
   protected:
     void mostrarLista(const Proveedor &reg);
   private:
     ProveedorArchivo _repo;
+    EmpresaManager _empresaManager;
 };

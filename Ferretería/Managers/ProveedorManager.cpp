@@ -12,6 +12,17 @@ ProveedorManager::ProveedorManager(){
 
 }
 
+bool ProveedorManager::existeProveedor(int id){
+    int pos = _repo.buscarID(id);
+    Proveedor reg = _repo.leer(pos);
+
+    if(reg.getEstado()){
+        return true;
+    }
+
+    return false;
+}
+
 void ProveedorManager::cargar(){
   int id;
   int idE;
@@ -24,18 +35,18 @@ void ProveedorManager::cargar(){
   id = _repo.getNuevoID();
 
   cout << "CARGAR NUEVO PROVEEDOR ----" << endl;
-  cout << "ID EMPRESA: (0 - Salir)";
+  cout << "ID EMPRESA (0 - Salir)" << endl;
+  cout << "Opcion: ";
   cin >> idE;
 
   if(idE <= 0){
     return;
   }
 
-  int pos = _repo.buscarID(idE);
-  Proveedor prov = _repo.leer(pos);
+  bool empresaExiste = _empresaManager.validarEmpresaExiste(idE);
 
-  if(!prov.getEstado()){
-    cout << "NO SE HA ENCONTRADO ESE PROVEEDOR" << endl;
+  if(!empresaExiste){
+    cout << "NO SE HA ENCONTRADO O NO EXISTE ESA EMPRESA" << endl;
     return;
   }
   cout << "ID PROVEEDOR: " << id << endl;
@@ -85,7 +96,7 @@ void ProveedorManager::mostrar(){
 
   _repo.leerTodos(vProveedor, cantidad);
 
-  cout << "CLIENTES: " << endl;
+  cout << "PROVEEDORES: " << endl;
 
   for(int i=0; i<cantidad; i++){
     if(vProveedor[i].getEstado()){

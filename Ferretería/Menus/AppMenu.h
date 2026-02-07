@@ -5,7 +5,7 @@
 #include "VentaMenu.h"
 #include "ClienteMenu.h"
 #include "ProveedorMenu.h"
-#include "ProductoMenu.h"
+#include "AlmacenMenu.h"
 #include "CategoriaMenu.h"
 #include "EmpresaMenu.h"
 
@@ -22,7 +22,7 @@ class AppMenu: public Menu{
     VentaMenu _ventaMenu;
     ClienteMenu _clienteMenu;
     ProveedorMenu _proveedorMenu;
-    ProductoMenu _productoMenu;
+    AlmacenMenu _almacenMenu;
     CategoriaMenu _categoriaMenu;
     EmpresaMenu _empresaMenu;
     //ReporteMenu _reporteMenu;

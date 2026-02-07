@@ -13,7 +13,7 @@ Transaccion::Transaccion(){
     Hora();
     setIdPersona(0);
     setMontoTotal(0);
-    setTipoFactura('B');
+    setTipoFactura('X');
     setEstado(false);
 }
 

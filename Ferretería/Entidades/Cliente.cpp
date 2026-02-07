@@ -14,7 +14,7 @@ Cliente::Cliente(){
 
 Cliente::Cliente(std::string nombre, std::string apellido, std::string telefono, std::string email, std::string dni, int id){
     setId(id);
-    setDni("");
+    setDni(dni);
     setNombre(nombre);
     setApellido(apellido);
     setTelefono(telefono);

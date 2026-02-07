@@ -1,0 +1,204 @@
+#include <iostream>
+
+#include "AlmacenManager.h"
+#include "../Entidades/Producto.h"
+
+#include "../Utils.h"
+
+using namespace std;
+
+
+AlmacenManager::AlmacenManager(){
+
+}
+
+void AlmacenManager::cargarProducto(){
+    int idProv, idProd, idCat, stock;
+    float precio;
+    string nombre;
+
+    idProd = _repo.getNuevoID();
+
+    do{
+        cout << "Ingrese el ID de proveedor (0 - Listar)" << endl;
+        cout << "Opcion: ";
+        cin >> idProv;
+        cout << endl;
+
+        if(idProv == 0){
+            cout << "PROVEEDORES: ";
+            _proveedorManager.mostrar();
+            cout << endl;
+        }
+
+    }while(idProv <= 0 || !_proveedorManager.existeProveedor(idProv));
+
+    do{
+        cout << "Ingrese el ID de Categoria (0 - Listar)"<< endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+        cout << "Ingrese el ID de Categoria" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+    }while(idCat <= 0);
+
+    cout << "Ingrese el nombre del producto: ";
+    nombre = cargarCadena();
+
+    do{
+        cout << "Ingrese el precio: ";
+        cin >> precio;
+    }while(precio <= 0);
+
+    do{
+        cout << "Ingrese el stock: ";
+        cin >> stock;
+    }while(stock <= 0);
+
+    if(_repo.guardar(Producto(idProd, idProv, idCat, nombre, precio, stock))){
+        cout << "NUEVO PRODUCTO GUARDADO";
+        return;
+    }else{
+        cout << "NO SE PUDO GUARDAR EL PRODUCTO";
+        return;
+    }
+
+}
+
+void AlmacenManager::mostrarProducto(){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  cout << "PRODUCTOS: " << endl;
+
+  for(int i=0; i<cantidad; i++){
+    if(vProducto[i].getEstado()){
+        mostrarLista(vProducto[i]);
+    }
+  }
+    delete [] vProducto;
+}
+
+int AlmacenManager::obtenerStock(int id){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  for(int i=0; i<cantidad; i++){
+    if(vProducto[i].getEstado() && vProducto[i].getId() == id){
+        return vProducto[i].getStock();
+    }
+  }
+  delete [] vProducto;
+  return 0;
+
+}
+
+bool AlmacenManager::validarID(int id){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    return false;
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  for(int i=0; i<cantidad; i++){
+    if(vProducto[i].getEstado() && vProducto[i].getId() == id){
+        return true;
+    }
+  }
+  delete [] vProducto;
+  return false;
+}
+
+float AlmacenManager::obtenerPrecio(int id){
+    int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  for(int i=0; i<cantidad; i++){
+    if(vProducto[i].getEstado() && vProducto[i].getId() == id){
+        return vProducto[i].getPrecio();
+    }
+  }
+  delete [] vProducto;
+  return 0;
+}
+
+void AlmacenManager::actualizarStock(int id, int cantidad){
+  int pos = _repo.buscarID(id);
+  Producto reg = _repo.leer(pos);
+
+  if(reg.getEstado()){
+
+    int nuevo = reg.getStock() - cantidad;
+
+    if(nuevo >= 0){
+        reg.setStock(nuevo);
+        _repo.guardar(pos, reg);
+    }
+
+  }else{
+    cout << "NO SE PUDO ACTUALIZAR EL STOCK" << endl;
+  }
+}
+
+void AlmacenManager::eliminarProducto(){
+  int id, pos;
+  cout << "Ingrese el ID del producto: ";
+  cin >> id;
+
+  pos = _repo.buscarID(id);
+  if(_repo.eliminar(pos)){
+    cout << "REGISTRO ELIMINADO" << endl;
+    return;
+  }
+
+  cout << "NO SE PUDO ELIMINAR EL REGISTRO" << endl;
+  return;
+}
+
+void AlmacenManager::actualizarProducto(){
+
+}
+
+
+
+void AlmacenManager::mostrarLista(const Producto &reg){
+  cout << "ID: " << reg.getId() << endl;
+  cout << "ID Categoria: " << reg.getIdCategoria() << endl;
+  cout << "ID Proveedor: " << reg.getIdProveedor() << endl;
+  cout << "Nombre: "<< reg.getNombre() << endl;
+  cout << "Precio: " << reg.getPrecio() << endl;
+  cout << "Stock: " << reg.getStock() << endl;
+  cout << "------------" <<endl;
+}
+

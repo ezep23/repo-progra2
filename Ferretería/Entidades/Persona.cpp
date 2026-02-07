@@ -48,7 +48,6 @@ string Persona::getTelefono() const{
 string Persona::getEmail() const{
     return string(_email);
 }
-
 string Persona::getDni() const{
     return string(_dni);
 }

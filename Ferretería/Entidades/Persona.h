@@ -11,7 +11,7 @@ protected:
 public:
 
     Persona();
-    Persona(std::string nombre, std::string apellido, std::string telefono, std::string email, std::string);
+    Persona(std::string nombre, std::string apellido, std::string telefono, std::string email, std::string dni);
 
     void setNombre(std::string nombre);
     void setApellido(std::string apellido);

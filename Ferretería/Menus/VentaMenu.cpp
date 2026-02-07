@@ -9,10 +9,11 @@ VentaMenu::VentaMenu(){
 
 void VentaMenu::mostrarOpciones(){
   cout << "--- MENU VENTA ---" << endl;
-  cout << "1 - CREAR VENTA " << endl;
-  cout << "2 - MOSTRAR VENTA " << endl;
-  cout << "3 - MODIFICAR VENTA " << endl;
-  cout << "4 - ELIMINAR VENTA " << endl;
+  cout << "1 - CREAR" << endl;
+  cout << "2 - MOSTRAR VENTAS " << endl;
+  cout << "3 - MOSTRAR VENTA " << endl;
+  cout << "4 - MODIFICAR " << endl;
+  cout << "5 - ELIMINAR" << endl;
   cout << "---------------------------------" << endl;
   cout << "0 - SALIR" << endl;
   cout << "--------------------"<<endl;
@@ -21,16 +22,19 @@ void VentaMenu::mostrarOpciones(){
 void VentaMenu::ejecutarOpcion(int opcion){
   switch(opcion){
   case 1:
-    _ventaManager.cargarVenta();
+    _ventasManager.cargarVenta();
   break;
   case 2:
-    _ventaManager.mostrarVentas();
+    _ventasManager.mostrarVentas();
   break;
   case 3:
-    _ventaManager.modificarVenta();
-  break;
+    _ventasManager.modificarVenta();
+    break;
   case 4:
-    _ventaManager.eliminarVenta();
+    _ventasManager.modificarVenta();
+  break;
+  case 5:
+    _ventasManager.eliminarVenta();
   break;
   }
 }

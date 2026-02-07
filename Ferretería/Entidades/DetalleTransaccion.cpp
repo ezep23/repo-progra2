@@ -1,6 +1,24 @@
 
 #include "DetalleTransaccion.h"
 
+DetalleTransaccion::DetalleTransaccion(){
+    setId(0);
+    setIdTransaccion(0);
+    setIdProducto(0);
+    setCantidad(0);
+    setPrecioUnitario(0);
+    setEstado(false);
+}
+
+DetalleTransaccion::DetalleTransaccion(int id, int idTransaccion, int idProducto, int cantidad, float precioUnitario){
+    setId(id);
+    setIdTransaccion(idTransaccion);
+    setIdProducto(idProducto);
+    setCantidad(cantidad);
+    setPrecioUnitario(precioUnitario);
+    setEstado(true);
+}
+
 void DetalleTransaccion::setId(int id){
     _id = id;
 }
@@ -20,21 +38,21 @@ void DetalleTransaccion::setEstado(bool est){
     _estado = est;
 }
 
-int DetalleTransaccion::getId(){
+int DetalleTransaccion::getId() const{
     return _id;
 }
-int DetalleTransaccion::getIdTransaccion(){
+int DetalleTransaccion::getIdTransaccion() const{
     return _idTransaccion;
 }
-int DetalleTransaccion::getIdProducto(){
+int DetalleTransaccion::getIdProducto() const{
     return _idProducto;
 }
-int DetalleTransaccion::getCantidad(){
+int DetalleTransaccion::getCantidad() const{
     return _cantidad;
 }
-float DetalleTransaccion::getPrecioUnitario(){
+float DetalleTransaccion::getPrecioUnitario() const{
     return _precioUnitario;
 }
-bool DetalleTransaccion::getEstado(){
+bool DetalleTransaccion::getEstado() const{
     return _estado;
 }
