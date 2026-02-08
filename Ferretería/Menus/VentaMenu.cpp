@@ -28,7 +28,7 @@ void VentaMenu::ejecutarOpcion(int opcion){
     _ventasManager.mostrarVentas();
   break;
   case 3:
-    _ventasManager.modificarVenta();
+    _ventasManager.mostrarVenta();
     break;
   case 4:
     _ventasManager.modificarVenta();

@@ -1,19 +1,24 @@
 #pragma once
 #include <string>
-#include "Persona.h"
 
-class Cliente : public Persona{
+class Cliente {
  private:
     int _id;
+    char _nombre[20];
+    char _dni[8];
     bool _estado;
  public:
 
     Cliente();
-    Cliente(std::string nom, std::string ape, std::string tel, std::string em, std::string dni, int id);
+    Cliente(int id, std::string nom, std::string dni);
 
+    void setNombre(std::string nombre);
+    void setDni(std::string dni);
     void setId(int);
     void setEstado(bool);
 
+    std::string getNombre() const;
+    std::string getDni() const;
     int getId() const;
     bool getEstado() const;
 

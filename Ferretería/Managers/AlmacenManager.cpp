@@ -153,13 +153,31 @@ float AlmacenManager::obtenerPrecio(int id){
   return 0;
 }
 
-void AlmacenManager::actualizarStock(int id, int cantidad){
+void AlmacenManager::descontarStock(int id, int cantidad){
   int pos = _repo.buscarID(id);
   Producto reg = _repo.leer(pos);
 
   if(reg.getEstado()){
 
     int nuevo = reg.getStock() - cantidad;
+
+    if(nuevo >= 0){
+        reg.setStock(nuevo);
+        _repo.guardar(pos, reg);
+    }
+
+  }else{
+    cout << "NO SE PUDO ACTUALIZAR EL STOCK" << endl;
+  }
+}
+
+void AlmacenManager::rellenarStock(int id, int cantidad){
+  int pos = _repo.buscarID(id);
+  Producto reg = _repo.leer(pos);
+
+  if(reg.getEstado()){
+
+    int nuevo = reg.getStock() + cantidad;
 
     if(nuevo >= 0){
         reg.setStock(nuevo);

@@ -16,9 +16,6 @@ ClienteManager::ClienteManager(){
 void ClienteManager::cargar(){
   int id;
   string nombre;
-  string apellido;
-  string tel;
-  string email;
   string dni;
 
   id = _repo.getNuevoID();
@@ -42,16 +39,7 @@ void ClienteManager::cargar(){
   cout << "Ingrese nombre: ";
   nombre = cargarCadena();
 
-  cout << "Ingrese apellido: ";
-  apellido = cargarCadena();
-
-  cout << "Ingrese telefono: ";
-  tel = cargarCadena();
-
-  cout << "Ingrese email: ";
-  email = cargarCadena();
-
-  if(_repo.guardar(Cliente(nombre, apellido, tel, email, dni, id))){
+  if(_repo.guardar(Cliente(id, nombre, dni))){
     cout << "Se agrego correctamente" << endl;
   }
   else{
@@ -105,13 +93,9 @@ void ClienteManager::actualizar(){
   Cliente reg = _repo.leer(pos);
 
   system("cls");
-  cout << "Que desea eliminar?" << endl;
+  cout << "Que desea actualizar?" << endl;
   cout << " 1 - NOMBRE" << endl;
-  cout << " 2 - APELLIDO" << endl;
-  cout << " 3 - TELEFONO" << endl;
-  cout << " 4 - EMAIL" << endl;
-  cout << " 5 - DNI" << endl;
-  cout << " 6 - ESTADO" << endl;
+  cout << " 2 - DNI" << endl;
   cout << " Opcion: ";
   cin >> opc;
 
@@ -132,37 +116,7 @@ void ClienteManager::actualizar(){
         return;
 
      }
-    case 2:{
-        string apellido;
-        apellido = cargarCadena();
-
-        reg.setApellido(apellido);
-        _repo.guardar(pos, reg);
-
-        cout << "APELLIDO ACTUALIZADO" << endl;
-        return;
-     }
-     case 3:{
-        string tel;
-        tel = cargarCadena();
-
-        reg.setTelefono(tel);
-        _repo.guardar(pos, reg);
-
-        cout << "TELEFONO ACTUALIZADO" << endl;
-        return;
-     }
-     case 4:{
-        string email;
-        email = cargarCadena();
-
-        reg.setEmail(email);
-        _repo.guardar(pos, reg);
-
-        cout << "EMAIL ACTUALIZADO" << endl;
-        return;
-     }
-     case 5:{
+     case 2:{
         string dni;
         dni = cargarCadena();
 
@@ -182,14 +136,6 @@ void ClienteManager::actualizar(){
         cout << "DNI ACTUALIZADO" << endl;
         return;
      }
-    case 6:{
-        reg.setEstado(!reg.getEstado());
-        _repo.guardar(pos, reg);
-
-        system("cls");
-        cout << "ESTADO ACTUALIZADO" << endl;
-        return;
-    }
  }
 
 }
@@ -198,9 +144,6 @@ void ClienteManager::mostrarLista(const Cliente &reg){
   cout << "ID: " << reg.getId() << endl;
   cout << "DNI: " << reg.getDni() << endl;
   cout << "Nombre: "<< reg.getNombre() << endl;
-  cout << "Apellido: " << reg.getApellido() << endl;
-  cout << "Telefono: " << reg.getTelefono() << endl;
-  cout << "Email: " << reg.getEmail() << endl;
   cout << "------------" <<endl;
 }
 

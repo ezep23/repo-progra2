@@ -1,42 +1,42 @@
 #include <iostream>
 using namespace std;
 
-#include "../utils.h" // para cargar cadena (string)
+#include "../utils.h" //
 
 #include "../Entidades/DetalleTransaccion.h"
 
-#include "DetalleVentaManager.h"
+#include "DetalleCompraManager.h"
 
-DetalleVentaManager::DetalleVentaManager(){
+DetalleCompraManager::DetalleCompraManager(){
 
 }
 
-int DetalleVentaManager::buscarPosicion(int id){
+int DetalleCompraManager::buscarPosicion(int id){
     return _repo.buscarID(id);
 }
 
-DetalleTransaccion DetalleVentaManager::traerRegistro(int pos){
+DetalleTransaccion DetalleCompraManager::traerRegistro(int pos){
     return _repo.leer(pos);
 }
 
 
-int DetalleVentaManager::obtenerNumeroRegistros(){
+int DetalleCompraManager::obtenerNumeroRegistros(){
     return _repo.getCantidadRegistros();
 }
 
-float DetalleVentaManager::cargar(int idTrans){
+float DetalleCompraManager::cargar(int idTrans){
     int opc, id, idTransaccion, idProducto, cantProducto, precioUnitario;
     float total, monto;
     total = 0;
 
-    cout << "CUANTOS PRODUCTOS VA A LLEVAR? -> Opcion: ";
+    cout << "CUANTOS PRODUCTOS VA A COMPRAR? -> Opcion: ";
     cin >> opc;
 
     for(int i=0; i<opc; i++){
         id = _repo.getNuevoID();
         idTransaccion = idTrans;
 
-        cout << "Ingresando detalle de venta numero " << (i + 1) << endl;
+        cout << "Ingresando detalle de compra numero " << (i + 1) << endl;
 
         cout << "Ingrese el id de producto: ";
         cin >> idProducto;
@@ -49,19 +49,19 @@ float DetalleVentaManager::cargar(int idTrans){
             }while(!_almacenManager.validarID(idProducto));
         }
 
-        cout << "Ingrese la cantidad de ese producto a llevar: ";
+        cout << "Ingrese la cantidad de ese producto a stockear: ";
         cin >> cantProducto;
 
-        if( _almacenManager.obtenerStock(idProducto) < cantProducto){
+        if( cantProducto <= 0){
 
             do{
-                cout << "NO HAY CANTIDAD SUFICIENTE EN EL ALMACEN" << endl;
-                cout << "Ingrese la cantidad de ese producto a llevar: ";
+                cout << "NO PUEDE COMPRAR ESA CANTIDAD" << endl;
+                cout << "Ingrese la cantidad de ese producto a stockear: ";
                 cin >> cantProducto;
-            }while(_almacenManager.obtenerStock(idProducto) < cantProducto);
+            }while(cantProducto <= 0);
         }
 
-        _almacenManager.descontarStock(idProducto, cantProducto);
+        _almacenManager.rellenarStock(idProducto, cantProducto);
 
         precioUnitario = _almacenManager.obtenerPrecio(idProducto);
         monto = cantProducto * precioUnitario;
@@ -76,8 +76,8 @@ float DetalleVentaManager::cargar(int idTrans){
     return total;
 }
 
-void DetalleVentaManager::mostrar(){
-  cout << "------ Lista detalles venta ------  "<<endl;;
+void DetalleCompraManager::mostrar(){
+  cout << "------ Lista detalles compras ------  "<<endl;;
   int cantidad = _repo.getCantidadRegistros();
 
   for(int i=0; i<cantidad; i++){
@@ -87,7 +87,7 @@ void DetalleVentaManager::mostrar(){
   }
 }
 
-void DetalleVentaManager::mostrar(int id){
+void DetalleCompraManager::mostrar(int id){
 
     int pos = _repo.buscarID(id);
 
@@ -240,9 +240,9 @@ void DetalleVentaManager::mostrar(int id){
 }
 */
 
-void DetalleVentaManager::eliminar(){
+void DetalleCompraManager::eliminar(){
     int id, pos;
-    cout << "Ingrese el ID de la venta: ";
+    cout << "Ingrese el ID de la compra: ";
     cin >> id;
 
     int cantidad = _repo.getCantidadRegistros();
@@ -257,7 +257,7 @@ void DetalleVentaManager::eliminar(){
   return;
 }
 
-void DetalleVentaManager::mostrarDetalleCompleto(const DetalleTransaccion &reg){
+void DetalleCompraManager::mostrarDetalleCompleto(const DetalleTransaccion &reg){
     cout << "-----------------------------------" << endl;
     cout << " ID: " << reg.getId() << endl;
     cout << " TRANSACCION ID: " << reg.getIdTransaccion() << endl;

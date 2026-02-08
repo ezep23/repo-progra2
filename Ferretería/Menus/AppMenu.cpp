@@ -4,7 +4,7 @@ using namespace std;
 #include "AppMenu.h"
 
 AppMenu::AppMenu(){
-  _cantidadOpciones = 7;
+  _cantidadOpciones = 9;
 }
 
 void AppMenu::mostrarOpciones(){
@@ -13,12 +13,15 @@ void AppMenu::mostrarOpciones(){
   cout << endl;
   cout << " 1 - VENTAS " << endl;
   cout << " 2 - COMPRAS " << endl;
-  cout << " 3 - CLIENTES" << endl;
-  cout << " 4 - PROVEEDORES" << endl;
-  cout << " 5 - ALMACEN" << endl;
-  cout << " 6 - CATEGORIAS" <<endl;
-  cout << " 7 - EMPRESAS" << endl;
-  cout << " 8 - REPORTES" << endl;
+  cout << " 3 - ALMACEN" << endl;
+  cout << " 4 - REPORTES" << endl;
+  cout << endl;
+  cout << " 5 - CLIENTES" << endl;
+  cout << " 6 - EMPLEADOS" << endl;
+  cout << " 7 - PROVEEDORES" << endl;
+  cout << endl;
+  cout << " 8 - CATEGORIAS" <<endl;
+  cout << " 9 - EMPRESAS" << endl;
   cout << endl;
   cout << "----------------------" << endl;
   cout << endl;
@@ -33,21 +36,27 @@ void AppMenu::ejecutarOpcion(int opcion){
     _ventaMenu.mostrar();
   break;
   case 2:
-    //_personalMenu.mostrar();
+    _compraMenu.mostrar();
     break;
   case 3:
-    _clienteMenu.mostrar();
-    break;
-  case 4:
-    _proveedorMenu.mostrar();
-    break;
-  case 5:
     _almacenMenu.mostrar();
     break;
+  case 4:
+    // reportesmenu
+    break;
+  case 5:
+    _clienteMenu.mostrar();
+    break;
   case 6:
-    _categoriaMenu.mostrar();
+    _empleadoMenu.mostrar();
     break;
   case 7:
+    _proveedorMenu.mostrar();
+    break;
+  case 8:
+    _categoriaMenu.mostrar();
+    break;
+  case 9:
     _empresaMenu.mostrar();
     break;
   }

@@ -1,24 +1,18 @@
-
-#include "string.h"
 #include "Cliente.h"
+#include <cstring>
+using namespace std;
 
 Cliente::Cliente(){
     setId(0);
-    setDni("");
     setNombre("");
-    setApellido("");
-    setEmail("");
-    setTelefono("");
+    setDni("");
     setEstado(false);
 }
 
-Cliente::Cliente(std::string nombre, std::string apellido, std::string telefono, std::string email, std::string dni, int id){
+Cliente::Cliente(int id, string nombre, string dni){
     setId(id);
-    setDni(dni);
     setNombre(nombre);
-    setApellido(apellido);
-    setTelefono(telefono);
-    setEmail(email);
+    setDni(dni);
     setEstado(true);
 }
 
@@ -30,10 +24,22 @@ void Cliente::setEstado(bool est){
     _estado = est;
 }
 
+void Cliente::setNombre(string nombre){
+    strncpy(_nombre, nombre.c_str(), 19);
+}
+void Cliente::setDni(string dni){
+    strncpy(_dni, dni.c_str(), 7);
+}
+
+string Cliente::getNombre() const{
+    return string(_nombre);
+}
+string Cliente::getDni() const{
+    return string(_dni);
+}
 int Cliente::getId() const{
     return _id;
 }
-
 bool Cliente::getEstado() const{
     return _estado;
 }
