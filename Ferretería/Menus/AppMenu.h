@@ -10,8 +10,7 @@
 #include "AlmacenMenu.h"
 #include "CategoriaMenu.h"
 #include "EmpresaMenu.h"
-
-//#include "ReporteMenu.h"
+#include "InformeMenu.h"
 
 class AppMenu: public Menu{
  public:
@@ -29,5 +28,5 @@ class AppMenu: public Menu{
     AlmacenMenu _almacenMenu;
     CategoriaMenu _categoriaMenu;
     EmpresaMenu _empresaMenu;
-    //ReporteMenu _reporteMenu;
+    InformeMenu _informeMenu;
 };

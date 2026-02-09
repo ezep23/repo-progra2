@@ -256,8 +256,6 @@ void AlmacenManager::actualizarProducto(){
 
 }
 
-
-
 void AlmacenManager::mostrarLista(const Producto &reg){
   cout << "ID: " << reg.getId() << endl;
   cout << "ID Categoria: " << reg.getIdCategoria() << endl;

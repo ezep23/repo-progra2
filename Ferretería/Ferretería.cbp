@@ -92,6 +92,8 @@
 		<Unit filename="Managers/EmpleadoManager.h" />
 		<Unit filename="Managers/EmpresaManager.cpp" />
 		<Unit filename="Managers/EmpresaManager.h" />
+		<Unit filename="Managers/InformeManager.cpp" />
+		<Unit filename="Managers/InformeManager.h" />
 		<Unit filename="Managers/ProveedorManager.cpp" />
 		<Unit filename="Managers/ProveedorManager.h" />
 		<Unit filename="Managers/VentaManager.cpp" />
@@ -112,6 +114,8 @@
 		<Unit filename="Menus/EmpleadoMenu.h" />
 		<Unit filename="Menus/EmpresaMenu.cpp" />
 		<Unit filename="Menus/EmpresaMenu.h" />
+		<Unit filename="Menus/InformeMenu.cpp" />
+		<Unit filename="Menus/InformeMenu.h" />
 		<Unit filename="Menus/Menu.cpp" />
 		<Unit filename="Menus/Menu.h" />
 		<Unit filename="Menus/ProveedorMenu.cpp" />

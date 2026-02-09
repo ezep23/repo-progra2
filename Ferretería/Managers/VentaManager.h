@@ -15,6 +15,9 @@ class VentaManager
 
     int obtenerNumeroRegistros();
 
+    void recaudacionMensual(int anio);
+    void recaudacionAnual();
+
     void mostrar();
     void mostrar(int id);
 

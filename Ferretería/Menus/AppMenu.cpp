@@ -14,7 +14,7 @@ void AppMenu::mostrarOpciones(){
   cout << " 1 - VENTAS " << endl;
   cout << " 2 - COMPRAS " << endl;
   cout << " 3 - ALMACEN" << endl;
-  cout << " 4 - REPORTES" << endl;
+  cout << " 4 - INFORMES" << endl;
   cout << endl;
   cout << " 5 - CLIENTES" << endl;
   cout << " 6 - EMPLEADOS" << endl;
@@ -42,7 +42,7 @@ void AppMenu::ejecutarOpcion(int opcion){
     _almacenMenu.mostrar();
     break;
   case 4:
-    // reportesmenu
+    _informeMenu.mostrar();
     break;
   case 5:
     _clienteMenu.mostrar();

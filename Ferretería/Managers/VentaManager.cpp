@@ -314,6 +314,94 @@ void VentaManager::eliminar(){
     }
 }
 
+void VentaManager::recaudacionMensual(int anio){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "No se pudo asignar memoria..." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    float recaudacionPorMes[12] = {0};
+    for(int i=0; i < cantidad; i++){
+
+        if(vVentas[i].getEstado() && vVentas[i].getFechaTransaccion().getAnio() == anio){
+
+            int mes = vVentas[i].getFechaTransaccion().getMes();
+
+            if(mes >= 1 && mes <= 12){
+                recaudacionPorMes[mes - 1] += vVentas[i].getMontoTotal();
+            }
+        }
+    }
+
+    for(int i=0; i < 12; i++){
+        cout << "RECAUDACION MES: " << (i + 1) << endl;
+        cout << "TOTAL: " << recaudacionPorMes[i] << endl;
+    }
+
+    delete [] vVentas;
+}
+
+
+void VentaManager::recaudacionAnual(){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    // ---------------------------------------------------------
+    // PASO 1: ORDENAR (Burbujeo) - Descendente por Año
+    // Si puedes usar <algorithm>, std::sort es mejor.
+    // Aquí uso burbujeo manual por si no te permiten librerías extra.
+    // ---------------------------------------------------------
+    Transaccion aux;
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+            // Si el año actual es MENOR al siguiente, los invertimos (para que quede Mayor -> Menor)
+            if(vVentas[j].getFechaTransaccion().getAnio() < vVentas[j+1].getFechaTransaccion().getAnio()){
+                aux = vVentas[j];
+                vVentas[j] = vVentas[j+1];
+                vVentas[j+1] = aux;
+            }
+        }
+    }
+
+    // ---------------------------------------------------------
+    // PASO 2: CORTE DE CONTROL
+    // Recorremos el arreglo agrupando por año
+    // ---------------------------------------------------------
+    int i = 0;
+    while(i < cantidad){
+
+        int anioActual = vVentas[i].getFechaTransaccion().getAnio();
+        float recaudacionAnio = 0;
+
+        while(i < cantidad && vVentas[i].getFechaTransaccion().getAnio() == anioActual){
+
+            if(vVentas[i].getEstado()){
+                recaudacionAnio += vVentas[i].getMontoTotal();
+            }
+
+            i++; // Avanzamos al siguiente registro
+        }
+
+        cout << "AÑO: " << anioActual << endl;
+        cout << "TOTAL RECAUDADO: " << recaudacionAnio << endl;
+        cout << "-------------------------" << endl;
+    }
+
+    delete [] vVentas;
+}
+
 void VentaManager::mostrarVentaCompleta(const Transaccion &reg){
     cout << "-----------------------------------" << endl;
     cout << " ID: " << reg.getIdTransaccion() << endl;
