@@ -54,7 +54,7 @@ int CompraManager::cargar() {
         return 0;
     }
 
-    cout << "Cliente asignado: " << empleado.getNombre() << " " << empleado.getApellido() << endl;
+    cout << "Empleado que encarga productos: " << empleado.getNombre() << " " << empleado.getApellido() << endl;
     system("pause");
 
     int d, m, a;

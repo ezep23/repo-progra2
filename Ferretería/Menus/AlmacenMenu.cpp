@@ -4,15 +4,16 @@ using namespace std;
 #include "AlmacenMenu.h"
 
 AlmacenMenu::AlmacenMenu(){
-  _cantidadOpciones = 4;
+  _cantidadOpciones = 5;
 }
 
 void AlmacenMenu::mostrarOpciones(){
   cout << "--- MENU ALMACEN ---" << endl;
   cout << "1 - CARGAR PRODUCTO" << endl;
   cout << "2 - MOSTRAR PRODUCTO" << endl;
-  cout << "3 - ACTUALIZAR PRODUCTO" << endl;
-  cout << "4 - ELIMINAR PRODUCTO" << endl;
+  cout << "3 - FILTRAR PRODUCTOS POR CATEGORIA" << endl;
+  cout << "4 - ACTUALIZAR PRODUCTO" << endl;
+  cout << "5 - ELIMINAR PRODUCTO" << endl;
   cout << "---------------------------------" << endl;
   cout << "0 - SALIR" << endl;
   cout << "--------------------"<<endl;
@@ -27,9 +28,12 @@ void AlmacenMenu::ejecutarOpcion(int opcion){
     _almacenManager.mostrarProducto();
   break;
   case 3:
+    _almacenManager.listarPorCategoria();
+    break;
+  case 4:
     _almacenManager.actualizarProducto();
   break;
-  case 4:
+  case 5:
     _almacenManager.eliminarProducto();
   break;
   }

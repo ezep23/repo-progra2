@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "../Archivos/CategoriaArchivo.h"
 
 
@@ -10,6 +11,8 @@ class CategoriaManager{
     void mostrar();
     void eliminar();
     void actualizar();
+
+    bool existeCategoria(int id);
 
   protected:
     void mostrarLista(const Categoria &reg);

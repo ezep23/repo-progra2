@@ -9,8 +9,11 @@ class AlmacenManager{
 
     void cargarProducto();
     void mostrarProducto();
+    void mostrarProducto(int idCategoria);
     void eliminarProducto();
     void actualizarProducto();
+
+    void listarPorCategoria();
 
     int obtenerStock(int id);
     float obtenerPrecio(int id);

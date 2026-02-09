@@ -71,6 +71,26 @@ void AlmacenManager::cargarProducto(){
 
 }
 
+void AlmacenManager::listarPorCategoria(){
+    int idCategoria;
+    _categoriaManager.mostrar();
+
+    cout << "INGRESE LA CATEGORIA QUE DESEE VER: (0 - Para salir)";
+    cin >> idCategoria;
+
+    if(idCategoria <= 0){
+        return;
+    }
+
+    if(_categoriaManager.existeCategoria(idCategoria)){
+        mostrarProducto(idCategoria);
+        return;
+    }
+
+    cout << "NO HAY REGISTROS" << endl;
+    return;
+}
+
 void AlmacenManager::mostrarProducto(){
   int cantidad = _repo.getCantidadRegistros();
   Producto *vProducto = new Producto[cantidad];
@@ -88,6 +108,34 @@ void AlmacenManager::mostrarProducto(){
     if(vProducto[i].getEstado()){
         mostrarLista(vProducto[i]);
     }
+  }
+    delete [] vProducto;
+}
+
+void AlmacenManager::mostrarProducto(int idCategoria){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  system("cls");
+  cout << "PRODUCTOS DE LA CATEGORIA SELECCIONADO:" << endl;
+
+  for(int i=0; i<cantidad; i++){
+
+    if(vProducto[i].getEstado()){
+
+        if(vProducto[i].getIdCategoria() == idCategoria){
+            mostrarLista(vProducto[i]);
+        }
+
+    }
+
   }
     delete [] vProducto;
 }

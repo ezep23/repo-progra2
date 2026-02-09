@@ -3,6 +3,7 @@
 #include "CategoriaManager.h"
 #include "../Entidades/Categoria.h"
 
+#include <string.h>
 #include "../Utils.h"
 
 using namespace std;
@@ -101,6 +102,32 @@ void CategoriaManager::actualizar(){
   }
 
 }
+
+bool CategoriaManager::existeCategoria(int id){
+  int cantidad = _repo.getCantidadRegistros();
+  Categoria *vCategoria = new Categoria[cantidad];
+
+  if(vCategoria == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vCategoria, cantidad);
+
+  for(int i=0; i<cantidad; i++){
+    if(vCategoria[i].getEstado()){
+        if(vCategoria[i].getId() == id){
+            delete [] vCategoria;
+            return true;
+        }
+    }
+  }
+
+  cout << "SIN REGISTROS" << endl;
+  delete [] vCategoria;
+  return false;
+}
+
 
 void CategoriaManager::mostrarLista(const Categoria &reg){
   cout << "ID: " << reg.getId() << endl;
