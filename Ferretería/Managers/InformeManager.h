@@ -14,6 +14,8 @@ class InformeManager{
     void recaudacionAnualCategoria();
     void numeroVentasAnualCategoria();
     void numeroProductosVendidosCategoria();
+    void numeroProductosProveeedor();
+    void ventasPorEmpleado();
     void listarBajoStock();
 
   private:

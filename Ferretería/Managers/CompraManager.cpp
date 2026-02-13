@@ -23,9 +23,7 @@ bool CompraManager::guardar(int pos, Transaccion reg){
 }
 
 int CompraManager::cargar() {
-    int id;
-    int idEmpleado;
-    int posEmpleado = -1; // IMPORTANTE: Inicializar con valor inválido
+    int id, idEmpleado;
 
     id = _repo.getNuevoID();
 
@@ -39,22 +37,13 @@ int CompraManager::cargar() {
             return 0;
         }
 
-        posEmpleado = _repoEmpleado.buscarID(idEmpleado);
-
-        if (posEmpleado == -1) {
+        if ( !_empleadoManager.existeRegistro(idEmpleado) ) {
             cout << ">>> Error: El cliente no existe. Intente nuevamente." << endl;
         }
 
-    } while (posEmpleado == -1);
+    } while ( !_empleadoManager.existeRegistro(idEmpleado));
 
-    Empleado empleado = _repoEmpleado.leer(posEmpleado);
-
-    if (!empleado.getEstado()) {
-        cout << ">>> Error: El empleado seleccionado ha sido dado de baja." << endl;
-        return 0;
-    }
-
-    cout << "Empleado que encarga productos: " << empleado.getNombre() << " " << empleado.getApellido() << endl;
+    _empleadoManager.mostrar(idEmpleado);
     system("pause");
 
     int d, m, a;
@@ -81,7 +70,7 @@ int CompraManager::cargar() {
 
     hora.setHora(h); hora.setMinutos(minu);
 
-    Transaccion nuevaCompra(id, idEmpleado, 0, hora, fecha, 'A');
+    Transaccion nuevaCompra(id, 0, idEmpleado, 0, hora, fecha, 'A');
 
     if (_repo.guardar(nuevaCompra)) {
         return id;

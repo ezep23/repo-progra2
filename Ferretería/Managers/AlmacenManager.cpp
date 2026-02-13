@@ -269,17 +269,47 @@ void AlmacenManager::actualizarProducto(){
 }
 
 void AlmacenManager::numeroProductosProveedor(){
-  int cantidad = _repo.getCantidadRegistros();
-  Producto *vProducto = new Producto[cantidad];
+    int cantidad = _repo.getCantidadRegistros();
 
-  _proveedorManager.
+    Producto *vProducto = new Producto[cantidad];
 
-  if(vProducto == nullptr){
-    cout << "No se pudo asignar memoria..." << endl;
-    exit(-100);
-  }
+    if(vProducto == nullptr){
+        cout << "No se pudo asignar memoria..." << endl;
+        return;
+    }
 
-  _repo.leerTodos(vProducto, cantidad);
+    _repo.leerTodos(vProducto, cantidad);
+
+    int totalIDs = _proveedorManager.obtenerNumeroProximoID();
+    int *cantProveedores = new int[totalIDs]();
+
+    if(cantProveedores == nullptr){
+        delete[] vProducto;
+        return;
+    }
+
+
+    for(int i = 0; i < cantidad; i++){
+        if(vProducto[i].getEstado()){
+            int idProv = vProducto[i].getIdProveedor();
+
+            if (idProv > 0 && idProv < totalIDs) {
+                cantProveedores[idProv - 1]++;
+            }
+        }
+    }
+
+    cout << "--- REPORTE DE PRODUCTOS POR PROVEEDOR ---" << endl;
+    for(int j = 0; j < totalIDs - 1; j++){
+        if(cantProveedores[j] > 0){
+            cout << "PROVEEDOR ID " << (j + 1) << endl;
+            cout << "PRODUCTOS ASIGNADOS: " << cantProveedores[j] << endl;
+            cout << "-------------------------" << endl;
+        }
+    }
+
+    delete[] vProducto;
+    delete[] cantProveedores;
 }
 
 void AlmacenManager::listarBajoStock(){

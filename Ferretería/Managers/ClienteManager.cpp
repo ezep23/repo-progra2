@@ -140,6 +140,22 @@ void ClienteManager::actualizar(){
 
 }
 
+
+bool ClienteManager::existeRegistro(int id){
+   int pos = _repo.buscarID(id);
+
+   if(pos != -1){
+        return true;
+   }
+
+   return false;
+}
+
+void ClienteManager::mostrar(int id){
+    int pos = _repo.buscarID(id);
+    cout << "Cliente asignado: " << _repo.leer(pos).getNombre() << " - " << _repo.leer(pos).getDni() << endl;
+}
+
 void ClienteManager::mostrarLista(const Cliente &reg){
   cout << "ID: " << reg.getId() << endl;
   cout << "DNI: " << reg.getDni() << endl;

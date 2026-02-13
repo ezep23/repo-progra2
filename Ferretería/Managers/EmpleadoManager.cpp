@@ -192,6 +192,30 @@ void EmpleadoManager::actualizar(){
 
 }
 
+bool EmpleadoManager::existeRegistro(int id){
+   int pos = _repo.buscarID(id);
+
+   if(pos != -1){
+
+        if(_repo.leer(pos).getEstado()){
+            return true;
+        }
+
+        return false;
+   }
+
+   return false;
+}
+
+void EmpleadoManager::mostrar(int id){
+    int pos = _repo.buscarID(id);
+    cout << "Empleado asignado: " << _repo.leer(pos).getNombre() << " - " << _repo.leer(pos).getDni() << endl;
+}
+
+int EmpleadoManager::obtenerNumeroProximoID(){
+    return _repo.getNuevoID();
+}
+
 void EmpleadoManager::mostrarLista(const Empleado &reg){
   cout << "ID: " << reg.getId() << endl;
   cout << "DNI: " << reg.getDni() << endl;

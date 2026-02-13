@@ -1,6 +1,7 @@
 #pragma once
 #include "../Archivos/CompraArchivo.h"
 #include "../Archivos/EmpleadoArchivo.h"
+#include "EmpleadoManager.h"
 
 class CompraManager
 {
@@ -23,6 +24,7 @@ class CompraManager
 
     void mostrarCompraCompleta(const Transaccion &reg);
   private:
+    EmpleadoManager _empleadoManager;
     EmpleadoArchivo _repoEmpleado;
     CompraArchivo _repo;
 };

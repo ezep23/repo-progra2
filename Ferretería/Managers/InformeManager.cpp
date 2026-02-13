@@ -120,6 +120,14 @@ void InformeManager::numeroProductosVendidosCategoria(){
     _ventaManager.obtenerNumeroProductosVendidosCategoria(idCat);
 }
 
+void InformeManager::numeroProductosProveeedor(){
+    _almacenManager.numeroProductosProveedor();
+}
+
+void InformeManager::ventasPorEmpleado(){
+
+}
+
 void InformeManager::listarBajoStock(){
     _almacenManager.listarBajoStock();
 }

@@ -13,6 +13,7 @@ class ProveedorManager{
     void actualizar();
 
     bool existeProveedor(int id);
+    int obtenerNumeroProximoID();
 
   protected:
     void mostrarLista(const Proveedor &reg);

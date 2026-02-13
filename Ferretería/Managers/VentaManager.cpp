@@ -23,10 +23,7 @@ bool VentaManager::guardar(int pos, Transaccion reg){
 }
 
 int VentaManager::cargar() {
-    int id;
-    int idCliente;
-    int posCliente = -1; // IMPORTANTE: Inicializar con valor inválido
-
+    int id, idCliente, idEmpleado;
     id = _repo.getNuevoID();
 
     cout << "--- NUEVA VENTA #" << id << " ----" << endl;
@@ -39,22 +36,34 @@ int VentaManager::cargar() {
             return 0;
         }
 
-        posCliente = _repoCliente.buscarID(idCliente);
-
-        if (posCliente == -1) {
+        if ( !_clienteManager.existeRegistro(idCliente)) {
             cout << ">>> Error: El cliente no existe. Intente nuevamente." << endl;
         }
 
-    } while (posCliente == -1);
+    } while ( !_clienteManager.existeRegistro(idCliente));
 
-    Cliente cliente = _repoCliente.leer(posCliente);
+    _clienteManager.mostrar(idCliente);
+    system("pause");
 
-    if (!cliente.getEstado()) {
-        cout << ">>> Error: El cliente seleccionado ha sido dado de baja." << endl;
-        return 0;
-    }
+    do{
 
-    cout << "Cliente asignado: " << cliente.getNombre() << " - " << cliente.getDni() << endl;
+       cout << "Ingrese el ID del empleado ('O' - Para listar) " << endl;
+       cout << "ID: ";
+       cin >> idEmpleado;
+
+       if(idEmpleado = 0){
+            cout << "EMPLEADOS" << endl;
+            _empleadoManager.mostrar();
+
+            cout << "Ingrese el ID del empleado: ";
+            cin >> idEmpleado;
+        }
+
+        _empleadoManager.existeRegistro(id);
+
+    } while ( !_empleadoManager.existeRegistro(id) );
+
+    _empleadoManager.mostrar(idCliente);
     system("pause");
 
     int d, m, a;
@@ -93,7 +102,7 @@ int VentaManager::cargar() {
     } while (opcFactu != 'A' && opcFactu != 'B');
     cin.ignore();
 
-    Transaccion nuevaVenta(id, idCliente, 0, hora, fecha, opcFactu);
+    Transaccion nuevaVenta(id, idCliente, idEmpleado, 0, hora, fecha, opcFactu);
 
     if (_repo.guardar(nuevaVenta)) {
         return id;
@@ -579,6 +588,49 @@ void VentaManager::obtenerNumeroProductosVendidosCategoria(int idCat){
    cout << "-----------------------------------" << endl;
 
     delete [] vVentas;
+}
+
+void VentaManager::ventasPorEmpleado(){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    int totalIDs = _empleadoManager.obtenerNumeroProximoID();
+    int *cantEmpleados = new int[totalIDs]();
+
+    if(cantEmpleados == nullptr){
+        delete[] vVentas;
+        return;
+    }
+
+
+    for(int i = 0; i < cantidad; i++){
+        if(vVentas[i].getEstado()){
+            int idEmpleado = vVentas[i].getIdPersona();
+
+            if (idEmpleado > 0 && idEmpleado < totalIDs) {
+                cantEmpleados[idEmpleado - 1]++;
+            }
+        }
+    }
+
+    cout << "--- REPORTE DE VENTAS POR EMPLEADO ---" << endl;
+    for(int j = 0; j < totalIDs - 1; j++){
+        if(cantEmpleados[j] > 0){
+            cout << "EMPLEADO ID " << (j + 1) << endl;
+            cout << "VENTAS ASIGNADOS: " << cantEmpleados[j] << endl;
+            cout << "-------------------------" << endl;
+        }
+    }
+
+    delete[] vVentas;
+    delete[] cantEmpleados;
 }
 
 void VentaManager::mostrarVentaCompleta(const Transaccion &reg){

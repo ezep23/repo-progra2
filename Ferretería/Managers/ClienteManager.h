@@ -8,8 +8,11 @@ class ClienteManager{
 
     void cargar();
     void mostrar();
+    void mostrar(int id);
     void eliminar();
     void actualizar();
+
+    bool existeRegistro(int id);
 
   protected:
     void mostrarLista(const Cliente &reg);

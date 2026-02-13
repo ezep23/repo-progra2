@@ -12,15 +12,17 @@ Transaccion::Transaccion(){
     Fecha();
     Hora();
     setIdPersona(0);
+    setIdEmpleado(0);
     setMontoTotal(0);
     setTipoFactura('X');
     setEstado(false);
 }
 
-Transaccion::Transaccion(int id, int idPersona, float montoTotal, Hora hora, Fecha fecha, char tipoFactura){
+Transaccion::Transaccion(int id, int idPersona, int idEmpleado, float montoTotal, Hora hora, Fecha fecha, char tipoFactura){
 
     setIdTransaccion(id);
     setIdPersona(idPersona);
+    setIdEmpleado(idEmpleado);
     setMontoTotal(montoTotal);
     setHoraEmision(hora);
     setFechaEmision(fecha);
@@ -34,6 +36,10 @@ void Transaccion::setIdTransaccion(int id){
 
 void Transaccion::setIdPersona(int id){
     _idPersona = id;
+}
+
+void Transaccion::setIdEmpleado(int id){
+    _idEmpleado = id;
 }
 
 void Transaccion::setMontoTotal(float monto){
@@ -62,6 +68,10 @@ int Transaccion::getIdTransaccion() const{
 
 int Transaccion::getIdPersona() const{
     return _idPersona;
+}
+
+int Transaccion::getIdEmpleado() const{
+    return _idEmpleado;
 }
 
 float Transaccion::getMontoTotal() const{

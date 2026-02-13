@@ -85,6 +85,10 @@ void ProveedorManager::cargar(){
 
 }
 
+int ProveedorManager::obtenerNumeroProximoID(){
+    return _repo.getNuevoID();
+}
+
 void ProveedorManager::mostrar(){
   int cantidad = _repo.getCantidadRegistros();
   Proveedor *vProveedor = new Proveedor[cantidad];

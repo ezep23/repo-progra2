@@ -8,8 +8,12 @@ class EmpleadoManager{
 
     void cargar();
     void mostrar();
+    void mostrar(int id);
     void eliminar();
     void actualizar();
+
+    bool existeRegistro(int id);
+    int obtenerNumeroProximoID();
 
   protected:
     void mostrarLista(const Empleado &reg);
