@@ -144,8 +144,13 @@ void ClienteManager::actualizar(){
 bool ClienteManager::existeRegistro(int id){
    int pos = _repo.buscarID(id);
 
-   if(pos != -1){
-        return true;
+   if(pos){
+
+        if(_repo.leer(pos).getEstado()){
+            return true;
+        }
+
+        return false;
    }
 
    return false;

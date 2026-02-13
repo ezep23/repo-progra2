@@ -18,7 +18,7 @@ void InformeMenu::mostrarOpciones(){
   cout << "7 - NUMERO TOTAL DE PRODUCTOS VENDIDOS POR CATEGORIA"<<endl;
   cout << "8 - NUMERO DE PRODUCTOS POR PROVEEDOR" << endl;
   cout << "9 - NUMERO DE VENTAS POR EMPLEADO" << endl;
-  cout << "9 - PRODUCTOS BAJO STOCK (MENOS DE 5)"<<endl;
+  cout << "10 - PRODUCTOS BAJO STOCK (MENOS DE 5)"<<endl;
   cout << "---------------------------------" << endl;
   cout << "0 - SALIR" << endl;
   cout << "---------------------------------"<<endl;

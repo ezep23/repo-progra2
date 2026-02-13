@@ -2,6 +2,7 @@
 #include "VentaManager.h"
 #include "AlmacenManager.h"
 #include "CategoriaManager.h"
+#include "CompraManager.h"
 
 class InformeManager{
   public:
@@ -16,10 +17,12 @@ class InformeManager{
     void numeroProductosVendidosCategoria();
     void numeroProductosProveeedor();
     void ventasPorEmpleado();
+    void comprasPorEmpleado();
     void listarBajoStock();
 
   private:
     VentaManager _ventaManager;
+    CompraManager _compraManager;
     AlmacenManager _almacenManager;
     CategoriaManager _categoriaManager;
 };

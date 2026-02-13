@@ -15,6 +15,7 @@ class CompraManager
     Transaccion traerRegistro(int pos);
 
     int obtenerNumeroRegistros();
+    void comprasPorEmpleado();
 
     void mostrar();
     void mostrar(int id);

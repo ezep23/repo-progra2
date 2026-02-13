@@ -195,7 +195,7 @@ void EmpleadoManager::actualizar(){
 bool EmpleadoManager::existeRegistro(int id){
    int pos = _repo.buscarID(id);
 
-   if(pos != -1){
+   if(pos){
 
         if(_repo.leer(pos).getEstado()){
             return true;

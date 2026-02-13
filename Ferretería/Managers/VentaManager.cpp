@@ -23,7 +23,7 @@ bool VentaManager::guardar(int pos, Transaccion reg){
 }
 
 int VentaManager::cargar() {
-    int id, idCliente, idEmpleado;
+    int id, idCliente = 0, idEmpleado = 0;
     id = _repo.getNuevoID();
 
     cout << "--- NUEVA VENTA #" << id << " ----" << endl;
@@ -40,7 +40,7 @@ int VentaManager::cargar() {
             cout << ">>> Error: El cliente no existe. Intente nuevamente." << endl;
         }
 
-    } while ( !_clienteManager.existeRegistro(idCliente));
+    } while (!_clienteManager.existeRegistro(idCliente));
 
     _clienteManager.mostrar(idCliente);
     system("pause");
@@ -59,11 +59,13 @@ int VentaManager::cargar() {
             cin >> idEmpleado;
         }
 
-        _empleadoManager.existeRegistro(id);
+        if ( !_empleadoManager.existeRegistro(idEmpleado)) {
+            cout << ">>> Error: El empleado no existe. Intente nuevamente." << endl;
+        }
 
-    } while ( !_empleadoManager.existeRegistro(id) );
+    } while ( !_empleadoManager.existeRegistro(idEmpleado));
 
-    _empleadoManager.mostrar(idCliente);
+    _empleadoManager.mostrar(idEmpleado);
     system("pause");
 
     int d, m, a;
@@ -612,17 +614,17 @@ void VentaManager::ventasPorEmpleado(){
 
     for(int i = 0; i < cantidad; i++){
         if(vVentas[i].getEstado()){
-            int idEmpleado = vVentas[i].getIdPersona();
+            int idEmpleado = vVentas[i].getIdEmpleado();
 
-            if (idEmpleado > 0 && idEmpleado < totalIDs) {
+            if (idEmpleado > 0 && idEmpleado <= totalIDs) {
                 cantEmpleados[idEmpleado - 1]++;
             }
         }
     }
 
     cout << "--- REPORTE DE VENTAS POR EMPLEADO ---" << endl;
-    for(int j = 0; j < totalIDs - 1; j++){
-        if(cantEmpleados[j] > 0){
+    for(int j = 0; j < totalIDs; j++){
+        if(cantEmpleados[j] >= 0){
             cout << "EMPLEADO ID " << (j + 1) << endl;
             cout << "VENTAS ASIGNADOS: " << cantEmpleados[j] << endl;
             cout << "-------------------------" << endl;
@@ -637,6 +639,7 @@ void VentaManager::mostrarVentaCompleta(const Transaccion &reg){
     cout << "-----------------------------------" << endl;
     cout << " ID: " << reg.getIdTransaccion() << endl;
     cout << " ID Cliente: " << reg.getIdPersona() << endl;
+    cout << " ID Empleado " << reg.getIdEmpleado() << endl;
     cout << " Monto total: " << reg.getMontoTotal() << endl;
 
 

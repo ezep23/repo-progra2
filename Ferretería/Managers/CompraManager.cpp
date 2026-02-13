@@ -255,6 +255,49 @@ void CompraManager::eliminar(){
     }
 }
 
+void CompraManager::comprasPorEmpleado(){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vCompras = new Transaccion[cantidad];
+
+    if(vCompras == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vCompras, cantidad);
+
+    int totalIDs = _empleadoManager.obtenerNumeroProximoID();
+    int *cantEmpleados = new int[totalIDs]();
+
+    if(cantEmpleados == nullptr){
+        delete[] vCompras;
+        return;
+    }
+
+
+    for(int i = 0; i < cantidad; i++){
+        if(vCompras[i].getEstado()){
+            int idEmpleado = vCompras[i].getIdEmpleado();
+
+            if (idEmpleado > 0 && idEmpleado <= totalIDs) {
+                cantEmpleados[idEmpleado - 1]++;
+            }
+        }
+    }
+
+    cout << "--- REPORTE DE COMPRAS POR EMPLEADO ---" << endl;
+    for(int j = 0; j < totalIDs; j++){
+        if(cantEmpleados[j] >= 0){
+            cout << "EMPLEADO ID " << (j + 1) << endl;
+            cout << "COMPRASS ASIGNADAS: " << cantEmpleados[j] << endl;
+            cout << "-------------------------" << endl;
+        }
+    }
+
+    delete[] vCompras;
+    delete[] cantEmpleados;
+}
+
 void CompraManager::mostrarCompraCompleta(const Transaccion &reg){
     cout << "-----------------------------------" << endl;
     cout << " ID: " << reg.getIdTransaccion() << endl;
