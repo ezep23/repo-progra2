@@ -101,6 +101,46 @@ void DetalleVentaManager::mostrar(int id){
     }
 }
 
+float DetalleVentaManager::obtenerMontoCategoria(int idTrans, int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    float acum = 0;
+
+    for(int i=0; i<cantidad; i++){
+        if(_repo.leer(i).getEstado() && _repo.leer(i).getIdTransaccion() == idTrans){
+
+            int idCategoria = _almacenManager.obtenerCategoriaProducto(_repo.leer(i).getIdProducto());
+            if(idCategoria != 0){
+
+                if(idCategoria == idCat ){
+                    acum += _repo.leer(i).getPrecioUnitario() * _repo.leer(i).getCantidad();
+                }
+
+            }
+        }
+    }
+    return acum;
+}
+
+int DetalleVentaManager::obtenerCantidadCategoria(int idTrans, int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    float acum = 0;
+
+    for(int i=0; i<cantidad; i++){
+        if(_repo.leer(i).getEstado() && _repo.leer(i).getIdTransaccion() == idTrans){
+
+            int idCategoria = _almacenManager.obtenerCategoriaProducto(_repo.leer(i).getIdProducto());
+            if(idCategoria != 0){
+
+                if(idCategoria == idCat ){
+                    acum += _repo.leer(i).getCantidad();
+                }
+
+            }
+        }
+    }
+    return acum;
+}
+
 /* void DetalleVentaManager::modificar(){
   int id, pos, opc;
   cout << "Ingrese el ID de la venta: ";

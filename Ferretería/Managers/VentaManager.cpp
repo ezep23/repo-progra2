@@ -346,6 +346,38 @@ void VentaManager::recaudacionMensual(int anio){
     delete [] vVentas;
 }
 
+void VentaManager::recaudacionMensualCategoria(int anio, int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "No se pudo asignar memoria..." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    float recaudacionPorMes[12] = {0};
+    for(int i=0; i < cantidad; i++){
+
+        if(vVentas[i].getEstado() && vVentas[i].getFechaTransaccion().getAnio() == anio){
+
+            int mes = vVentas[i].getFechaTransaccion().getMes();
+
+            if(mes >= 1 && mes <= 12){
+                recaudacionPorMes[mes - 1] += _detalleManager.obtenerMontoCategoria(vVentas[i].getIdTransaccion(), idCat);
+            }
+        }
+    }
+
+    for(int i=0; i < 12; i++){
+        cout << "RECAUDACION MES: " << (i + 1) << endl;
+        cout << "TOTAL: " << recaudacionPorMes[i] << endl;
+    }
+
+    delete [] vVentas;
+}
+
 
 void VentaManager::recaudacionAnual(){
     int cantidad = _repo.getCantidadRegistros();
@@ -366,7 +398,7 @@ void VentaManager::recaudacionAnual(){
     Transaccion aux;
     for(int i = 0; i < cantidad - 1; i++){
         for(int j = 0; j < cantidad - i - 1; j++){
-            // Si el año actual es MENOR al siguiente, los invertimos (para que quede Mayor -> Menor)
+            // Si el año actual es MENOR al siguiente, los invertimos (p ara que quede Mayor -> Menor)
             if(vVentas[j].getFechaTransaccion().getAnio() < vVentas[j+1].getFechaTransaccion().getAnio()){
                 aux = vVentas[j];
                 vVentas[j] = vVentas[j+1];
@@ -398,6 +430,153 @@ void VentaManager::recaudacionAnual(){
         cout << "TOTAL RECAUDADO: " << recaudacionAnio << endl;
         cout << "-------------------------" << endl;
     }
+
+    delete [] vVentas;
+}
+
+void VentaManager::recaudacionAnualCategoria(int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    Transaccion aux;
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+            if(vVentas[j].getFechaTransaccion().getAnio() < vVentas[j+1].getFechaTransaccion().getAnio()){
+                aux = vVentas[j];
+                vVentas[j] = vVentas[j+1];
+                vVentas[j+1] = aux;
+            }
+        }
+    }
+
+    int i = 0;
+    while(i < cantidad){
+
+        int anioActual = vVentas[i].getFechaTransaccion().getAnio();
+        float recaudacionAnio = 0;
+
+        while(i < cantidad && vVentas[i].getFechaTransaccion().getAnio() == anioActual){
+
+            if(vVentas[i].getEstado() ){
+                recaudacionAnio += _detalleManager.obtenerMontoCategoria(vVentas[i].getIdTransaccion(), idCat);
+            }
+
+            i++;
+        }
+
+        cout << "AÑO: " << anioActual << endl;
+        cout << "TOTAL RECAUDADO: " << recaudacionAnio << endl;
+        cout << "-------------------------" << endl;
+    }
+
+    delete [] vVentas;
+}
+
+void VentaManager::numeroVentasMensualCategoria(int anio, int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "No se pudo asignar memoria..." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    float ventasPorMes[12] = {0};
+    for(int i=0; i < cantidad; i++){
+
+        if(vVentas[i].getEstado() && vVentas[i].getFechaTransaccion().getAnio() == anio){
+
+            int mes = vVentas[i].getFechaTransaccion().getMes();
+
+            if(mes >= 1 && mes <= 12){
+                ventasPorMes[mes - 1] += _detalleManager.obtenerCantidadCategoria(vVentas[i].getIdTransaccion(), idCat);
+            }
+        }
+    }
+
+    for(int i=0; i < 12; i++){
+        cout << "VENTA MES: " << (i + 1) << endl;
+        cout << "PRODUCTOS VENDIDOS: " << ventasPorMes[i] << endl;
+    }
+
+    delete [] vVentas;
+}
+
+void VentaManager::numeroVentasAnualCategoria(int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    Transaccion aux;
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+            if(vVentas[j].getFechaTransaccion().getAnio() < vVentas[j+1].getFechaTransaccion().getAnio()){
+                aux = vVentas[j];
+                vVentas[j] = vVentas[j+1];
+                vVentas[j+1] = aux;
+            }
+        }
+    }
+
+    int i = 0;
+    while(i < cantidad){
+
+        int anioActual = vVentas[i].getFechaTransaccion().getAnio();
+        int productosVendidos = 0;
+
+        while(i < cantidad && vVentas[i].getFechaTransaccion().getAnio() == anioActual){
+
+            if(vVentas[i].getEstado() ){
+                productosVendidos += _detalleManager.obtenerCantidadCategoria(vVentas[i].getIdTransaccion(), idCat);
+            }
+
+            i++;
+        }
+
+        cout << "AÑO: " << anioActual << endl;
+        cout << "CANTIDAD DE PRODUCTOS VENDIDOS: " << productosVendidos << endl;
+        cout << "-------------------------" << endl;
+    }
+
+    delete [] vVentas;
+}
+
+void VentaManager::obtenerNumeroProductosVendidosCategoria(int idCat){
+    int cantidad = _repo.getCantidadRegistros();
+    Transaccion *vVentas = new Transaccion[cantidad];
+
+    if(vVentas == nullptr){
+        cout << "Error de memoria." << endl;
+        exit(-100);
+    }
+
+    _repo.leerTodos(vVentas, cantidad);
+
+    int productosVendidos = 0;
+    for(int i = 0; i < cantidad; i++){
+        if(vVentas[i].getEstado()){
+            productosVendidos += _detalleManager.obtenerCantidadCategoria(vVentas[i].getIdTransaccion(), idCat);
+        }
+    }
+
+   cout << "-----------------------------------" << endl;
+   cout << " Total productos vendidos: " << productosVendidos << endl;
+   cout << "-----------------------------------" << endl;
 
     delete [] vVentas;
 }

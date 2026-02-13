@@ -1,6 +1,7 @@
 #pragma once
 #include "../Archivos/VentaArchivo.h"
 #include "../Archivos/ClienteArchivo.h"
+#include "DetalleVentaManager.h"
 
 class VentaManager
 {
@@ -16,7 +17,12 @@ class VentaManager
     int obtenerNumeroRegistros();
 
     void recaudacionMensual(int anio);
+    void recaudacionMensualCategoria(int anio, int idCat);
+    void numeroVentasMensualCategoria(int anio, int idCat);
     void recaudacionAnual();
+    void recaudacionAnualCategoria(int idCat);
+    void numeroVentasAnualCategoria(int idCat);
+    void obtenerNumeroProductosVendidosCategoria(int idCat);
 
     void mostrar();
     void mostrar(int id);
@@ -26,6 +32,7 @@ class VentaManager
 
     void mostrarVentaCompleta(const Transaccion &reg);
   private:
+    DetalleVentaManager _detalleManager;
     ClienteArchivo _repoCliente;
     VentaArchivo _repo;
 };

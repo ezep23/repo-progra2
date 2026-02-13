@@ -4,31 +4,49 @@ using namespace std;
 #include "InformeMenu.h"
 
 InformeMenu::InformeMenu(){
-  _cantidadOpciones = 4;
+  _cantidadOpciones = 8;
 }
 
 void InformeMenu::mostrarOpciones(){
-  cout << "--- MENU INFORMES ---" << endl;
-  cout << "1 - RECAUDACION MENSUAL DE UN ANIO " << endl;
-  cout << "2 - RECAUDACION ANUAL" << endl;
+  cout << "--- MENU INFORMES ---------------" << endl;
+  cout << "1 - RECAUDACION MENSUAL EN UN ANIO " << endl;
+  cout << "2 - RECAUDACION MENSUAL POR CATEGORIA EN UN ANIO" << endl;
+  cout << "3 - NUMERO DE PRODUCTOS VENDIDOS MENSUALMENTE POR CATEGORIA" << endl;
+  cout << "4 - RECAUDACION ANUAL" << endl;
+  cout << "5 - RECAUDACION ANUAL POR CATEGORIA" << endl;
+  cout << "6 - NUMERO DE PRODUCTOS VENDIDOS POR CATEGORIA EN UN ANIO" << endl;
+  cout << "7 - NUMERO TOTAL DE PRODUCTOS VENDIDOS POR CATEGORIA"<<endl;
+  cout << "8 - PRODUCTOS BAJO STOCK (MENOS DE 5)"<<endl;
   cout << "---------------------------------" << endl;
   cout << "0 - SALIR" << endl;
-  cout << "--------------------"<<endl;
+  cout << "---------------------------------"<<endl;
 }
 
 void InformeMenu::ejecutarOpcion(int opcion){
   switch(opcion){
   case 1:
     _informeManager.recaudacionMensual();
-  break;
+    break;
   case 2:
-    _informeManager.recaudacionAnual();
-  break;
+    _informeManager.recaudacionMensualCategoria();
+    break;
   case 3:
-    //_informeManager.actualizar();
-  break;
+    _informeManager.numeroVentasMensualCategoria();
+    break;
   case 4:
-    //_informeManager.eliminar();
-  break;
+    _informeManager.recaudacionAnual();
+    break;
+  case 5:
+    _informeManager.recaudacionAnualCategoria();
+    break;
+  case 6:
+    _informeManager.numeroVentasAnualCategoria();
+    break;
+  case 7:
+    _informeManager.numeroProductosVendidosCategoria();
+    break;
+  case 8:
+    _informeManager.listarBajoStock();
+    break;
   }
 }

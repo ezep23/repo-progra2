@@ -252,8 +252,63 @@ void AlmacenManager::eliminarProducto(){
   return;
 }
 
+int AlmacenManager::obtenerCategoriaProducto(int id){
+    int cantidad = _repo.getCantidadRegistros();
+
+    for(int i=0; i<cantidad; i++){
+        if(_repo.leer(i).getEstado() && _repo.leer(i).getId() == id){
+            return _repo.leer(i).getIdCategoria();
+        }
+  }
+
+  return 0;
+}
+
 void AlmacenManager::actualizarProducto(){
 
+}
+
+void AlmacenManager::numeroProductosProveedor(){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  _proveedorManager.
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+}
+
+void AlmacenManager::listarBajoStock(){
+  int cantidad = _repo.getCantidadRegistros();
+  Producto *vProducto = new Producto[cantidad];
+
+  if(vProducto == nullptr){
+    cout << "No se pudo asignar memoria..." << endl;
+    exit(-100);
+  }
+
+  _repo.leerTodos(vProducto, cantidad);
+
+  cout << "PRODUCTOS CON MENOS DE 5 UNIDADES DISPONIBLES: " << endl;
+  for(int i=0; i<cantidad; i++){
+
+    if(vProducto[i].getEstado()){
+
+        if(vProducto[i].getStock() <= 5){
+            mostrarLista(vProducto[i]);
+            cout << endl;
+        }
+
+    }
+
+  }
+
+  delete [] vProducto;
+  return;
 }
 
 void AlmacenManager::mostrarLista(const Producto &reg){

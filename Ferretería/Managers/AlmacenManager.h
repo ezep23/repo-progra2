@@ -14,9 +14,13 @@ class AlmacenManager{
     void actualizarProducto();
 
     void listarPorCategoria();
+    void listarBajoStock();
 
     int obtenerStock(int id);
     float obtenerPrecio(int id);
+    int obtenerCategoriaProducto(int id);
+
+    void numeroProductosProveedor();
 
     void descontarStock(int id, int cantidad);
     void rellenarStock(int id, int cantidad);

@@ -16,7 +16,110 @@ void InformeManager::recaudacionMensual(){
     _ventaManager.recaudacionMensual(anio);
 }
 
+void InformeManager::recaudacionMensualCategoria(){
+    int anio, idCat;
+
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    do{
+        cout << "Ingrese la categoria (0 - Para mostrar categorias)" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+
+    }while(idCat <= 0 && !_categoriaManager.existeCategoria(idCat));
+
+    _ventaManager.recaudacionMensualCategoria(anio, idCat);
+}
+
 void InformeManager::recaudacionAnual(){
 
     _ventaManager.recaudacionAnual();
+}
+
+void InformeManager::recaudacionAnualCategoria(){
+    int anio, idCat;
+
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    do{
+        cout << "Ingrese la categoria (0 - Para mostrar categorias)" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+
+    }while(idCat <= 0 && !_categoriaManager.existeCategoria(idCat));
+
+    _ventaManager.numeroVentasMensualCategoria(anio, idCat);
+}
+
+void InformeManager::numeroVentasAnualCategoria(){
+    int idCat;
+
+    do{
+        cout << "Ingrese la categoria (0 - Para mostrar categorias)" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+
+    }while(idCat <= 0 && !_categoriaManager.existeCategoria(idCat));
+
+    _ventaManager.numeroVentasAnualCategoria(idCat);
+}
+
+void InformeManager::numeroVentasMensualCategoria(){
+    int anio, idCat;
+
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    do{
+        cout << "Ingrese la categoria (0 - Para mostrar categorias)" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+
+    }while(idCat <= 0 && !_categoriaManager.existeCategoria(idCat));
+
+    _ventaManager.numeroVentasMensualCategoria(anio, idCat);
+}
+
+void InformeManager::numeroProductosVendidosCategoria(){
+    int idCat;
+
+    do{
+        cout << "Ingrese la categoria (0 - Para mostrar categorias)" << endl;
+        cout << "Opcion: ";
+        cin >> idCat;
+
+        if(idCat == 0){
+            _categoriaManager.mostrar();
+        }
+
+
+    }while(idCat <= 0 && !_categoriaManager.existeCategoria(idCat));
+
+    _ventaManager.obtenerNumeroProductosVendidosCategoria(idCat);
+}
+
+void InformeManager::listarBajoStock(){
+    _almacenManager.listarBajoStock();
 }

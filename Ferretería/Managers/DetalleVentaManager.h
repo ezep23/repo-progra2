@@ -19,6 +19,9 @@ class DetalleVentaManager
     void modificar();
     void eliminar();
 
+    float obtenerMontoCategoria(int idTrans, int idCat);
+    int obtenerCantidadCategoria(int idTrans, int idCat);
+
     void mostrarDetalleCompleto(const DetalleTransaccion &reg);
   private:
     DetalleVentaArchivo _repo;
